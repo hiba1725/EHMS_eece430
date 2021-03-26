@@ -2,7 +2,7 @@ from django.template import loader
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render, redirect
 from django.urls import reverse, reverse_lazy
-from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth import authenticate, login, logout, password_validation
 from django.contrib.auth.decorators import login_required
 
 from .models import Patient, CreditCard
@@ -17,7 +17,13 @@ def signup(request):
         patient_form = PatientForm(request.POST)
         if user_form.is_valid() and patient_form.is_valid():
             user = user_form.save(commit=False)
-            user.set_password(request.POST["password"])
+            password = request.POST["password"]
+            try:
+                password_validation.validate_password(password)
+            except Exception as e:
+                return render(request, 'customer/signup.html',
+                              {'user_form_error': e.messages})
+            user.set_password(password)
             user.save()
             patient = patient_form.save(commit=False)
             patient.user = user
@@ -125,6 +131,24 @@ def edit_account_info(request):
 def edit_password(request):
     if request.user.is_authenticated:
         if request.POST:
-            pass
+            oldpass = request.POST["passwordold"]
+            user = request.user.username
+            user = authenticate(username=user, password=oldpass)
+            if user is not None:
+                try:
+                    passwordnew1 = request.POST["passwordnew1"]
+                    password_validation.validate_password(passwordnew1)
+                except Exception as e:
+                    return render(request, 'customer/edit_password.html', {'errors': e.messages})
+                passwordnew2 = request.POST["passwordnew2"]
+                if passwordnew1 != passwordnew2:
+                    return render(request, 'customer/edit_password.html', {'errors': 'Passwords do not match'})
+                user.set_password(passwordnew1)
+                user.save()
+                login(request, user)
+                return redirect('/customer/account')
+            else:
+                return render(request, 'customer/edit_password.html', {'errors': 'Old password is not correct'})
+
         return render(request, 'customer/edit_password.html')
     return redirect('/customer/login')
