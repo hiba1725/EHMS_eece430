@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block content %}
+
+    <h3>Username: {{ user.username }}</h3>
+    <h3>First Name: {{ user.first_name }}</h3>
+    <h3>Email: {{ user.email }}</h3>
+    <!--
+    for username, first_name, last_name, password, email WE USE user
+    for age, address, cardInfo, phone_number WE USE user.patient
+    -->
+    <h3>Age: {{ user.patient.age }}</h3>
+
+    <h4> <a href = {% url 'customer:add_card' %}>Add card</a></h4>
+    <h4> <a href = {% url 'customer:remove_card' %}>Remove card</a></h4>
+    <h4> <a href = {% url 'customer:edit_account_info' %}>Edit account info</a></h4>
+
+{% endblock %}

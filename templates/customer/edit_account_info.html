@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<form action="" method="post">
+    {% csrf_token %}
+    <input name="first_name" value="{{ user.first_name }}"> Mine
+    <input name="last_name" value="{{ user.last_name }}">
+    <input name="username" value="{{ user.username }}">
+    <input name="email" value="{{ user.email }}">
+    <input name="age" value="{{ user.patient.age }}">
+
+{#    add phone number, and address#}
+    <h4>Enter password to validate changes</h4>
+    <input name="password">
+
+    <button type="submit">submit</button>
+</form>
+    {% if user_form_error %}
+    <p> {{ user_form_error }} </p>
+    {% endif %}
+    {% if patient_form_error %}
+    <p> {{ patient_form_error }} </p>
+    {% endif %}
+    {% if other_errors %}
+    <p> {{ other_errors }} </p>
+    {% endif %}
+{% endblock %}

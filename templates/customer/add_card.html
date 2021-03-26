@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<form action="" method="post">
+    {% csrf_token %}
+    <input name="card_num">
+    <input name="cvv">
+    <input name="name">
+
+    <button type="submit">submit</button>
+</form>
+    {% if card_form_error %}
+    <p> {{ card_form_error }} </p>
+    {% endif %}
+{% endblock %}

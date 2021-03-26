@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<form action="" method="post">
+    {% csrf_token %}
+    <input name="first_name"> Mine
+    <input name="last_name">
+    <input name="username">
+    <input name="email">
+    <input name="age">
+    <input name="password">
+{#    add phone number, and address#}
+
+    <button type="submit">submit</button>
+</form>
+    {% if user_form_error %}
+    <p> {{ user_form_error }} </p>
+    {% endif %}
+    {% if patient_form_error %}
+    <p> {{ patient_form_error }} </p>
+    {% endif %}
+{% endblock %}

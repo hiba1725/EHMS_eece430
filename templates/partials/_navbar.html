@@ -1,0 +1,13 @@
+<nav class="navbar navbar-dark bg-primary mb-4">
+	<div class="container">
+		<a class="navbar-brand" href="/">ClinicX</a>
+        <p> test</p>
+        {% if user.is_authenticated  %}
+        <a class="navbar-brand" href="{%  url 'customer:account_info' %}">Account</a>
+        <a class="navbar-brand" href="{%  url 'customer:logout' %}">Logout</a>
+        {% else %}
+        <a class="navbar-brand" href="{%  url 'customer:login' %}">Login as a Patient</a>
+{#        <a class="navbar-brand" href="{%  url 'doctor:login' %}">Login as a Doctor</a>#}
+        {% endif %}
+    </div>
+</nav>
