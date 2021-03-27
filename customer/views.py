@@ -66,13 +66,13 @@ def logout_user(request):
 
 
 def account_info(request):
-    if request.user.is_authenticated:
-        return render(request, 'customer/account_info.html')
+    if request.user.is_authenticated and request.user.patient.role == "Patient":
+            return render(request, 'customer/account_info.html')
     return redirect('/customer/login')
 
 
 def add_card(request):
-    if request.user.is_authenticated:
+    if request.user.is_authenticated and request.user.patient.role == "Patient":
         if request.POST:
             card_form = CardForm(request.POST)
             if card_form.is_valid():
@@ -87,7 +87,7 @@ def add_card(request):
 
 
 def remove_card(request):
-    if request.user.is_authenticated:
+    if request.user.is_authenticated and request.user.patient.role == "Patient":
         cards = CreditCard.objects.filter(patient_id=request.user.id)
         if request.POST:
             id = request.POST["choice"]
@@ -99,7 +99,7 @@ def remove_card(request):
 
 
 def edit_account_info(request):
-    if request.user.is_authenticated:
+    if request.user.is_authenticated and request.user.patient.role == "Patient":
         if request.POST:
             user_form = UserForm(request.POST, instance=request.user, )
             patient_form = PatientForm(request.POST, instance=request.user.patient)
@@ -129,7 +129,7 @@ def edit_account_info(request):
 
 
 def edit_password(request):
-    if request.user.is_authenticated:
+    if request.user.is_authenticated and request.user.patient.role == "Patient":
         if request.POST:
             oldpass = request.POST["passwordold"]
             user = request.user.username

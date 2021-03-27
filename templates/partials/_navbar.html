@@ -3,8 +3,16 @@
 		<a class="navbar-brand" href="/">ClinicX</a>
         <p> test</p>
         {% if user.is_authenticated  %}
-        <a class="navbar-brand" href="{%  url 'customer:account_info' %}">Account</a>
-        <a class="navbar-brand" href="{%  url 'customer:logout' %}">Logout</a>
+{#            Both work, need to check how it works with a doctor model connected to user: if error is given#}
+            {% if user.patient.role == "Patient" %}
+{#            {% if user.patient %}#}
+                <a class="navbar-brand" href="{%  url 'customer:account_info' %}">Account</a>
+                <a class="navbar-brand" href="{%  url 'customer:logout' %}">Logout</a>
+            {% endif %}
+{#            {% if user.doctor.role is 'Doctor' %}#}
+{#                <a class="navbar-brand" href="{%  url 'doctor:dashboard' %}">Account</a>#}
+{#                <a class="navbar-brand" href="{%  url 'doctor:logout' %}">Logout</a>#}
+{#            {% endif %}#}
         {% else %}
         <a class="navbar-brand" href="{%  url 'customer:login' %}">Login as a Patient</a>
 {#        <a class="navbar-brand" href="{%  url 'doctor:login' %}">Login as a Doctor</a>#}
