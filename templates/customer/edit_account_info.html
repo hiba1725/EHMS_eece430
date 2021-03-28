@@ -1,21 +1,59 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<form action="" method="post">
-    {% csrf_token %}
-    <input name="first_name" value="{{ user.first_name }}"> Mine
-    <input name="last_name" value="{{ user.last_name }}">
-    <input name="username" value="{{ user.username }}">
-    <input name="email" value="{{ user.email }}">
-    <input name="age" value="{{ user.patient.age }}">
+<div class="container">
+    <div class="col-sm-6 col-md-8 mx-auto">
+        <form class="form" action="" method="post">
+            {% csrf_token %}    
+            <div class="row">
+                <h2>
+                    <legend>Edit Your Account Info</legend>
+                </h2>
+            </div>
+            <div class="row">
+                <label for="first_name">First Name: </label>
+                <input class="form-control input-lg" name="first_name" value="{{ user.first_name }}">
+            </div>
+            
+            <div class="row">
+                <label for="last_name">Last Name: </label>
+                <input class="form-control input-lg" name="last_name" value="{{ user.last_name }}">
+            </div>
+            <div class="row pt-3">
+                <label for="username">Username: </label>
+                <input class="form-control input-lg" name="username" value="{{ user.username }}">
+            </div>
+            <div class="row pt-3">
+                <label for="email">Email: </label>
+                <input class="form-control input-lg" name="email" value="{{ user.email }}">
+            </div>
+            <div class="row pt-3">
+                <label for="age">Age: </label>
+                <input class="form-control input-lg" name="age" value="{{ user.patient.age }}">
+            </div>
+            <div class="row pt-3"><label for="gender">Gender:&nbsp; </label>
+                <label class="radio-inline">
+                    <input type="radio" name="gender" value="M" id="male"> Male&nbsp;
+                </label>
+                <label class="radio-inline">
+                    <input type="radio" name="gender" value="F" id="female"> Female&nbsp;
+                </label>
+                <label class="radio-inline">
+                    <input type="radio" name="gender" value="O" id="other"> Other&nbsp;
+                </label>
+            </div><br>
+            <div class="row">
+                <h5>Enter password to validate changes</h5>
+                <input class="form-control input-lg" type="password" name="password">
+            <div>
+            {#add phone number, and address#}
+            <br/>
+            <button class="btn btn-lg btn-primary btn-block signup-btn" type="submit">Submit Changes</button>
+        </form>          
+    </div>
+    </div>
 
-{#    add phone number, and address#}
-    <h4>Enter password to validate changes</h4>
-    <input name="password">
-
-    <button type="submit">submit</button>
-
-<h3> <a href="{% url 'customer:edit_password' %}"> Edit password</a> </h3>
+<h3> <a href="{% url 'customer:edit_password' %}">Change password</a> </h3>
 </form>
     {% if user_form_error %}
     <p> {{ user_form_error }} </p>

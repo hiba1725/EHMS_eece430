@@ -1,14 +1,35 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<form action="" method="post">
-    {% csrf_token %}
-    <input name="card_num">
-    <input name="cvv">
-    <input name="name">
+<div class="container">
+    <div class="col-sm-6 col-md-8 mx-auto">
+        <form class="form" action="" method="post">
+            {% csrf_token %}    
+            <div class="row">
+                <h2>
+                    Add Your Credit Card
+                </h2>
+            </div>
+            <div class="row col-xs-6 pt-3">
+                <label for="card_num">Card Number: </label>
+                <input name="card_num" class="form-control input-lg" placeholder="xxxx-xxxx-xxxx-xxxx">
+            </div>
+            <div class="row col-xs-6 pt-3">
+                <label for="cvv">CVV: </label>
+                <input name="cvv" class="form-control input-lg" placeholder="xxx">
+            </div>
+            <div class="row col-xs-6 pt-3">
+                <label for="name">CC Name: </label>
+                <input name="name" class="form-control input-lg" placeholder="Custom Name">
+            </div>
+            <div class="pt-3">
+                <button class="btn btn-lg btn-primary btn-block signup-btn" type="submit">Add Card</button>
+            </div>
+            </form>
+        </div>
+    </div>
+</div>
 
-    <button type="submit">submit</button>
-</form>
     {% if card_form_error %}
     <p> {{ card_form_error }} </p>
     {% endif %}

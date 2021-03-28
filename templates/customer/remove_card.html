@@ -8,6 +8,7 @@
 {% endif %}
 
     {% if cards %}
+    <div class="col-sm-6 col-md-8 mx-auto">
     <form action="{% url 'customer:remove_card' %}" method="POST">
         {% csrf_token %}
         {% for card in cards %}
@@ -23,8 +24,9 @@
                 <label for="choice{{ forloop.counter }}">{{ card.card_num }} -- {{ card.name }}</label>
             </div>
         {% endfor %}
-        <input type="submit" value="delete" class="btn btn-success btn-lg btn-block mt-4" />
+        <input type="submit" value="delete" class="btn btn-danger btn-lg btn-block mt-4" />
 {#    </form>#}
+    </div>
         {% else %}
         <h3>User has no card added to their account</h3>
     {% endif %}

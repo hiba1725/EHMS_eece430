@@ -1,18 +1,59 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<form action="" method="post">
-    {% csrf_token %}
-    <input name="first_name"> Mine
-    <input name="last_name">
-    <input name="username">
-    <input name="email">
-    <input name="age">
-    <input name="password">
-{#    add phone number, and address#}
+<div class="container">
+        <div class="col-sm-6 col-md-8 mx-auto">
+        <form class="form" action="" method="post">
+        {% csrf_token %}    
+        <div class="row">
+            <h2>
+                <legend>Signup</legend>
+            </h2>
+        </div>
+        <div class="row">
+            <div class="col-xs-6 col-md-6 pt-3">
+                <input class="form-control input-lg" name="first_name" placeholder="First Name">
+            </div>
+            <br>
+            <div class="col-xs-6 col-md-6 pt-3">
+                <input class="form-control input-lg" name="last_name" placeholder="Last Name">
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-xs-6 col-md-6 pt-3">
+                <input class="form-control input-lg" name="username" placeholder="Username">
+            </div>
+            <div class="col-xs-6 col-md-6 pt-3">
+                <input class="form-control input-lg" name="age" placeholder="Age">
+            </div>
+        </div>
+        <div class="row col-xs-6 pt-3">
+            <input class="form-control input-lg" name="email" placeholder="Email">
+        </div>
+        <div class="row pt-3">
+            <input class="form-control input-lg" type="password" name="password" placeholder="Password">
+        </div>
+        <div class="row pt-3"><label for="gender">Gender:&nbsp; </label>
+            <label class="radio-inline">
+                <input type="radio" name="gender" value="M" id="male"> Male&nbsp;
+            </label>
+            <label class="radio-inline">
+                <input type="radio" name="gender" value="F" id="female"> Female&nbsp;
+            </label>
+            <label class="radio-inline">
+                <input type="radio" name="gender" value="O" id="other"> Other&nbsp;
+            </label>
+        </div>
+        
+        {#add phone number, and address#}
+        <br/>
+        <button class="btn btn-lg btn-primary btn-block signup-btn" type="submit">Sign Up</button>
+    </form>          
+        </div>
+      </div>
 
-    <button type="submit">submit</button>
-</form>
+
     {% if user_form_error %}
     <p> {{ user_form_error }} </p>
     {% endif %}
