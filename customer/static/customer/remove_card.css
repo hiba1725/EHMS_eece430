@@ -1,0 +1,17 @@
+.title{
+    margin-bottom: 40px;
+}
+
+.credit-card{
+    background-color: white;
+    margin: 10px;
+}
+
+.card-label{
+    margin: 10px;
+}
+
+.credit-card-title{
+    font-weight: bold;
+    color: rgb(67, 136, 204);;
+}

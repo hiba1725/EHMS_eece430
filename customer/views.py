@@ -1,3 +1,4 @@
+from django.forms.utils import ErrorDict
 from django.template import loader
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render, redirect
@@ -21,8 +22,12 @@ def signup(request):
             try:
                 password_validation.validate_password(password)
             except Exception as e:
+                errAsDict = {'password': ErrorDict({'': '\n'.join(e.messages)})}
                 return render(request, 'customer/signup.html',
-                              {'user_form_error': e.messages})
+                              {'user_form_error': ErrorDict(errAsDict)})
+            passwordConfirm = request.POST["passwordConfirm"]
+            if password != passwordConfirm:
+                return render(request, 'customer/signup.html', {'password': ErrorDict({'': "Passwords do not match"})})
             user.set_password(password)
             user.save()
             patient = patient_form.save(commit=False)
@@ -91,7 +96,8 @@ def remove_card(request):
         cards = CreditCard.objects.filter(patient_id=request.user.id)
         if request.POST:
             id = request.POST["choice"]
-            card = CreditCard.objects.get(pk=id)
+            # card = CreditCard.objects.get(pk=id)
+            card = get_object_or_404(CreditCard, pk=id)
             card.delete()
             cards = CreditCard.objects.filter(patient_id=request.user.id)
         return render(request, 'customer/remove_card.html', {'cards': cards})

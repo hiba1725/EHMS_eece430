@@ -7,7 +7,7 @@ from django.contrib.auth.models import User
 class PatientForm(ModelForm):
     class Meta:
         model = Patient
-        fields = ['age', 'phone_number', 'address']
+        fields = ['age', 'phone_number', 'address', 'gender']
 
 
 class UserForm(forms.ModelForm):

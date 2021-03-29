@@ -1,0 +1,56 @@
+.login-main{
+    margin-top: 40px;
+    background-color: white;
+    box-shadow: 0 10px 30px 0 rgba(0,0,0,0.5);
+    padding: 0 60px;
+}
+
+.login-title{
+    margin: 30px;
+    color: rgb(67, 136, 204)
+}
+
+.login-btn{
+    width: 100%;
+    margin: 30px 0 10px 0;
+    padding: 12px;
+    border-radius: 0;
+    color: rgb(67, 136, 204);
+    border-color: rgb(67, 136, 204);
+}
+
+.login-btn:hover{
+    background-color: rgb(67, 136, 204);
+    border-color: rgb(67, 136, 204);
+}
+
+.login-input{
+    padding: 14px;
+    height: auto;
+    border: 1px solid black;
+    border-radius: 0;
+}
+
+ul.errorlist{
+    text-align: left;
+    list-style-type: none;
+    font-weight: bold;
+    text-transform: capitalize;
+    padding: 0;
+}
+
+ul>li>ul.errorlist{
+    text-align: left;
+    list-style-type: none;
+    font-weight: normal;
+    text-transform: capitalize;
+    padding-left: 20px;
+}
+
+.register-sentence{
+    margin-bottom: 30px;
+}
+
+.register-link{
+    color: rgb(67, 136, 204);
+}
