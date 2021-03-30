@@ -1,21 +1,14 @@
 {% block styles %}
     <style>
         .nav-item{
-            margin-left: 40px;
-            font-size: 18px;
-            color: rgb(67, 136, 204);
+            color: rgb(161, 161, 161);
         }
 
         .nav-link{
-            margin-right: 20px;
-            font-size: 18px;
             color: rgb(67, 136, 204) !important;
         }
 
         .navbar-brand{
-            font-family: cursive;
-            font-size: 32px;
-            font-weight: bolder;
             color: rgb(67, 136, 204) !important;
         }
 
@@ -48,7 +41,7 @@
             </ul>
         </div>
         <div class="justify-content-center">
-            <a class="navbar-brand" style="font-family: cursive" href="/">ClinicX</a>
+            <a class="navbar-brand" href="/">ClinicX</a>
         </div>
         <div class="collapse navbar-collapse collapsibleNavbar justify-content-end">
             {% if user.is_authenticated  %}
