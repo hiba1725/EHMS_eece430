@@ -1,40 +1,8 @@
 customer package
 ================
 
-Subpackages
------------
-
-.. toctree::
-   :maxdepth: 4
-
-   customer.migrations
-
 Submodules
 ----------
-
-customer.admin module
----------------------
-
-.. automodule:: customer.admin
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
-customer.apps module
---------------------
-
-.. automodule:: customer.apps
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
-customer.forms module
----------------------
-
-.. automodule:: customer.forms
-   :members:
-   :undoc-members:
-   :show-inheritance:
 
 customer.models module
 ----------------------

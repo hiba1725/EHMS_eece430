@@ -9,7 +9,7 @@ Welcome to E-Healthcare Management System - EECE 430's documentation!
 .. toctree::
    :maxdepth: 2
    :caption: Contents:
-
+   modules
 
 
 Indices and tables
