@@ -1,12 +1,27 @@
 from django.shortcuts import render
 
-import functions
+from . import functions
 
-# Create your views here.
 def day_selector(request):
     """
     Day selector view
 
     """
+    render(request,"appointment/day_selector.html")
+
+def slot_selector(request):
+    """
+    Slot selector view
+
+    """
     pass
+
+def confirmation(request):
+    """
+    Confirmation view
+
+    """
+    pass
+
+
 

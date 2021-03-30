@@ -3,7 +3,6 @@ from django.db import models
 from doctor.models import Doctor
 from customer.models import Patient
 
-# Create your models here.
 class Appointment(models.Model):
     """
     Appointment model
