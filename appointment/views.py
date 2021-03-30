@@ -7,7 +7,7 @@ def day_selector(request):
     Day selector view
 
     """
-    render(request,"appointment/day_selector.html")
+    return render(request,"appointment/day_selector.html")
 
 def slot_selector(request):
     """
