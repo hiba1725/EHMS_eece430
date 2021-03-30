@@ -1,22 +1,93 @@
 {% extends 'base.html' %}
+{% load static %}
+{% block styles %}
+<link rel="stylesheet" type="text/css" href="{% static 'customer/signup.css' %}">
+{% endblock %}
 {% block content %}
 
-<form action="" method="post">
-    {% csrf_token %}
-    <input name="first_name"> Mine
-    <input name="last_name">
-    <input name="username">
-    <input name="email">
-    <input name="age">
-    <input name="password">
-{#    add phone number, and address#}
+<div class="col-sm-4 col-md"></div>
 
-    <button type="submit">submit</button>
-</form>
+<div class="col-sm-4 col-md-5 signup-main">
+    <div class="row text-center justify-content-center">
+        <h3 class="text-center signup-title"><strong>Sign Up</strong></h3>
+    </div>
+    <form class="form" action="" method="post">
+        {% csrf_token %}
+        <div class="form-row">
+            <div class="col-xs-6 col-md-6 pt-3">
+                <input class="form-control input-lg signup-input" name="first_name" placeholder="First Name">
+            </div>
+            <div class="col-xs-6 col-md-6 pt-3">
+                <input class="form-control input-lg signup-input" name="last_name" placeholder="Last Name">
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="col-xs-6 col-md-6 pt-1">
+                <input class="form-control input-lg signup-input" name="username" placeholder="Username">
+            </div>
+            <div class="col-xs-6 col-md-6 pt-1">
+                <input class="form-control input-lg signup-input" name="age" placeholder="Age">
+            </div>
+        </div>
+        <div class="form-row pt-1">
+            <div class="col-md">
+                <input class="form-control input-lg signup-input" name="email" placeholder="Email">
+            </div>
+        </div>
+        <div class="form-row pt-1">
+            <div class="col-md">
+                <input class="form-control input-lg signup-input" name="phone_number" placeholder="Phone Number">
+            </div>
+        </div>
+        <div class="form-row pt-1">
+            <div class="col-md">
+                <input class="form-control input-lg signup-input" name="address" placeholder="Address">
+            </div>
+        </div>
+        <div class="form-row pt-1">
+            <div class="col-md">
+                <input class="form-control input-lg signup-input" type="password" name="password" placeholder="Password">
+            </div>
+        </div>
+        <div class="form-row pt-1">
+            <div class="col-md">
+                <input class="form-control input-lg signup-input" type="password" name="passwordConfirm" placeholder="Confirm Password">
+            </div>
+        </div>
+        <div class="form-row pt-2">
+            <label for="gender" class="signup-gender">Gender:&nbsp; </label>
+            <label class="radio-inline signup-gender-val">
+                <input type="radio" name="gender" value="M" id="male" > Male&nbsp;
+            </label>
+            <label class="radio-inline signup-gender-val">
+                <input type="radio" name="gender" value="F" id="female"> Female&nbsp;
+            </label>
+            <label class="radio-inline signup-gender-val">
+                <input type="radio" name="gender" value="O" id="other"> Other&nbsp;
+            </label>
+        </div>
+        <br/>
+        <button class="btn btn-lg btn-primary signup-btn"  style="" type="submit">Sign Up</button>
+    </form>
+</div>
+
+<div class="col-sm-4 col-md signup-error">
+
     {% if user_form_error %}
-    <p> {{ user_form_error }} </p>
+        <div class="alert alert-danger text-center">
+            {{ user_form_error }}
+        </div>
     {% endif %}
     {% if patient_form_error %}
-    <p> {{ patient_form_error }} </p>
+        <div class="alert alert-danger text-center">
+            {{ patient_form_error }}
+        </div>
     {% endif %}
+    {% if other_errors %}
+        <div class="alert alert-danger text-center">
+            {{ other_errors }}
+        </div>
+    {% endif %}
+</div>
+
 {% endblock %}

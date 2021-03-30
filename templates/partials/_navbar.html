@@ -1,21 +1,88 @@
-<nav class="navbar navbar-dark bg-primary mb-4">
-	<div class="container">
-		<a class="navbar-brand" href="/">ClinicX</a>
-        <p> test</p>
-        {% if user.is_authenticated  %}
-{#            Both work, need to check how it works with a doctor model connected to user: if error is given#}
-            {% if user.patient.role == "Patient" %}
-{#            {% if user.patient %}#}
-                <a class="navbar-brand" href="{%  url 'customer:account_info' %}">Account</a>
-                <a class="navbar-brand" href="{%  url 'customer:logout' %}">Logout</a>
+{% block styles %}
+    <style>
+        .nav-item{
+            margin-left: 40px;
+            font-size: 18px;
+            color: rgb(67, 136, 204);
+        }
+
+        .nav-link{
+            margin-right: 20px;
+            font-size: 18px;
+            color: rgb(67, 136, 204) !important;
+        }
+
+        .navbar-brand{
+            font-family: cursive;
+            font-size: 32px;
+            font-weight: bolder;
+            color: rgb(67, 136, 204) !important;
+        }
+
+        .navbar{
+            background-color: white !important;
+        }
+
+    </style>
+{% endblock %}
+
+<nav class="navbar navbar-expand-md bg-light navbar-light">
+    <div class="container-fluid">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".collapsibleNavbar">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse collapsibleNavbar">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">About</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Services</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Contact Us</a>
+                </li>
+            </ul>
+        </div>
+        <div class="justify-content-center">
+            <a class="navbar-brand" style="font-family: cursive" href="/">ClinicX</a>
+        </div>
+        <div class="collapse navbar-collapse collapsibleNavbar justify-content-end">
+            {% if user.is_authenticated  %}
+                {% if user.patient.role == "Patient" %}
+                    <ul class="navbar-nav">
+                        <li class ="nav-item" style="padding: 8px">Hello <strong>{{ user.username }}</strong></li>
+                            <a class="nav-link" href="{%  url 'customer:account_info' %}"><i class="fas fa-user"></i></a>
+                        <li class ="nav-item">
+                            <a class="nav-link" href="{%  url 'customer:logout' %}"><strong>Logout</strong></a>
+                        </li>
+                    </ul>
+                {% endif %}
+                {% if user.doctor.role == 'Doctor' %}
+                    <ul class="navbar-nav">
+                        <li class ="nav-item">
+                            <a class="nav-link" href="{%  url 'doctor:dashboard' %}">Dashboard</a>
+                        </li>
+                        <li class ="nav-item">
+                            <a class="nav-link" href="{%  url 'doctor:logout' %}"><strong>Logout</strong></a>
+                        </li>
+                    </ul>
+                {% endif %}
+            {% else %}
+                <ul class="navbar-nav">
+                    <li class ="nav-item">
+                        <a class="nav-link" href="{%  url 'customer:login' %}">Login as a Patient</a>
+                    </li>
+                    <li class ="nav-item">
+{#                        <a class="navbar-brand" href="{%  url 'doctor:login' %}">For Doctors</a>#}
+                        <a class="nav-link" href="#">For Doctors</a>
+
+                    </li>
+                </ul>
             {% endif %}
-{#            {% if user.doctor.role is 'Doctor' %}#}
-{#                <a class="navbar-brand" href="{%  url 'doctor:dashboard' %}">Account</a>#}
-{#                <a class="navbar-brand" href="{%  url 'doctor:logout' %}">Logout</a>#}
-{#            {% endif %}#}
-        {% else %}
-        <a class="navbar-brand" href="{%  url 'customer:login' %}">Login as a Patient</a>
-{#        <a class="navbar-brand" href="{%  url 'doctor:login' %}">Login as a Doctor</a>#}
-        {% endif %}
+        </div>
     </div>
 </nav>

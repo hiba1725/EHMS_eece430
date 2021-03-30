@@ -1,15 +1,39 @@
 {% extends 'base.html' %}
+{% load static %}
+{% block styles %}
+<link rel="stylesheet" type="text/css" href="{% static 'customer/add_card.css' %}">
+{% endblock %}
 {% block content %}
+    
+<div class="col-sm-4 col-md"></div>
 
-<form action="" method="post">
-    {% csrf_token %}
-    <input name="card_num">
-    <input name="cvv">
-    <input name="name">
+<div class="col-sm-4 col-md-5 add-card-main">
+    <div class="row text-center justify-content-center">
+        <h3 class="text-center add-card-title"><strong>Add Your Credit Card</strong></h3>
+    </div>
+    <form class="form" action="" method="post">
+        {% csrf_token %}
+        <div class="row">
+            <label for="card_num" class="add-card-label">Card Number: </label>
+            <input name="card_num" class="form-control input-lg add-card-input" placeholder="xxxx-xxxx-xxxx-xxxx">
+        </div>
+        <div class="row">
+            <label for="cvv" class="add-card-label">CVV: </label>
+            <input name="cvv" class="form-control input-lg add-card-input" placeholder="xxx">
+        </div>
+        <div class="row">
+            <label for="name" class="add-card-label">Card Name: </label>
+            <input name="name" class="form-control input-lg add-card-input" placeholder="_______ _______">
+        </div>
+        <button class="btn btn-lg btn-primary add-card-btn" type="submit">Add Card</button>
+        </form>
+    </div>
 
-    <button type="submit">submit</button>
-</form>
+<div class="col-sm-4 col-md add-card-error">
     {% if card_form_error %}
-    <p> {{ card_form_error }} </p>
+        <div class="alert alert-danger text-center">
+            {{ card_form_error }}
+        </div>
     {% endif %}
+</div>
 {% endblock %}

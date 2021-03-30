@@ -1,32 +1,39 @@
 {% extends 'base.html' %}
+{% load static %}
+{% block styles %}
+<link rel="stylesheet" type="text/css" href="{% static 'customer/remove_card.css' %}">
+{% endblock %}
 {% block content %}
 
-{% if error_message %}
-<p class="alert alert-danger">
-	<strong>{{ error_message }}</strong>
-</p>
-{% endif %}
-
+<div class="container text-center justify-content-center">
     {% if cards %}
-    <form action="{% url 'customer:remove_card' %}" method="POST">
-        {% csrf_token %}
-        {% for card in cards %}
-
-            <div class="form-check">
-                <input
-                    type="radio"
-                    name="choice"
-                    class="form-check-input"
-                    id="choice{{ forloop.counter }}"
-                    value="{{ card.id }}"
-                />
-                <label for="choice{{ forloop.counter }}">{{ card.card_num }} -- {{ card.name }}</label>
+    <h2 class="title">Remove Card</h2>
+    <div class="col-sm-6 col-md-8 mx-auto">
+        <form action="{% url 'customer:remove_card' %}" method="POST">
+            {% csrf_token %}
+        <div class="row">
+            {% for card in cards %}
+                <div class="col-md-4 credit-card">
+                    <input
+                        type="radio"
+                        name="choice"
+                        class="form-check-input"
+                        id="choice{{ forloop.counter }}"
+                        value="{{ card.id }}"
+                    />
+                    <label class="card-label" for="choice{{ forloop.counter }}">
+                        <h4 class="credit-card-title">{{ card.name }}</h4>
+                        <p class="credit-card-text"> {{ card.card_num }}</p>
+                    </label>
+                </div>
+            {% endfor %}
             </div>
-        {% endfor %}
-        <input type="submit" value="delete" class="btn btn-success btn-lg btn-block mt-4" />
-{#    </form>#}
-        {% else %}
-        <h3>User has no card added to their account</h3>
+            <input type="submit" value="Delete" class="btn btn-danger btn-lg btn-block mt-4" />
+        </form>
+    </div>
+    {% else %}
+        <h2 class="title">You have no cards added to this account</h2>
     {% endif %}
+</div>
 
 {% endblock %}
