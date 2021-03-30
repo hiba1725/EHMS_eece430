@@ -10,8 +10,8 @@ class Patient(models.Model):
 	age = models.IntegerField(default=0)
 	phone_number = models.CharField(max_length=15, default='01111111')
 	address = models.CharField(max_length=100, null=True, blank=True)
-	role = models.CharField(max_length=10, default='Patient')
-	gender = models.CharField(max_length=1, default='M')
+	role = models.CharField(max_length=10, default='none')
+	gender = models.CharField(max_length=1, default='O')
 
 	def __str__(self):
 		return f"{self.user.username} {self.user.first_name} {self.user.last_name}"

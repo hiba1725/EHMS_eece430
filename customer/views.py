@@ -32,6 +32,7 @@ def signup(request):
             user.save()
             patient = patient_form.save(commit=False)
             patient.user = user
+            patient.role = "Patient"
             patient.save()
             login(request, user)
             return redirect('/')
