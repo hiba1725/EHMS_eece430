@@ -1,0 +1,92 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block styles %}
+<link rel="stylesheet" type="text/css" href="{% static 'doctor/edit_account_info.css' %}">
+{% endblock %}
+{% block content %}
+
+<div class="col-sm-4 col-md"></div>
+
+<div class="col-sm-4 col-md-5 edit-account-main">
+    <div class="row text-center justify-content-center">
+        <h3 class="text-center edit-account-title"><strong>Edit Account Info</strong></h3>
+    </div>
+    <form class="form" action="" method="post">
+        {% csrf_token %}
+        <div class="form-row">
+            <div class="col-md-6 pt-3">
+                <input class="form-control input-lg edit-account-input" name="first_name" placeholder="First Name" value="{{ user.first_name }}">
+            </div>
+            <div class="col-md-6 pt-3">
+                <input class="form-control input-lg edit-account-input" name="last_name" placeholder="Last Name" value="{{ user.last_name }}">
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="col-xs-6 col-md-6 pt-1">
+                <input class="form-control input-lg edit-account-input" name="username" placeholder="Username" value="{{ user.username }}">
+            </div>
+            <div class="col-xs-6 col-md-6 pt-1">
+                <input class="form-control input-lg edit-account-input" name="age" placeholder="Age" value="{{ user.patient.age }}">
+            </div>
+        </div>
+        <div class="form-row pt-1">
+            <div class="col-md">
+                <input class="form-control input-lg edit-account-input" name="email" placeholder="Email" value="{{ user.email }}">
+            </div>
+        </div>
+        <div class="form-row pt-1">
+            <div class="col-md">
+                <input class="form-control input-lg edit-account-input" name="phone_number" placeholder="Phone Number" value="{{ user.patient.phone_number }}">
+            </div>
+        </div>
+        <div class="form-row pt-1">
+            <div class="col-md">
+                <input class="form-control input-lg edit-account-input" name="address" placeholder="Address" value="{{ user.patient.address }}">
+            </div>
+        </div>
+        <div class="form-row pt-2">
+            <label for="gender" class="edit-account-gender">Gender:&nbsp; </label>
+            <label class="radio-inline edit-account-gender-val">
+                <input type="radio" name="gender" value="M" id="male" > Male&nbsp;
+            </label>
+            <label class="radio-inline edit-account-gender-val">
+                <input type="radio" name="gender" value="F" id="female"> Female&nbsp;
+            </label>
+            <label class="radio-inline edit-account-gender-val">
+                <input type="radio" name="gender" value="O" id="other"> Other&nbsp;
+            </label>
+        </div>
+        <div class="form-row pt-1">
+            <div class="col-md text-center">
+                <p class="password-validation">Enter password to validate changes</p>
+                <input class="form-control input-lg edit-account-input" type="password" name="password" placeholder="Password">
+            </div>
+        </div>
+        <br/>
+        <button class="btn btn-lg btn-primary edit-account-btn"  style="" type="submit">Submit Changes</button>
+    </form>
+    <div class="row text-center justify-content-center">
+        <a href="{% url 'doctor:edit_password' %}" class="edit-password-link">Change password</a>
+    </div>
+</div>
+
+
+<div class="col-sm-4 col-md edit-account-error">
+    {% if user_form_error %}
+        <div class="alert alert-danger text-center">
+            {{ user_form_error }}
+        </div>
+    {% endif %}
+    {% if patient_form_error %}
+        <div class="alert alert-danger text-center">
+            {{ patient_form_error }}
+        </div>
+    {% endif %}
+    {% if other_errors %}
+        <div class="alert alert-danger text-center">
+            {{ other_errors }}
+        </div>
+    {% endif %}
+</div>
+
+{% endblock %}
