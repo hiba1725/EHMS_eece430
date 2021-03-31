@@ -29,5 +29,12 @@ def confirmation(request):
     """
     pass
 
+def book(request):
+    """
+    Book appointment view
+
+    """
+    pass
+
 
 

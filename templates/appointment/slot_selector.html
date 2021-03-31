@@ -1,6 +1,13 @@
 {% extends 'base.html' %}
 {% block content %}
 
+<ul>
+    {% for slot in available_slots %}
+    <li>
+        {{slot}}
+    </li>
+    {% endfor %}
+</ul>
 
 
 {% endblock %}

@@ -5,8 +5,10 @@ def find_available_slots(appts):
     output: list of available time slots on day X with doctor Y
     """
 
+    N = 10
+
     slots = {}
-    for i in range(0,8):
+    for i in range(0,N):
         slots[i] = False
     for appt in appts:
         appt_slot = appt.slot
@@ -14,10 +16,11 @@ def find_available_slots(appts):
 
 
     available_slots = []
-    for i in range(0,8):
+    for i in range(0,N):
         if(not slots[i]):
-            available_slots.append(slots[i])
+            available_slots.append(f'{8+i}:00-{9+i}:00')
     
     return available_slots
+
     
             
