@@ -8,6 +8,7 @@ from django.dispatch import receiver
 
 class Doctor(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='doctor', primary_key=True)
+    name = models.CharField(max_length=20,default="")
     years_of_experience = models.IntegerField(default=0)
     age = models.IntegerField(default=0)
     phone_number = models.CharField(max_length=15, default='01111111')
