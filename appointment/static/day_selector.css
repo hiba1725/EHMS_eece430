@@ -1,0 +1,49 @@
+#container {
+    width: auto;
+    margin: 0 auto;
+    display: flex;
+}
+
+.box {
+    flex: auto;
+    margin: 20px;
+    margin-top: 40px;
+    background-color: white;
+    box-shadow: 0 10px 30px 0 rgba(0,0,0,0.5);
+    padding: 60px;
+    justify-content: center;
+}
+
+#dr-pic {
+    border: 2px solid rgb(67, 136, 204);
+    border-radius: 50%;
+    height: 200px;
+    width: 200px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.title {
+    color: rgb(67, 136, 204);
+    margin: 0 0 30px 30px;
+}
+
+input[type=date] {
+    margin: 0 auto;
+    font-size: 15pt;
+}
+
+.btn{
+    width: 100%;
+    margin: 30px 0 10px 0;
+    padding: 12px;
+    border-radius: 0;
+    color: rgb(67, 136, 204);
+    border-color: rgb(67, 136, 204);
+}
+
+.btn:hover{
+    background-color: rgb(67, 136, 204);
+    border-color: rgb(67, 136, 204);
+    color: white;
+}

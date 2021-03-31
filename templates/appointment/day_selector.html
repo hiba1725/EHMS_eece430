@@ -1,8 +1,31 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block styles %}
-<link rel="stylesheet" type="text/css" href="{% static 'appointment/day_selector.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'day_selector.css' %}">
 {% endblock %}
 {% block content %}
-<p>Test</p>
+
+    <div id="container">
+
+        <div class="box">
+            <div id="dr-pic">
+                <img src="../../../../../../Pictures/Saved Pictures/wallpaper.jpg" alt="Doctor's Picture">
+            </div>
+            <h2>Dr. Battikha</h2>
+            <h3>Orthologist</h3>
+        </div>        
+        
+        <div class="box">
+            <form action="" method="POST">
+                <h3 class="title">Choose a day to proceed:</h3>
+                <div style="text-align: center;">
+                    <label for="day" style="font-size:larger">Select date:&nbsp;</label>
+                    <input type="date" name="day"><br>
+                </div>
+                <input type="submit" class="btn" name="submit-day" value="Check Available Times">
+            </form>
+        </div>
+
+    </div>
+
 {% endblock %}
