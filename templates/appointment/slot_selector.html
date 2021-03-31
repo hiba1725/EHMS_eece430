@@ -1,13 +1,40 @@
 {% extends 'base.html' %}
+{% load static %}
+{% block styles %}
+<link rel="stylesheet" type="text/css" href="{% static 'day_selector.css' %}">
+{% endblock %}
 {% block content %}
 
-<ul>
-    {% for slot in available_slots %}
-    <li>
-        {{slot}}
-    </li>
-    {% endfor %}
-</ul>
+<div id="container">
 
+    <div class="box">
+        <div id="dr-pic">
+            <img src="../../../../../../Pictures/Saved Pictures/wallpaper.jpg" alt="Doctor's Picture">
+        </div>
+        <h2>{{doctor}}</h2>
+        <h3>Orthologist</h3>
+    </div>        
+    
+    <div class="box">
+        <form action="" method="GET">
+            <h3 class="title">Choose a time to proceed:</h3>
+            <div style="text-align: center;">
+                <span style="font-size:larger; color: gray">Selected date:</span>
+            </div>
+            <div id="slots">
+                {% for slot in available_slots %}
+                <div>
+                  <input type="radio" name="select-day" id="{{slot}}" value="{{doctor.slot}}">
+                  <label for="{{slot}}">
+                    <p>{{slot}}</p>
+                  </label>
+                </div>
+                {% endfor %}
+            </div>
+            <input type="submit" class="btn" name="submit-time" value="Book Appointment">
+        </form>
+    </div>
+
+</div>
 
 {% endblock %}

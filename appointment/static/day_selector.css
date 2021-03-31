@@ -47,3 +47,36 @@ input[type=date] {
     border-color: rgb(67, 136, 204);
     color: white;
 }
+
+#slots {
+    display: flex;
+    flex-flow: wrap;
+    width: 500px;
+}
+#slots > div {
+    flex: 1;
+    padding: 0.5rem;
+}
+#slots input[type="radio"] {
+    display: none;
+    cursor: pointer;
+}
+#slots label {
+    cursor: pointer;
+    width: 100px;
+    height: 100%;
+    display: block;
+    background: white;
+    border: 2px solid rgb(67, 136, 204);
+    border-radius: 0px;
+    padding-top: 20px;   
+    text-align: center;
+    box-shadow: 0px 3px 10px -2px rgb(67, 136, 204);
+    position: relative;
+}
+#slots input[type="radio"]:checked + label {
+    background: rgb(67, 136, 204);
+    color: white;
+    box-shadow: 0px 0px 20px rgb(67, 136, 204);
+}
+
