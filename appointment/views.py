@@ -14,7 +14,9 @@ def slot_selector(request):
     Slot selector view
 
     """
-    pass
+    day = request.POST["day"]
+    
+    return render(request,"appointment/slot_selector.html")
 
 def confirmation(request):
     """
