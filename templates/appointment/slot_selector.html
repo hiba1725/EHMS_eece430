@@ -17,12 +17,14 @@
         <h5>Orthologist</h5>
     </div>        
     
-    <div class="box">
+    <div class="box2">
+        <a href="/appointment/{{doctor}}/day?" style="text-align: left; margin-bottom: 20px;">
+            <i class="fa fa-chevron-left" style="font-size:12px;color:gray" aria-hidden="true"></i>
+            <span style="font-size:12px;color:gray;">Select another day</span> 
+        </a>
+
         <form action="/appointment/{{doctor}}/{{day}}/confirm" method="GET">
             <h3 class="title">Booking an appointment on {{day}}. Choose a time to proceed</h3>
-            <div style="text-align: center;">
-                <span style="font-size:larger; color: gray">Selected date:</span>
-            </div>
             <div id="slots">
                 {% for slot in available_slots %}
                 <div>

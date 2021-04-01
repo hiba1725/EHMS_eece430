@@ -1,0 +1,33 @@
+#container {
+	width: auto;
+	margin: 0 auto;
+	display: flex;
+}
+@media (max-width: 600px) {
+	#container {
+		display: flex;
+		flex-direction: column;
+	}
+}
+
+h3 {
+	color: rgb(67, 136, 204);
+}
+
+a {
+    text-decoration: none;
+	color: rgb(67, 136, 204);
+}a:hover {
+    text-decoration: none;
+}
+
+.box {
+	flex: auto;
+	margin: 20px;
+	margin-top: 40px;
+	background-color: white;
+	border: 1pt solid rgb(236, 236, 236);
+	padding: 60px;
+	text-align: center;
+	height: max-content;
+}
