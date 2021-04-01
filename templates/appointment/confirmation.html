@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block styles %}
+<link rel="stylesheet" type="text/css" href="{% static 'day_selector.css' %}">
+{% endblock %}
+{% block content %}
+
+<p>Appointment with {{doctor}} at {{slot}}</p>
+<form action="/appointment/{{doctor}}/{{day}}/{{slot}}/book" method="GET">
+    <input type="submit" class="btn btn-dark" value="Book Now"/>
+</form>
+
+
+{% endblock %}

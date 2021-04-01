@@ -16,15 +16,15 @@
     </div>        
     
     <div class="box">
-        <form action="" method="GET">
-            <h3 class="title">Choose a time to proceed:</h3>
+        <form action="/appointment/{{doctor}}/{{day}}/confirm" method="GET">
+            <h3 class="title">Booking an appointment on {{day}}. Choose a time to proceed</h3>
             <div style="text-align: center;">
                 <span style="font-size:larger; color: gray">Selected date:</span>
             </div>
             <div id="slots">
                 {% for slot in available_slots %}
                 <div>
-                  <input type="radio" name="select-day" id="{{slot}}" value="{{doctor.slot}}">
+                  <input type="radio" name="select-slot" id="{{slot}}" value="{{slot}}">
                   <label for="{{slot}}">
                     <p>{{slot}}</p>
                   </label>

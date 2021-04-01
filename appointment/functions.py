@@ -22,5 +22,14 @@ def find_available_slots(appts):
     
     return available_slots
 
+def encode_slot(slot):
+    i = 0
+    s = ""
+    while(slot[i]!=':'):
+        s = s + slot[i]
+        i = i + 1
+    start_time = int(s)
+    slot = start_time - 8
+    return slot
     
             
