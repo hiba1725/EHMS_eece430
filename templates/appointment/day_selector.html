@@ -9,17 +9,17 @@
 
         <div class="box">
             <div id="dr-pic">
-                <img src="../../../../../../Pictures/Saved Pictures/wallpaper.jpg" alt="Doctor's Picture">
+                <img src="https://st2.depositphotos.com/3889193/7657/i/950/depositphotos_76570869-stock-photo-confident-female-doctor-posing-in.jpg" alt="Doctor's Picture" width = "200" height = "200" style="object-fit: cover; border-radius: 50%;">
             </div>
-            <h2>{{doctor}}</h2>
-            <h3>Orthologist</h3>
+            <h4>Dr. {{doctor}}</h4>
+            <h5>Orthologist</h5>
         </div>        
         
         <div class="box">
             <form action="/appointment/{{doctor}}/slot" method="GET">
                 <h3 class="title">Choose a day to proceed:</h3>
                 <div style="text-align: center;">
-                    <label for="day" style="font-size:larger">Select date:&nbsp;</label>
+                    <label for="day" style="font-size:12pt">Select date:&nbsp;</label>
                     <input type="date" name="day"><br>
                 </div>
                 <input type="submit" class="btn" name="submit-day" value="Check Available Times">

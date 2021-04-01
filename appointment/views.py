@@ -41,7 +41,7 @@ def book(request,doctor_name,day,slot):
     slot_encoded = functions.encode_slot(slot)
     appt = Appointment(doctor=doctor,patient=patient,date=day,slot=slot_encoded)
     appt.save()
-    return render(request,"pages/index.html")
+    return render(request,"appointment/booked.html")
 
 
 
