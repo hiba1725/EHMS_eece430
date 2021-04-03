@@ -38,6 +38,11 @@
     <div class="col-md justify-content-left account-appointments">
         <h2>Appointments</h2>
         {% if appointments %}
+            {% for appointment in appointments %}
+                <div class="row appointment">
+                    <h4> {{ appointment.date }} with {{ appointment.doctor }}</h4>
+                </div>
+            {% endfor %}
         {% else %}
             <h4>You haven't had any appointments, and didn't reserve any yet</h4>
         {% endif %}
