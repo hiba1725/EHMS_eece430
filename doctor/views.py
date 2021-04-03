@@ -5,6 +5,8 @@ from django.shortcuts import get_object_or_404, render, redirect
 from django.urls import reverse, reverse_lazy
 from django.contrib.auth import authenticate, login, logout, password_validation
 from django.contrib.auth.decorators import login_required
+from django.views.generic import TemplateView
+from django.views.generic.list import ListView
 
 from .models import Doctor
 from .forms import DoctorForm, UserForm
