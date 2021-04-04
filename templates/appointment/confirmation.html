@@ -1,14 +1,28 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block styles %}
-<link rel="stylesheet" type="text/css" href="{% static 'day_selector.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'confirmation.css' %}">
 {% endblock %}
 {% block content %}
 
-<p>Appointment with {{doctor}} at {{slot}}</p>
-<form action="/appointment/{{doctor}}/{{day}}/{{slot}}/book" method="GET">
-    <input type="submit" class="btn btn-dark" value="Book Now"/>
-</form>
+<div id="container">
+
+    <div class="box">
+        <a href="/appointment/{{doctor}}/slot?day={{day}}&submit-day=Check+Available+Times" style="text-align: left; margin-bottom: 20px;">
+            <i class="fa fa-chevron-left" style="font-size:12px;color:gray" aria-hidden="true"></i>
+            <span style="font-size:12px;color:gray;">Select another slot</span> 
+        </a>
+
+        <h3 >Your appointment details:</h3>
+        <p>Doctor: Dr. {{doctor}}</p>
+        <p>Date: {{day}}</p>
+        <p>Time: {{slot}}</p>
+        <form action="/appointment/{{doctor}}/{{day}}/{{slot}}/book" method="GET">
+            <input type="submit" class="btn" value="Confirm Booking"/>
+        </form>
+    </div> 
+    
+</div>
 
 
 {% endblock %}

@@ -1,0 +1,43 @@
+#container {
+	width: auto;
+	margin: 0 auto;
+	display: flex;
+}
+@media (max-width: 600px) {
+	#container {
+		display: flex;
+		flex-direction: column;
+	}
+}
+
+.box {
+	flex: auto;
+	margin: 20px;
+	margin-top: 40px;
+	background-color: white;
+	border: 1pt solid rgb(236, 236, 236);
+	padding: 60px;
+	height: max-content;
+}
+
+.btn {
+	width: 100%;
+	margin: 30px 0 10px 0;
+	padding: 12px;
+	border-radius: 0;
+	color: rgb(67, 136, 204);
+	border-color: rgb(67, 136, 204);
+}
+
+.btn:hover {
+	background-color: rgb(67, 136, 204);
+	border-color: rgb(67, 136, 204);
+	color: white;
+}
+
+.title {
+	color: rgb(67, 136, 204);
+	font-size: 12pt;
+	margin: 0 0 30px 30px;
+    justify-self: center;
+}

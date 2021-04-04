@@ -1,11 +1,19 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block styles %}
-<link rel="stylesheet" type="text/css" href="{% static 'day_selector.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'booked.css' %}">
 {% endblock %}
 {% block content %}
 
-<p>Appointment booked!</p>
+<div id="container">
+
+    <div class="box">
+        <h3>Your appointment has been booked!</h3>
+        <p>Refer to your <a href="{%  url 'customer:account_info' %}">profile</a>
+         page in order to cancel appointments.</p>
+    </div> 
+    
+</div>
 
 
 {% endblock %}

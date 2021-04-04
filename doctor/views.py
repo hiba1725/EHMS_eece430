@@ -5,6 +5,8 @@ from django.shortcuts import get_object_or_404, render, redirect
 from django.urls import reverse, reverse_lazy
 from django.contrib.auth import authenticate, login, logout, password_validation
 from django.contrib.auth.decorators import login_required
+from django.views.generic import TemplateView
+from django.views.generic.list import ListView
 
 from .models import Doctor
 from .forms import DoctorForm, UserForm
@@ -131,3 +133,26 @@ def edit_password(request):
 
         return render(request, 'doctor/edit_password.html')
     return redirect('/doctor/login')
+
+def search_doctors(request):
+    st = request.GET('query')
+    doctors = Doctor.objects.filter(specialty__icontains=st).order_by('-years_of_experience')
+    return render(request, 'doctor/search_doctors.html', {'doctors:', doctors})
+
+
+class DoctorSearch(TemplateView):
+    template_name = 'doctor/search_doctors.html'
+
+
+class DoctorSearchResult(ListView):
+    model = Doctor
+    template_name = 'doctor/doctors_list.html'
+
+    def get_queryset(self, *args, **kwargs):
+        val = self.request.GET.get("q")
+        if val:
+            queryset = Doctor.objects.filter(specialty__icontains=val).order_by('-years_of_experience')
+        else:
+            queryset = Doctor.objects.none()
+        queryset = queryset.values_list()
+        return render(self.request, 'doctor/doctors_list.html', {'queryset':queryset})

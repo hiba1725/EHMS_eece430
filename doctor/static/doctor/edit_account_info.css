@@ -1,7 +1,7 @@
 .edit-account-main{
     margin-top: 40px;
-    background-color: white;
-    box-shadow: 0 10px 30px 0 rgba(0,0,0,0.5);
+	background-color: white;
+	border: 1pt solid rgb(236, 236, 236);
     padding: 0 60px;
 }
 

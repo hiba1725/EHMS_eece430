@@ -8,6 +8,7 @@ from django.contrib.auth.decorators import login_required
 
 from .models import Patient, CreditCard
 from .forms import PatientForm, UserForm, CardForm
+from appointment.models import Appointment
 
 
 def signup(request):
@@ -73,7 +74,9 @@ def logout_user(request):
 
 def account_info(request):
     if request.user.is_authenticated and request.user.patient.role == "Patient":
-            return render(request, 'customer/account_info.html')
+            appointments = Appointment.objects.filter(patient=request.user.patient.pk)
+            print(appointments)
+            return render(request, 'customer/account_info.html', {'appointments':appointments})
     return redirect('/customer/login')
 
 
