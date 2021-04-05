@@ -4,5 +4,8 @@
 <form action="/appointment/Yara Halawi/day" method="GET">
     <input type="submit" class="btn btn-dark" value="Book Now"/>
 </form>
+<form action="{% url 'doctor:dsearch' %}" method="GET">
+    <input type="submit" class="btn btn-dark" value="Search for doctors"/>
+</form>
 
 {% endblock %}
