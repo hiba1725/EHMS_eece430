@@ -157,6 +157,6 @@ table.table-borderless > thead > tr > th, table.table-borderless > tbody > tr > 
     background-color: whiteSmoke;
 }
 
-.active{
-	background-color: rgb(87, 156, 234);;
+.myactive{
+	background-color: rgb(87, 156, 234);
 }

@@ -4,7 +4,7 @@ $(document).ready(function() {
     });
     for (app in week_appointment){
         idToFind = "#"+app.toString()+week_appointment[app][0].toString()
-        $(idToFind).addClass("active").append(week_appointment[app][1]);
+        $(idToFind).addClass("myactive").append(week_appointment[app][1]);
     }
 })
 

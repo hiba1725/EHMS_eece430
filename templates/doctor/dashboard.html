@@ -179,7 +179,11 @@
                         <h4 style="text-align: center"> Appointments List</h4>
                         <ul class="list-group text-center justify-content-center">
                             {% for appointment in appointments %}
-                                <li class="list-group-item"> {{ appointment.date }} with {{ appointment.patient.user.last_name }} {{ appointment.patient.user.first_name }} at {{ appointment.slot|add:8 }}:00 until {{ appointment.slot|add:9 }}:00</li>
+                                {% if appointment.done %}
+                                    <li class="list-group-item myactive"> {{ appointment.date }} with {{ appointment.patient.user.last_name }} {{ appointment.patient.user.first_name }} at {{ appointment.slot|add:8 }}:00 until {{ appointment.slot|add:9 }}:00</li>
+                                {% else %}
+                                    <li class="list-group-item"> {{ appointment.date }} with {{ appointment.patient.user.last_name }} {{ appointment.patient.user.first_name }} at {{ appointment.slot|add:8 }}:00 until {{ appointment.slot|add:9 }}:00</li>
+                                {% endif %}
                             {% endfor %}
                         </ul>
                     {% else %}
