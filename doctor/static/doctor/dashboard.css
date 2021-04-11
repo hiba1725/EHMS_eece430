@@ -123,3 +123,40 @@
 	background: rgb(87, 156, 234);
 }
 
+
+
+
+
+
+table.calendar {
+    margin-bottom: 0;
+}
+
+table.calendar > thead > tr > th {
+    text-align: center;
+}
+
+table.calendar > tbody > tr > td {
+    height: 20px;
+}
+
+table.calendar > tbody > tr > td > div {
+    //padding: 8px;
+    height: 40px;
+    overflow: hidden;
+    display: inline-block;
+    vertical-align: middle;
+    float: left;
+}
+
+table.table-borderless > thead > tr > th, table.table-borderless > tbody > tr > td {
+    border: 0;
+}
+
+.table tbody tr.hover td, .table tbody tr.hover th {
+    background-color: whiteSmoke;
+}
+
+.active{
+	background-color: rgb(87, 156, 234);;
+}

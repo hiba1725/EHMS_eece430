@@ -11,7 +11,7 @@ from django.views.generic.list import ListView
 from .models import Doctor
 from .forms import DoctorForm, UserForm
 from appointment.models import Appointment
-
+from datetime import datetime
 
 def signup(request):
     if request.user.is_authenticated:
@@ -97,20 +97,29 @@ def dashboard(request):
             else:
                 err = form.errors
                 print(err)
-        appointments = Appointment.objects.filter(doctor=request.user.doctor)
+        appointments = Appointment.objects.filter(doctor=request.user.doctor).order_by('-date')
         todo_app = 0
         done_app = 0
+        today = datetime.today()
+        week_number = today.isocalendar()[1]
+        week_appointment ={}
         for app in appointments:
+            iso = app.date.isocalendar()
+            if app.date.year == today.year and iso[1] == week_number+(today.isocalendar()[2]//7): # if sunday, we want next week
+                week_appointment[iso[2]] = [app.slot, f"{app.patient.user.first_name} {app.patient.user.last_name}"]
             if app.done:
                 done_app += 1
             else:
                 todo_app += 1
+        print(week_appointment)
         return render(request, 'doctor/dashboard.html',
                       {'appointments': appointments,
                        'done_app': done_app,
                        'todo_app': todo_app,
+                       'week_appointment': week_appointment,
                        'total_app': len(appointments),
-                       'form_hidden': form_hidden})
+                       'form_hidden': form_hidden
+                       })
     return redirect('/doctor/login/')
 
 

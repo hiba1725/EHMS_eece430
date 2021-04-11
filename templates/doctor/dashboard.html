@@ -2,13 +2,13 @@
 {% load static %}
 {% block styles %}
 <link rel="stylesheet" type="text/css" href="{% static 'doctor/dashboard.css' %}">
-<link rel="stylesheet" href="{% static 'doctor/donut.css' %}" type="text/css">
 <script src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.1.4/Chart.bundle.min.js'></script>
 <script src="{% static 'doctor/donut.js' %}"></script>
 <script src="{% static 'doctor/dashboard.js' %}"></script>
     <script>
         var done_app = {{ done_app }};
         var todo_app = {{ todo_app }};
+        var week_appointment = {{ week_appointment|safe }};
     </script>
 {% endblock %}
 {% block content %}
@@ -61,16 +61,117 @@
 
 
                 <div class="row justify-content-center appointments-summary">
-                    <div class="col-md-5">
+                    <div class="col-md-3">
                         <h4> Total Number of appointments: {{ total_app }}</h4>
                         <canvas id="chart-line" width="300" height="250" class="chartjs-render-monitor"></canvas>
                     </div>
                     <div class="col-md">
-                        {% if next %}
-                            <h5> Next Appointment with {next.name} on {next.date} </h5>
-                        {% else %}
-                            <h5> No next appointment</h5>
-                        {% endif %}
+<table class="calendar table table-bordered">
+    <thead>
+        <tr>
+            <th>&nbsp;</th>
+            <th style="width: 16.6%;">Monday</th>
+            <th style="width: 16.6%;">Tuesday</th>
+            <th style="width: 16.6%;">Wednesday</th>
+            <th style="width: 16.6%;">Thursday</th>
+            <th style="width: 16.6%;">Friday</th>
+            <th style="width: 16.6%;">Saturday</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>08:00</td>
+            <td id="10"></td>
+            <td id="20"></td>
+            <td id="30"></td>
+            <td id="40"></td>
+            <td id="50"></td>
+            <td id="60"></td>
+        </tr>
+        <tr>
+            <td>09:00</td>
+            <td id="11"></td>
+            <td id="21"></td>
+            <td id="31"></td>
+            <td id="41"></td>
+            <td id="51"></td>
+            <td id="61"></td>
+        </tr>
+        <tr>
+            <td>10:00</td>
+            <td id="12"></td>
+            <td id="22"></td>
+            <td id="32"></td>
+            <td id="42"></td>
+            <td id="52"></td>
+            <td id="62"></td>
+        </tr>
+        <tr>
+            <td>11:00</td>
+            <td id="13"></td>
+            <td id="23"></td>
+            <td id="33"></td>
+            <td id="43"></td>
+            <td id="53"></td>
+            <td id="63"></td>
+        </tr>
+        <tr>
+            <td>12:00</td>
+            <td id="14"></td>
+            <td id="24"></td>
+            <td id="34"></td>
+            <td id="44"></td>
+            <td id="54"></td>
+            <td id="64"></td>
+        </tr>
+        <tr>
+            <td>13:00</td>
+            <td id="15"></td>
+            <td id="25"></td>
+            <td id="35"></td>
+            <td id="45"></td>
+            <td id="55"></td>
+            <td id="65"></td>
+        </tr>
+        <tr>
+            <td>14:00</td>
+            <td id="16"></td>
+            <td id="26"></td>
+            <td id="36"></td>
+            <td id="46"></td>
+            <td id="56"></td>
+            <td id="66"></td>
+        </tr>
+        <tr>
+            <td>15:00</td>
+            <td id="17"></td>
+            <td id="27"></td>
+            <td id="37"></td>
+            <td id="47"></td>
+            <td id="57"></td>
+            <td id="67"></td>
+        </tr>
+        <tr>
+            <td>16:00</td>
+            <td id="18"></td>
+            <td id="28"></td>
+            <td id="38"></td>
+            <td id="48"></td>
+            <td id="58"></td>
+            <td id="68"></td>
+        </tr>
+        <tr>
+            <td>17:00</td>
+            <td id="19"></td>
+            <td id="29"></td>
+            <td id="39"></td>
+            <td id="49"></td>
+            <td id="59"></td>
+            <td id="69"></td>
+        </tr>
+
+    </tbody>
+</table>
                     </div>
                 </div>
                 <div class="row-content">
