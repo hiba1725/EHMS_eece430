@@ -52,6 +52,12 @@ def login_user(request):
         username = request.POST['username']
         password = request.POST['password']
         user = authenticate(username=username, password=password)
+        try:
+            if user.doctor.role != "Doctor":
+                raise
+        except Exception as e:
+            print(e)
+            return render(request, 'doctor/login.html', {'error_message': 'Invalid Login'})
         if user is not None:
             if user.is_active:
                 login(request, user)

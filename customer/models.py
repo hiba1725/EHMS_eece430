@@ -23,6 +23,7 @@ class CreditCard(models.Model):
 
 class MedicalRecord(models.Model):
 	patient = models.ForeignKey(Patient, on_delete=models.CASCADE, null=True, blank=True)
+	num_appoinments = models.IntegerField(default=0)
 	# allergies
 	# treatments
 	# chronic illnesses

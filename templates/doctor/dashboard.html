@@ -13,10 +13,11 @@
         <h5>First Name: {{ user.first_name }}</h5>
         <h5>Last Name: {{ user.last_name }}</h5>
         <h5>Email: {{ user.email }}</h5>
-        <h5>Age: {{ user.patient.age }}</h5>
-        <h5>Phone Number: {{ user.patient.phone_number }}</h5>
-        <h5>Address: {{ user.patient.address }}</h5>
-        <h5>Gender: {{ user.patient.gender }}</h5>
+        <h5>Age: {{ user.doctor.age }}</h5>
+        <h5>Phone Number: {{ user.doctor.phone_number }}</h5>
+        <h5>Address: {{ user.doctor.address }}</h5>
+        <h5>Gender: {{ user.doctor.gender }}</h5>
+        <h5>Specialty: {{ user.doctor.specialty }}</h5>
         <br>
         <a href = {% url 'doctor:edit_account_info' %} class="button-link">
             <button class="btn btn-outline-primary btn-lg btn-block">Edit account info</button>
