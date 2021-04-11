@@ -111,7 +111,6 @@ def dashboard(request):
                 done_app += 1
             else:
                 todo_app += 1
-        print(week_appointment)
         return render(request, 'doctor/dashboard.html',
                       {'appointments': appointments,
                        'done_app': done_app,

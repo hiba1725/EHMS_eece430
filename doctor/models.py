@@ -16,6 +16,7 @@ class Doctor(models.Model):
     role = models.CharField(max_length=10, default='none')
     gender = models.CharField(max_length=1, default='O')
     profile_pic = models.ImageField(null=True, blank=True, upload_to='images')
+    rating = models.IntegerField(default=0)
 
     def __str__(self):
         return f"{self.user.username} {self.user.first_name} {self.user.last_name}"
