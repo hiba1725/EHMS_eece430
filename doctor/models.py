@@ -8,7 +8,6 @@ from django.dispatch import receiver
 
 class Doctor(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='doctor', primary_key=True)
-    name = models.CharField(max_length=20,default="")
     years_of_experience = models.IntegerField(default=0)
     age = models.IntegerField(default=0)
     phone_number = models.CharField(max_length=15, default='01111111')
@@ -16,6 +15,8 @@ class Doctor(models.Model):
     address = models.CharField(max_length=100, null=True, blank=True)
     role = models.CharField(max_length=10, default='none')
     gender = models.CharField(max_length=1, default='O')
+    profile_pic = models.ImageField(null=True, blank=True, upload_to='images')
+    rating = models.IntegerField(default=0)
 
     def __str__(self):
         return f"{self.user.username} {self.user.first_name} {self.user.last_name}"

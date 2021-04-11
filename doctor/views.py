@@ -11,7 +11,7 @@ from django.views.generic.list import ListView
 from .models import Doctor
 from .forms import DoctorForm, UserForm
 from appointment.models import Appointment
-
+from datetime import datetime
 
 def signup(request):
     if request.user.is_authenticated:
@@ -84,14 +84,29 @@ def dashboard(request):
     if request.user.is_authenticated:
         try:
             if request.user.doctor.role != "Doctor":
-                return redirect('/doctor/login')
+                return redirect('/doctor/login/')
         except Exception as e:
             print(e)
-            return redirect('/doctor/login')
-        appointments = Appointment.objects.filter(doctor=request.user.doctor)
+            return redirect('/doctor/login/')
+        doc = request.user.doctor
+        form_hidden = DoctorForm(instance=doc)
+        if request.method == "POST":
+            form = DoctorForm(request.POST, request.FILES, instance=doc)
+            if form.is_valid():
+                form.save()
+            else:
+                err = form.errors
+                print(err)
+        appointments = Appointment.objects.filter(doctor=request.user.doctor).order_by('-date')
         todo_app = 0
         done_app = 0
+        today = datetime.today()
+        week_number = today.isocalendar()[1]
+        week_appointment ={}
         for app in appointments:
+            iso = app.date.isocalendar()
+            if app.date.year == today.year and iso[1] == week_number+(today.isocalendar()[2]//7): # if sunday, we want next week
+                week_appointment[iso[2]] = [app.slot, f"{app.patient.user.first_name} {app.patient.user.last_name}"]
             if app.done:
                 done_app += 1
             else:
@@ -100,12 +115,15 @@ def dashboard(request):
                       {'appointments': appointments,
                        'done_app': done_app,
                        'todo_app': todo_app,
-                       'total_app': len(appointments)})
-    return redirect('/doctor/login')
+                       'week_appointment': week_appointment,
+                       'total_app': len(appointments),
+                       'form_hidden': form_hidden
+                       })
+    return redirect('/doctor/login/')
 
 
 def edit_account_info(request):
-    if request.user.is_authenticated and request.user.patient.role == "Patient":
+    if request.user.is_authenticated and request.user.doctor.role == "Doctor":
         if request.POST:
             user_form = UserForm(request.POST, instance=request.user, )
             doctor_form = DoctorForm(request.POST, instance=request.user.patient)
@@ -131,11 +149,11 @@ def edit_account_info(request):
                 return render(request, 'doctor/edit_account_info.html',
                               {'user_form_error': user_form.errors, 'patient_form_error': doctor_form.errors})
         return render(request, 'doctor/edit_account_info.html')
-    return redirect('/doctor/login')
+    return redirect('/doctor/login/')
 
 
 def edit_password(request):
-    if request.user.is_authenticated and request.user.patient.role == "Patient":
+    if request.user.is_authenticated and request.user.doctor.role == "Doctor":
         if request.POST:
             oldpass = request.POST["passwordold"]
             user = request.user.username
@@ -155,9 +173,8 @@ def edit_password(request):
                 return redirect('/doctor/account')
             else:
                 return render(request, 'doctor/edit_password.html', {'errors': 'Old password is not correct'})
-
         return render(request, 'doctor/edit_password.html')
-    return redirect('/doctor/login')
+    return redirect('/doctor/login/')
 
 
 def search_doctors(request):
@@ -189,7 +206,7 @@ def search_patient(request):
         if request.POST:
             pass
         return render(request, 'doctor/search_patient.html')
-    return redirect('/doctor/login')
+    return redirect('/doctor/login/')
 
 
 def patient_profile(request):

@@ -1,11 +1,153 @@
 {% extends 'base.html' %}
-{% block content %}
-
-<form action="/appointment/Yara Halawi/day" method="GET">
-    <input type="submit" class="btn btn-dark" value="Book Now"/>
-</form>
-<form action="{% url 'doctor:dsearch' %}" method="GET">
-    <input type="submit" class="btn btn-dark" value="Search for doctors"/>
-</form>
-
+{% load static %}
+{% block styles %}
+<meta charset="UTF-8" xmlns="http://www.w3.org/1999/html">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
 {% endblock %}
+<style>
+    body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
+</style>
+{% block content %}
+<body style="font-family: Source Sans Pro">
+<div class="container" style="background-color: #E8E8E8">
+    <div class="row">
+    <div class="column">
+        <div class="image">
+            <img src="https://api.time.com/wp-content/uploads/2016/07/sb10063567v-001.jpg?w=800&quality=85" width="600" height="400">
+    </div>
+    </div>
+        <center>
+    <div class="column" style="margin-left: 80px">
+        </br>
+        </br>
+        </br>
+        </br>
+        </br>
+        <center>
+            <h1 style="font-size: 50px; color: #3333FF; text-align: center; font-family: SansSerif"><b>We care about You</b></h1>
+            <p style="font-size: 15px; font-family: SansSerif">Make an appointment or get an online consultation with our specialists</p>
+            <form action="/appointment/14/day" method="GET">
+                <input type="submit" class="btn btn-dark" style="background-color: #3333FF; font-size: 20px" value="Book Now"/>
+            </form>
+        </center>
+    </div>
+        </center>
+</div>
+</div>
+</div>
+<div class="row text-center justify-content-center">
+    <h3 class="text-center signup-title" style="font-size: 35px; color: #3333FF; text-align: center; font-family: SansSerif">
+        </br>
+        </br>
+        <strong>Browse or Search for our specialists</strong>
+        <p style="font-size: 20px; color: #000000; font-family: SansSerif">
+            </br>Browse by speciality or search for a specialist by name</p>
+        <form action="{% url 'doctor:dsearch' %}" method="GET">
+            <input type="submit" class="btn btn-dark" style="background-color: #3333FF; font-size: 20px" value="Search for doctors"/>
+        </form>
+    </h3>
+</div>
+</div>
+<div class="text">
+    </br>
+    </br>
+</div>
+<hr style="height:4px;border-width:0; margin-left: 30px; margin-right: 30px; color:gray;background-color:gray">
+<div class="text">
+    </br>
+    </br>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+            <h1 style="font-size: 30px; color:#3333FF; text-align: center; font-family: SansSerif">Who are We?</h1>
+            <p style="font-size:20px; text-align: center; font-family: SansSerif">
+                <span style=" display: block;margin-bottom: 1.5em;"></span>
+                We are a team of highly specialized doctors and nurses. We come </p>
+            <p style="font-size:20px; text-align: center; font-family: SansSerif">
+                <span style=" display: block;margin-bottom: 1em;"></span>
+                from many different backgrounds and specialize in different fields.</p>
+            <p style="font-size:20px; text-align: center; font-family: SansSerif">
+                <span style=" display: block;margin-bottom: 1em;"></span>
+                We decided to do this platform to help people get accessible, fast</p>
+            <p style="font-size:20px; text-align: center; font-family: SansSerif">
+                <span style=" display: block;margin-bottom: 1em;"></span>
+                and easy medicare.</p>
+        </div>
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+            <h1 style="font-size: 30px; color:#3333FF; text-align: center; font-family: SansSerif">How does it work?</h1>
+            <p style="font-size:20px; text-align: center; font-family: SansSerif">
+                </br>
+            1- Create an account </p>
+            <p style="font-size:20px; text-align: center; font-family: SansSerif">
+            2- Select the doctor you want </p>
+            <p style="font-size:20px; text-align: center; font-family: SansSerif">
+            3- Select a suitable time</p>
+            <p style="font-size:20px; text-align: center; font-family: SansSerif">
+            4- Select consultation type</p>
+            <p style="font-size:20px; text-align: center; font-family: SansSerif">
+            5- Select payment method</p>
+            <p style="font-size:20px; text-align: center; font-family: SansSerif">
+                6- Enjoy your high quality consultation </p>
+        </div>
+    </div>
+</div>
+<div class="text">
+    </br>
+    </br>
+</div>
+<hr style="height:4px;border-width:0; margin-left: 30px; margin-right: 30px; color:gray;background-color:gray">
+<div class="text">
+    </br>
+    </br>
+</div>
+<div class="row text-center justify-content-center">
+    <h3 class="text-center signup-title" style="font-size: 35px; color: #3333FF; text-align: center; font-family: SansSerif">
+        <strong>Our Services</strong>
+    </h3>
+</div>
+<div class="text">
+    </br>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+            <div style="border-radius: 15px;background: #EEEEEE;">
+                <h1 style="font-size: 30px; color:#3333FF; text-align: center; font-family: SansSerif">Specialists</h1>
+                <span style=" display: block;margin-bottom: 1.5em;"></span>
+                <p style="font-size:20px; text-align: center; font-family: SansSerif">
+                    - Stay linked to your patients</p>
+                <p style="font-size:20px; text-align: center; font-family: SansSerif">
+                    - Have all the information in one place</p>
+                <p style="font-size:20px; text-align: center; font-family: SansSerif">
+                    - Give consultations to people online</p>
+                </br>
+                </div>
+        </div>
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+            <div style="border-radius: 15px;background: #EEEEEE;">
+                <h1 style="font-size: 30px; color:#3333FF; text-align: center; font-family: SansSerif">Patients</h1>
+                <span style=" display: block;margin-bottom: 1.5em;"></span>
+                <p style="font-size:20px; text-align: center; font-family: SansSerif">
+                    - Consult a doctor by dropping a text, call or video</p>
+                <p style="font-size:20px; text-align: center; font-family: SansSerif">
+                    - Book an appointment quickly and securely </p>
+                <p style="font-size:20px; text-align: center; font-family: SansSerif">
+                    - Get fast consultations anywhere</p>
+                </br>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="text">
+    </br>
+    </br>
+    </br>
+        </div>
+
+</body>
+{% endblock %}
+
+   
