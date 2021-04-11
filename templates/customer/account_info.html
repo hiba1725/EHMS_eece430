@@ -6,32 +6,34 @@
 {% block content %}
 <div class="container-fluid">
 <div class="row content">
-    <div class="col-md-4 justify-content-center account-info">
-        <h3> Welcome {{ user.username }}</h3>
-        <br>
-        <h4>Account Information</h4>
-        <h5>First Name: {{ user.first_name }}</h5>
-        <h5>Last Name: {{ user.last_name }}</h5>
-        <h5>Email: {{ user.email }}</h5>
-        <h5>Age: {{ user.patient.age }}</h5>
-        <h5>Phone Number: {{ user.patient.phone_number }}</h5>
-        <h5>Address: {{ user.patient.address }}</h5>
-        <h5>Gender: {{ user.patient.gender }}</h5>
-        <br>
-        <a href = {% url 'customer:edit_account_info' %} class="button-link">
-            <button class="btn btn-outline-primary btn-lg btn-block">Edit account info</button>
-        </a>
-        <br>
-        <div class="row">
-            <div class="col-md-6">
-                <a href = {% url 'customer:add_card' %} class="button-link">
-                    <button class="btn btn-outline-info btn-lg btn-block">Add card</button>
-                </a>
-            </div>
-            <div class="col-md-6">
-                <a href = {% url 'customer:remove_card' %} class="button-link">
-                    <button class="btn btn-outline-danger btn-lg btn-block">Remove card</button>
-                </a>
+    <div class="col-md-4">
+        <div class="justify-content-center account-info">
+            <h3> Welcome {{ user.username }}</h3>
+            <br>
+            <h4>Account Information</h4>
+            <h5>First Name: {{ user.first_name }}</h5>
+            <h5>Last Name: {{ user.last_name }}</h5>
+            <h5>Email: {{ user.email }}</h5>
+            <h5>Age: {{ user.patient.age }}</h5>
+            <h5>Phone Number: {{ user.patient.phone_number }}</h5>
+            <h5>Address: {{ user.patient.address }}</h5>
+            <h5>Gender: {{ user.patient.gender }}</h5>
+            <br>
+            <a href = {% url 'customer:edit_account_info' %} class="button-link">
+                <button class="btn btn-outline-primary btn-lg btn-block">Edit account info</button>
+            </a>
+            <br>
+            <div class="row">
+                <div class="col-md-6">
+                    <a href = {% url 'customer:add_card' %} class="button-link">
+                        <button class="btn btn-outline-info btn-lg btn-block">Add card</button>
+                    </a>
+                </div>
+                <div class="col-md-6">
+                    <a href = {% url 'customer:remove_card' %} class="button-link">
+                        <button class="btn btn-outline-danger btn-lg btn-block">Remove card</button>
+                    </a>
+                </div>
             </div>
         </div>
     </div>
