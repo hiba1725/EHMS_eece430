@@ -5,6 +5,7 @@
 <link rel="stylesheet" href="{% static 'doctor/donut.css' %}" type="text/css">
 <script src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.1.4/Chart.bundle.min.js'></script>
 <script src="{% static 'doctor/donut.js' %}"></script>
+<script src="{% static 'doctor/dashboard.js' %}"></script>
     <script>
         var done_app = {{ done_app }};
         var todo_app = {{ todo_app }};
@@ -18,6 +19,26 @@
             <div class=" justify-content-center dashboard">
                 <h3> Welcome {{ user.username }}</h3>
                 <br>
+                {% if user.doctor.profile_pic %}
+                    <img class="profile-pic" src=" {{ user.doctor.profile_pic.url }}">
+                {% else %}
+                    <div class="upload">
+                        <div class="newcontent">
+                            <form method="POST" enctype="multipart/form-data">
+                                {% csrf_token %}
+                                <div class="dropzone">
+                                    <img src="http://100dayscss.com/codepen/upload.svg" class="upload-icon" />
+                                    <input type="file" name="profile_pic" class="upload-input" onchange="console.log('yes')">
+                                </div>
+                                <div style="display: none">
+                                    {{ form_hidden }}
+                                </div>
+                                <button type="submit" class="img-upload" name="uploadbutton">Upload</button>
+                            </form>
+                        </div>
+                    </div>
+                    <h5 style="text-align: center"> You do not have a profile picture uploaded</h5>
+                {% endif %}
                 <h4>Account Information</h4>
                 <h5>First Name: {{ user.first_name }}</h5>
                 <h5>Last Name: {{ user.last_name }}</h5>
@@ -28,10 +49,9 @@
                 <h5>Gender: {{ user.doctor.gender }}</h5>
                 <h5>Specialty: {{ user.doctor.specialty }}</h5>
                 <br>
-                <a href = {% url 'doctor:edit_account_info' %} class="button-link">
+                <a href = "{% url 'doctor:edit_account_info' %}" class="button-link">
                     <button class="btn btn-outline-primary btn-lg btn-block">Edit account info</button>
                 </a>
-                <br>
             </div>
         </div>
 
