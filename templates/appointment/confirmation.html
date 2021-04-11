@@ -14,10 +14,10 @@
         </a>
 
         <h3 >Your appointment details:</h3>
-        <p>Doctor: Dr. {{doctor}}</p>
+        <p>Doctor: Dr. {{doctor.user.first_name}} {{doctor.user.last_name}}</p>
         <p>Date: {{day}}</p>
         <p>Time: {{slot}}</p>
-        <form action="/appointment/{{doctor}}/{{day}}/{{slot}}/book" method="GET">
+        <form action="/appointment/{{doctor.pk}}/{{day}}/{{slot}}/book" method="GET">
             <input type="submit" class="btn" value="Confirm Booking"/>
         </form>
     </div> 
