@@ -1,0 +1,40 @@
+.dashboard{
+    margin: 10px 30px 40px 20px;
+	background-color: white;
+	border: 1pt solid rgb(236, 236, 236);
+    padding: 30px 40px;
+    box-shadow: 0 15px 30px 0 rgba(0, 0, 0, 0.55);
+}
+
+.appointments{
+    margin: 10px 10px 40px 20px;
+	background-color: white;
+	border: 1pt solid rgb(236, 236, 236);
+    padding: 30px 40px;
+    box-shadow: 0 15px 30px 0 rgba(0, 0, 0, 0.55);
+}
+
+.appointments-title{
+    text-align: center;
+    font-size: 38px;
+    margin-bottom: 20px;
+    padding-bottom: 30px;
+    border-bottom: 2px solid #3E4349;
+}
+
+.appointments-summary{
+    margin-bottom: 40px;
+    padding-bottom: 30px;
+    border-bottom: 1pt solid #3E4349;
+    border-left: 1pt solid #3E4349;
+    border-right: 1pt solid #3E4349;
+}
+
+.button-link:hover{
+    text-decoration: none;
+}
+
+.chartjs-render-monitor{
+    width: 100%;
+    height: 100%;
+}

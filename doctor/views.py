@@ -10,6 +10,7 @@ from django.views.generic.list import ListView
 
 from .models import Doctor
 from .forms import DoctorForm, UserForm
+from appointment.models import Appointment
 
 
 def signup(request):
@@ -80,8 +81,26 @@ def logout_user(request):
 
 
 def dashboard(request):
-    if request.user.is_authenticated and request.user.doctor.role == "Doctor":
-            return render(request, 'doctor/dashboard.html')
+    if request.user.is_authenticated:
+        try:
+            if request.user.doctor.role != "Doctor":
+                return redirect('/doctor/login')
+        except Exception as e:
+            print(e)
+            return redirect('/doctor/login')
+        appointments = Appointment.objects.filter(doctor=request.user.doctor)
+        todo_app = 0
+        done_app = 0
+        for app in appointments:
+            if app.done:
+                done_app += 1
+            else:
+                todo_app += 1
+        return render(request, 'doctor/dashboard.html',
+                      {'appointments': appointments,
+                       'done_app': done_app,
+                       'todo_app': todo_app,
+                       'total_app': len(appointments)})
     return redirect('/doctor/login')
 
 
@@ -140,6 +159,7 @@ def edit_password(request):
         return render(request, 'doctor/edit_password.html')
     return redirect('/doctor/login')
 
+
 def search_doctors(request):
     st = request.GET('query')
     doctors = Doctor.objects.filter(specialty__icontains=st).order_by('-years_of_experience')
@@ -170,3 +190,7 @@ def search_patient(request):
             pass
         return render(request, 'doctor/search_patient.html')
     return redirect('/doctor/login')
+
+
+def patient_profile(request):
+    pass

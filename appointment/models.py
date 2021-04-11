@@ -15,3 +15,4 @@ class Appointment(models.Model):
     patient = models.ForeignKey(Patient,on_delete=models.CASCADE)
     date = models.DateField()
     slot = models.IntegerField()
+    done = models.BooleanField(default=False)
