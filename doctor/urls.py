@@ -14,4 +14,5 @@ urlpatterns = [
     path('edit_password/', views.edit_password, name='edit_password'),
     path('search_doctors/', views.DoctorSearch.as_view(), name="dsearch"),
     path('list_doctors/', views.DoctorSearchResult.as_view(), name="dlist"),
+    path('search_patient/', views.search_patient, name="search_patient"),
 ]

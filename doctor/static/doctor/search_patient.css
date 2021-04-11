@@ -1,0 +1,86 @@
+.background{
+    /*background-image: url('medicalRecordSearch.jpg');*/
+    /*background-size: contain;*/
+    /*background-repeat: no-repeat;*/
+    width: 100%;
+    max-height: 100vh;
+    position: absolute;
+    z-index: -1;
+}
+
+.center{
+    width: 50%;
+    margin: 100px 25%;
+    border-radius: 10px;
+    background: white;
+    padding: 50px 10px;
+    box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.55);
+}
+
+.title{
+    font-size: 46px;
+    color: rgb(67, 136, 204);
+    font-weight: bolder;
+    text-align: right;
+}
+
+
+.searchbar{
+    margin-bottom: auto;
+    margin-top: auto;
+    height: 60px;
+    background-color: #353b48;
+    border-radius: 30px;
+    padding: 10px;
+    width: 80%;
+}
+
+.searchbar:hover > .search_input{
+    caret-color:rgb(87, 156, 234);
+    }
+
+.search_input{
+    color: white;
+    border: 0;
+    outline: 0;
+    background: none;
+    width: 80%;
+    caret-color:transparent;
+    line-height: 40px;
+    transition: width 0.4s linear;
+    padding: 0 10px;
+}
+
+.search_icon{
+    height: 40px;
+    width: 40px;
+    float: right;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    text-decoration:none;
+    background: white;
+    color: rgb(67, 136, 204);
+}
+
+.patients{
+    width: 80%;
+    align-content: center;
+    margin: 0 10%;
+    font-size: 20px;
+}
+
+.label{
+    font-size: 22px;
+    color: rgb(67, 136, 204);
+}
+
+.patient-info{
+    margin-bottom: 30px;
+    padding: 20px;
+    border-radius: 3px;
+    border: 1px solid rgb(67, 136, 204);
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.55);
+    background: white;
+}

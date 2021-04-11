@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block styles %}
+<link rel="stylesheet" type="text/css" href="{% static 'doctor/search_patient.css' %}">
+{% endblock %}
+{% block content %}
+<div class="general w-100">
+{#    <img src="{% static 'doctor/search_patient.css' %}>#}
+    <img class="background" src="{% static 'doctor/medicalRecordSearch.jpg' %}" alt="background-image">
+    <div class="row w-100">
+        <div class="center">
+            <div class="row">
+                <div class="col-lg-3">
+                    <h1 class="title">Search <br> Patient <br> Records</h1>
+                </div>
+                <div class="col-lg">
+                    <form class ="d-flex justify-content-center h-100" action="" method="post" style="width: 100%;">
+                        {% csrf_token %}
+                        <div class="searchbar">
+                            <input class="search_input" type="text" name="query" placeholder="Search...">
+                            <button class="search_icon" type="submit"><i class="fas fa-search"></i></button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row w-100">
+        {% if users %}
+            <div class="patients">
+                <div class="row">
+                    {% for user in users %}
+                        <div class="col-md-3 d-flex justify-content-center col-md-offset-1">
+                        <div class="col-md-12 patient-info">
+                            <p>
+                                <span class="label">Username: </span> {{ user }} <br>
+                                <span class="label">Name: </span> {{ user.first_name }} {{ user.last_name }} <br>
+                                <span class="label">Age: </span>{{ user.patient.age }} <br>
+                                <span class="label">Phone number: </span>{{ user.patient.phone_number }} <br>
+                                <span class="label">Address: </span>{{ user.patient.address }} <br>
+                            </p>
+                        </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

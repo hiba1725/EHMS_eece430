@@ -1,3 +1,4 @@
+from django.contrib.auth.models import User
 from django.forms.utils import ErrorDict
 from django.template import loader
 from django.http import HttpResponse, HttpResponseRedirect
@@ -11,6 +12,7 @@ from django.views.generic.list import ListView
 from .models import Doctor
 from .forms import DoctorForm, UserForm
 from appointment.models import Appointment
+from customer.models import Patient
 from datetime import datetime
 
 def signup(request):
@@ -203,9 +205,26 @@ class DoctorSearchResult(ListView):
 
 def search_patient(request):
     if request.user.is_authenticated and request.user.doctor.role == "Doctor":
+        patients = []
         if request.POST:
-            pass
-        return render(request, 'doctor/search_patient.html')
+            query = request.POST.get("query")
+            results = User.objects.filter(
+                last_name__icontains=query,
+            ) | User.objects.filter(
+                first_name__icontains=query,
+            ) | User.objects.filter(
+                username__contains=query,
+            )
+            patients = []
+            for e in results:
+                try:
+                    if e.patient.role == "Patient":
+                        patients.append(e)
+                except Exception as e:
+                    print(e)
+            # for patient in patients:
+            #     print(patient.first_name, patient.last_name, patient.patient.age)
+        return render(request, 'doctor/search_patient.html', {'users':patients})
     return redirect('/doctor/login/')
 
 
