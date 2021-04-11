@@ -51,6 +51,12 @@ def login_user(request):
         username = request.POST['username']
         password = request.POST['password']
         user = authenticate(username=username, password=password)
+        try:
+            if user.patient.role != "Patient":
+                raise
+        except Exception as e:
+            print(e)
+            return render(request, 'customer/login.html', {'error_message': 'Invalid Login'})
         if user is not None:
             if user.is_active:
                 login(request, user)
@@ -74,8 +80,7 @@ def logout_user(request):
 
 def account_info(request):
     if request.user.is_authenticated and request.user.patient.role == "Patient":
-            appointments = Appointment.objects.filter(patient=request.user.patient.pk)
-            print(appointments)
+            appointments = Appointment.objects.filter(patient=request.user.patient)
             return render(request, 'customer/account_info.html', {'appointments':appointments})
     return redirect('/customer/login')
 
@@ -100,8 +105,8 @@ def remove_card(request):
         cards = CreditCard.objects.filter(patient_id=request.user.id)
         if request.POST:
             id = request.POST["choice"]
-            # card = CreditCard.objects.get(pk=id)
-            card = get_object_or_404(CreditCard, pk=id)
+            card = CreditCard.objects.filter(patient=request.user.patient)
+            # card = get_object_or_404(CreditCard, pk=id)
             card.delete()
             cards = CreditCard.objects.filter(patient_id=request.user.id)
         return render(request, 'customer/remove_card.html', {'cards': cards})

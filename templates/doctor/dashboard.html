@@ -1,37 +1,73 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block styles %}
-<link rel="stylesheet" type="text/css" href="{% static 'doctor/account_info.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'doctor/dashboard.css' %}">
+<link rel="stylesheet" href="{% static 'doctor/donut.css' %}" type="text/css">
+<script src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.1.4/Chart.bundle.min.js'></script>
+<script src="{% static 'doctor/donut.js' %}"></script>
+    <script>
+        var done_app = {{ done_app }};
+        var todo_app = {{ todo_app }};
+    </script>
 {% endblock %}
 {% block content %}
-<div class="container-fluid">
-<div class="row content">
-    <div class="col-md-4 justify-content-center account-info">
-        <h3> Welcome {{ user.username }}</h3>
-        <br>
-        <h4>Account Information</h4>
-        <h5>First Name: {{ user.first_name }}</h5>
-        <h5>Last Name: {{ user.last_name }}</h5>
-        <h5>Email: {{ user.email }}</h5>
-        <h5>Age: {{ user.patient.age }}</h5>
-        <h5>Phone Number: {{ user.patient.phone_number }}</h5>
-        <h5>Address: {{ user.patient.address }}</h5>
-        <h5>Gender: {{ user.patient.gender }}</h5>
-        <br>
-        <a href = {% url 'doctor:edit_account_info' %} class="button-link">
-            <button class="btn btn-outline-primary btn-lg btn-block">Edit account info</button>
-        </a>
-        <br>
-    </div>
-    <div class="col-md justify-content-left account-appointments">
-        <h2>Appointments</h2>
-        {% if appointments %}
-        {% else %}
-            <h4>You have no appointments</h4>
-        {% endif %}
-    </div>
-</div>
 
+<div class="container-fluid">
+    <div class="row content">
+        <div class="col-md-4">
+            <div class=" justify-content-center dashboard">
+                <h3> Welcome {{ user.username }}</h3>
+                <br>
+                <h4>Account Information</h4>
+                <h5>First Name: {{ user.first_name }}</h5>
+                <h5>Last Name: {{ user.last_name }}</h5>
+                <h5>Email: {{ user.email }}</h5>
+                <h5>Age: {{ user.doctor.age }}</h5>
+                <h5>Phone Number: {{ user.doctor.phone_number }}</h5>
+                <h5>Address: {{ user.doctor.address }}</h5>
+                <h5>Gender: {{ user.doctor.gender }}</h5>
+                <h5>Specialty: {{ user.doctor.specialty }}</h5>
+                <br>
+                <a href = {% url 'doctor:edit_account_info' %} class="button-link">
+                    <button class="btn btn-outline-primary btn-lg btn-block">Edit account info</button>
+                </a>
+                <br>
+            </div>
+        </div>
+
+        <div class="col-md">
+            <div class="justify-content-left appointments">
+                <h2 class="appointments-title">Appointments</h2>
+
+
+                <div class="row justify-content-center appointments-summary">
+                    <div class="col-md-5">
+                        <h4> Total Number of appointments: {{ total_app }}</h4>
+                        <canvas id="chart-line" width="300" height="250" class="chartjs-render-monitor"></canvas>
+                    </div>
+                    <div class="col-md">
+                        {% if next %}
+                            <h5> Next Appointment with {next.name} on {next.date} </h5>
+                        {% else %}
+                            <h5> No next appointment</h5>
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="row-content">
+                    {% if appointments %}
+                        <h4 style="text-align: center"> Appointments List</h4>
+                        <ul class="list-group text-center justify-content-center">
+                            {% for appointment in appointments %}
+                                <li class="list-group-item"> {{ appointment.date }} with {{ appointment.patient.user.last_name }} {{ appointment.patient.user.first_name }} at {{ appointment.slot|add:8 }}:00 until {{ appointment.slot|add:9 }}:00</li>
+                            {% endfor %}
+                        </ul>
+                    {% else %}
+                        <h4>You haven't had any appointments, and didn't reserve any yet</h4>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
 

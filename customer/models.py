@@ -1,7 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser, User
 
-# Create your models here.
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 
@@ -22,6 +21,13 @@ class CreditCard(models.Model):
 	name = models.CharField(max_length=60)
 	patient = models.ForeignKey(Patient, on_delete=models.CASCADE, null=True, blank=True)
 
+class MedicalRecord(models.Model):
+	patient = models.ForeignKey(Patient, on_delete=models.CASCADE, null=True, blank=True)
+	num_appoinments = models.IntegerField(default=0)
+	# allergies
+	# treatments
+	# chronic illnesses
+	# past diagnosis
 
 @receiver(post_save, sender=User)
 def create_user_profile(sender, instance, created, **kwargs):
