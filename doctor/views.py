@@ -180,27 +180,29 @@ def edit_password(request):
 
 
 def search_doctors(request):
-    st = request.GET('query')
-    doctors = Doctor.objects.filter(specialty__icontains=st).order_by('-years_of_experience')
-    return render(request, 'doctor/search_doctors.html', {'doctors:', doctors})
-
-
-class DoctorSearch(TemplateView):
-    template_name = 'doctor/search_doctors.html'
-
-
-class DoctorSearchResult(ListView):
-    model = Doctor
-    template_name = 'doctor/doctors_list.html'
-
-    def get_queryset(self, *args, **kwargs):
-        val = self.request.GET.get("q")
-        if val:
-            queryset = Doctor.objects.filter(specialty__icontains=val).order_by('-years_of_experience')
+    val = request.GET.get("q")
+    if val:
+        queryset = Doctor.objects.filter(specialty__icontains=val).order_by('-years_of_experience')
+    else:
+        val2 = request.GET.get("n")
+        if val2:
+            queryset = User.objects.filter(last_name__icontains=val2,
+            ) | User.objects.filter(first_name__icontains=val2,
+            ) | User.objects.filter(username__contains=val2,
+            )
+            doctors = []
+            for d in queryset:
+                try:
+                    if d.doctor.role == "Doctor":
+                        doctors.append(d)
+                except Exception as e:
+                    print(e)
         else:
             queryset = Doctor.objects.none()
-        queryset = queryset.values_list()
-        return render(self.request, 'doctor/doctors_list.html', {'queryset':queryset})
+    queryset = queryset.values_list()
+    print("queryset:", queryset)
+    return render(request, 'doctor/search_doctors.html', {'queryset':queryset})
+        
 
 
 def search_patient(request):
