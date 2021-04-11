@@ -156,3 +156,11 @@ class DoctorSearchResult(ListView):
             queryset = Doctor.objects.none()
         queryset = queryset.values_list()
         return render(self.request, 'doctor/doctors_list.html', {'queryset':queryset})
+
+
+def search_patient(request):
+    if request.user.is_authenticated and request.user.doctor.role == "Doctor":
+        if request.POST:
+            pass
+        return render(request, 'doctor/search_patient.html')
+    return redirect('/doctor/login')
