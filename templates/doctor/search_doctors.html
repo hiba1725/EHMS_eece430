@@ -43,7 +43,7 @@
                             <span class="label">Specialty: </span> {{ user.doctor.specialty }} <br>
                             <span class="label">Phone number: </span>{{ user.doctor.phone_number }} <br>
                             <span class="label">Address: </span>{{ user.doctor.address }} <br>
-                            <button class="btn btn-lg btn-outline-primary login-btn" type="submit">Book Now</button>
+                            <a href="/appointment/{{ user.doctor.pk }}/day"><button class="btn btn-lg btn-outline-primary login-btn" type="submit">Book Now</button></a>
                             <button class="btn btn-lg btn-outline-primary login-btn" type="submit">Chat</button>
                         </p>
                     </div>

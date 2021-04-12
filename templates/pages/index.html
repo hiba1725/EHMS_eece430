@@ -120,7 +120,11 @@
     <div style="margin-left: 50px;">
         <h1>We care about you!</h1>
         <span>Make an appointment or get an online consultation with our specialists</span>
-        <a href = "/customer/signup/"><button class="button">Join Us Now!</button></a>
+        {% if user.is_authenticated  %}
+            <a href = "/doctor/search_doctors/"><button class="button">Book An Appointment</button></a>
+        {% else %}
+            <a href = "/customer/signup/"><button class="button">Join Us Now!</button></a>
+        {% endif %}
     </div>
 </div>
 </div>

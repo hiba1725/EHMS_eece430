@@ -22,12 +22,14 @@
                 <h3 class="title">Choose a day to proceed:</h3>
                 <div style="text-align: center;">
                     <label for="day" style="font-size:12pt">Select date:&nbsp;</label>
-                    <input type="date" name="day"><br>
+                    <input type="date" name="day"><br>  
                 </div>
                 <input type="submit" class="btn" name="submit-day" value="Check Available Times">
+                {% if error != "" %}
+                    <p style="color:rgb(150, 1, 1)">{{error}}</p>
+                {% endif %}
             </form>
         </div>
 
     </div>
-
 {% endblock %}
