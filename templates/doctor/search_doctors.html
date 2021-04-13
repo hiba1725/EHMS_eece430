@@ -44,7 +44,7 @@
                             <span class="label">Specialty: </span> {{ d.specialty }} <br>
                             <span class="label">Phone number: </span>{{ d.phone_number }} <br>
                             <span class="label">Address: </span>{{ d.address }} <br>
-                            <a href="/appointment/{{ user.doctor.pk }}/day"><button class="btn btn-lg btn-outline-primary login-btn" type="submit">Book Now</button></a>
+                            <a href="/appointment/{{ d.pk }}/day"><button class="btn btn-lg btn-outline-primary login-btn" type="submit">Book Now</button></a>
                             <button class="btn btn-lg btn-outline-primary login-btn" type="submit">Chat</button>
                         </p>
                     </div>

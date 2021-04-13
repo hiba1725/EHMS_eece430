@@ -81,9 +81,20 @@ def logout_user(request):
 def account_info(request):
     if request.user.is_authenticated and request.user.patient.role == "Patient":
             appointments = Appointment.objects.filter(patient=request.user.patient)
-            return render(request, 'customer/account_info.html', {'appointments':appointments})
+            return render(request, 'customer/account_info.html')
     return redirect('/customer/login')
 
+def appointments(request):
+    if request.user.is_authenticated and request.user.patient.role == "Patient":
+            appointments = Appointment.objects.filter(patient=request.user.patient)
+            return render(request, 'customer/appointments.html', {'appointments':appointments})
+    return redirect('/customer/login')
+
+def payments(request):
+    if request.user.is_authenticated and request.user.patient.role == "Patient":
+            appointments = Appointment.objects.filter(patient=request.user.patient)
+            return render(request, 'customer/payment_methods.html')
+    return redirect('/customer/login')
 
 def add_card(request):
     if request.user.is_authenticated and request.user.patient.role == "Patient":
