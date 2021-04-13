@@ -17,10 +17,11 @@
                     <form class ="d-flex justify-content-center h-100" action="" method="post" style="width: 100%;">
                         {% csrf_token %}
                         <div class="searchbar">
-                            <input class="search_input" type="text" name="q" placeholder="Search by name">
+                            <input class="search_input" type="text" name="q" placeholder="Search by specialty">
+                            <button class="search_icon" type="submit"><i class="fas fa-search"></i></button>
                         </div>
                         <div class="searchbar">
-                            <input class="search_input" type="text" name="n" placeholder="Search by specialty">
+                            <input class="search_input" type="text" name="n" placeholder="Search by name">
                             <button class="search_icon" type="submit"><i class="fas fa-search"></i></button>
                         </div>
                     </form>
@@ -33,16 +34,16 @@
         {% if queryset %}
         <div class="patients">
             <div class="row">
-                {% for user in queryset %}
+                {% for d in queryset %}
                 <div class="col-md-3 d-flex justify-content-center col-md-offset-1">
                     <div class="col-md-12 patient-info">
                         <p>
-                            <span class="label">Username: </span> {{ user }} <br>
-                            <span class="label">Name: </span> {{ user.first_name }} {{ user.last_name }} <br>
-                            <span class="label">Age: </span>{{ user.doctor.age }} <br>
-                            <span class="label">Specialty: </span> {{ user.doctor.specialty }} <br>
-                            <span class="label">Phone number: </span>{{ user.doctor.phone_number }} <br>
-                            <span class="label">Address: </span>{{ user.doctor.address }} <br>
+                            <span class="label">Username: </span> {{ d.user.username }} <br>
+                            <span class="label">Name: </span> {{ d.user.first_name }} {{ d.user.last_name }} <br>
+                            <span class="label">Age: </span>{{ d.age }} <br>
+                            <span class="label">Specialty: </span> {{ d.specialty }} <br>
+                            <span class="label">Phone number: </span>{{ d.phone_number }} <br>
+                            <span class="label">Address: </span>{{ d.address }} <br>
                             <a href="/appointment/{{ user.doctor.pk }}/day"><button class="btn btn-lg btn-outline-primary login-btn" type="submit">Book Now</button></a>
                             <button class="btn btn-lg btn-outline-primary login-btn" type="submit">Chat</button>
                         </p>

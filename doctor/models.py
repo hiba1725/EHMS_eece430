@@ -19,7 +19,7 @@ class Doctor(models.Model):
     rating = models.IntegerField(default=0)
 
     def __str__(self):
-        return f"{self.user.username} {self.user.first_name} {self.user.last_name}"
+        return f"{self.user.username} {self.user.first_name} {self.user.last_name} {self.age} {self.specialty} {self.phone_number} {self.address}"
 
 
 @receiver(post_save, sender=User)

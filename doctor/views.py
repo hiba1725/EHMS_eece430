@@ -179,51 +179,39 @@ def edit_password(request):
     return redirect('/doctor/login/')
 
 def search_doctors(request):
-        doctors = []
-        if request.POST:
-            query = request.POST.get("q")
-            if query:
-                queryset = User.objects.filter(
-                last_name__icontains=query,
-                ) | User.objects.filter(
-                first_name__icontains=query,
-                ) | User.objects.filter(
-                username__contains=query,
+    if (request.POST):
+        val = request.POST.get("q")
+        if val:
+            queryset = Doctor.objects.filter(specialty__icontains=val).order_by('-years_of_experience')
+            doctors = []
+            for d in queryset:
+                try:
+                    doctors.append(d)
+                except Exception as e:
+                    print(e)
+            queryset = doctors
+        else:
+            val2 = request.POST.get("n")
+            if val2:
+                queryset = User.objects.filter(last_name__icontains=val2,
+                ) | User.objects.filter(first_name__icontains=val2,
+                ) | User.objects.filter(username__contains=val2,
                 )
                 doctors = []
-                for e in queryset:
+                for d in queryset:
                     try:
-                       if e.doctor.role == "Doctor":
-                           doctors.append(e)
+                        if d.doctor.role == "Doctor":
+                            dt= Doctor.objects.get(user = d)
+                            doctors.append(dt)
                     except Exception as e:
-                       print(e)
-            else:
-                query = request.POST.get("n")
-                queryset = Doctor.objects.filter(specialty__icontains=query).order_by('-years_of_experience')
-        return render(request, 'doctor/search_doctors.html', {'queryset':doctors})
+                        print(e)
+                queryset = doctors
+    else:
+        queryset = Doctor.objects.none()
+        queryset = queryset.values_list()
+    return render(request, 'doctor/search_doctors.html', {'queryset':queryset})
+
     
-#def search_doctors(request): this works eza bas name
-#        doctors = []
-#        if request.POST:
-#            query = request.POST.get("q")
-#            if query:
-#            queryset = User.objects.filter(
-#                last_name__icontains=query,
-#            ) | User.objects.filter(
-#                first_name__icontains=query,
-#            ) | User.objects.filter(
-#                username__contains=query,
-#            )
-#            doctors = []
-#            for e in queryset:
-#                try:
-#                    if e.doctor.role == "Doctor":
-#                        doctors.append(e)
-#                except Exception as e:
-#                    print(e)
-            # for patient in patients:
-            #     print(patient.first_name, patient.last_name, patient.patient.age)
-#        return render(request, 'doctor/search_doctors.html', {'queryset':doctors})
 
 def search_patient(request):
     if request.user.is_authenticated and request.user.doctor.role == "Doctor":
