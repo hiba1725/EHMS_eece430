@@ -1,12 +1,153 @@
+body {
+    width: 100%;
+}
+
+#container {
+	width: auto;
+	margin: 0 auto;
+	display: flex;
+}
+@media (max-width: 600px) {
+	#container {
+		display: flex;
+		flex-direction: column;
+	}
+}
+
+.title{
+    font-size: 46px;
+    color: rgb(67, 136, 204);
+    text-align: center;
+}
+
+#titles {
+    width: 100%;
+    margin: 0 auto;
+}
+
+h3 {
+    font-size:40px; 
+    color: rgb(67, 136, 204);
+    text-align: center; 
+}
+
+.center{
+    width: 60%;
+    margin: 0 auto;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding: 50px 50px 100px 50px;
+    background: white;
+	border: 1pt solid rgb(236, 236, 236);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+#form {
+    width: 100%;
+    justify-content: center;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.searchbar{
+    margin: 6px;
+    height: 60px;
+    background-color: rgb(236, 236, 236);
+    padding: 10px;
+    width: 80%;
+    border-radius: 30px;
+    position: relative;
+}
+
+.searchbar:hover > .search_input{
+    caret-color:black;
+}
+
+.search_input{
+    color: black;
+    border: 0;
+    outline: 0;
+    background: none;
+    width: 80%;
+    caret-color:transparent;
+    line-height: 40px;
+    transition: width 0.4s linear;
+    padding: 0 10px;
+}
+
+.search_icon{
+    position: absolute;
+    right: 6px;
+    height: 40px;
+    width: 40px;
+    text-decoration:none;
+    border: none;
+    background-color: transparent;
+    color: rgb(67, 136, 204);
+}
+
+@media (max-width: 800px) {
+    .center{
+        width: 80%;
+        margin: 0 auto;
+        margin-top: 20px;
+        margin-bottom: 20px;
+        padding: 50px 50px 100px 50px;
+        background: white;
+        border: 1pt solid rgb(236, 236, 236);
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+}
+    .searchbar{
+        margin: 6px;
+        height: 60px;
+        background-color: rgb(236, 236, 236);
+        padding: 10px;
+        width: 100%;
+        border-radius: 30px;
+    }
+}
+
+.specialties-container {
+    margin: 0 auto;
+    margin-top: 40px;
+    margin-bottom: 40px;
+    max-width: 80%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.doctors{
+    width: 80%;
+    align-content: center;
+    margin: 0 10%;
+    font-size: 20px;
+}
+
+.label{
+    font-size: 22px;
+    color: rgb(67, 136, 204);
+}
+
+.doctor-info{
+    margin-bottom: 30px;
+    padding: 20px;
+    border-radius: 3px;
+    border: 1px solid rgb(67, 136, 204);
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.55);
+    background: white;
+}
+
 .search-title{
     flex: auto;
     background-color: #E0E0E0;
     border: 1pt solid rgb(224,224, 224);
     margin: 10px 30px 40px 20px;
     padding: 30px 40px;
-}
-.center{
-    color: #3333FF;
 }
 
 .widget-26 {
@@ -247,13 +388,9 @@
     word-wrap: break-word;
     background-color: #ffffff;
     background-clip: border-box;
-    border: 1px solid #e6e4e9;
     border-radius: 8px;
 }
 
-#header {
-    text-align: center;
-}
 
 .col {
     float: left;
@@ -266,10 +403,11 @@
     display: flex;
 }
 .flip-box {
+	border: 1pt solid rgb(236, 236, 236);
     background-color: transparent;
     width: 300px;
     height: 300px;
-    border: 1px solid #f1f1f1;
+    margin: 5px;
     perspective: 1000px; /* Remove this if you don't want the 3D effect */
 }
 
@@ -307,16 +445,7 @@
 .flip-box-back {
     background-color: #0066b2;
     color: white;
+    padding: 60px;
     transform: rotateY(180deg);
 }
-
-
-
-
-
-
-
-
-
-
 

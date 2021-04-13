@@ -1,42 +1,33 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block styles %}
-<link rel="stylesheet" type="text/css" href="{% static 'doctor/search_patient.css' %}">
 <link rel="stylesheet" type="text/css" href="{% static 'doctor/search_doctors.css' %}">
-<link rel="stylesheet" type="text/css" href="{% static 'doctor/login.css' %}">
 {% endblock %}
 {% block content %}
-<div class="general w-100" style = "background-image: url(https://wallpapercave.com/wp/BEUGBRe.jpg)">
-    <div class="row w-100">
-        <div class="center">
-            <div class="row">
-                <div class="col-lg-3">
-                    <h1 class="title">Search <br> <center> for</center> <center>Doctors</center></h1>
-                </div>
-                <div class="col-lg">
-                    <form class ="d-flex justify-content-center h-100" action="" method="post" style="width: 100%;">
-                        {% csrf_token %}
-                        <div class="searchbar">
-                            <input class="search_input" type="text" name="q" placeholder="Search by specialty">
-                            <button class="search_icon" type="submit"><i class="fas fa-search"></i></button>
-                        </div>
-                        <div class="searchbar">
-                            <input class="search_input" type="text" name="n" placeholder="Search by name">
-                            <button class="search_icon" type="submit"><i class="fas fa-search"></i></button>
-                        </div>
-                    </form>
-                </div>
+    <div class="center">
+            
+        <h1 class="title">Search for Doctors</h1>
+        <form action="" method="post" id="form">
+            {% csrf_token %}
+            <div class="searchbar">
+                <input class="search_input" type="text" name="q" placeholder="Search by specialty">
+                <button class="search_icon" type="submit"><i class="fas fa-search"></i></button>
             </div>
-        </div>
+            <div class="searchbar">
+                <input class="search_input" type="text" name="n" placeholder="Search by name">
+                <button class="search_icon" type="submit"><i class="fas fa-search"></i></button>
+            </div>
+        </form>
+        
     </div>
 
     <div class="row w-100">
         {% if queryset %}
-        <div class="patients">
+        <div class="doctors">
             <div class="row">
                 {% for d in queryset %}
                 <div class="col-md-3 d-flex justify-content-center col-md-offset-1">
-                    <div class="col-md-12 patient-info">
+                    <div class="col-md-12 doctor-info">
                         <p>
                             <span class="label">Username: </span> {{ d.user.username }} <br>
                             <span class="label">Name: </span> {{ d.user.first_name }} {{ d.user.last_name }} <br>
@@ -52,102 +43,94 @@
                 {% endfor %}
             </div>
         </div>
-        {% else %}
-        <h3 style="font-size:40px; color: rgb(255, 255, 255); text-align: center; margin-left: 560px"><center> <strong> No Results Found  </strong></center></h3>
-        {% endif %}
     </div>
-    <h3 style="font-size:40px; color: rgb(255, 255, 255);"><center> <strong> Top Specialties </strong></center></h3>
-    <div id="header" style="box-sizing: border-box; margin:60px">
-        <center>
-            <div class="ro">
-                <div class="col">
-                    <div class="flip-box">
-                        <div class="flip-box-inner">
-                            <div class="flip-box-front">
-                                <img src= "{% static 'doctor/Ophtalmology.PNG' %}" style="width: 300px; height: 300px;">
-                            </div>
-                            <div class="flip-box-back">
-                                <h2>Ophtalmologists:</h2>
-                                <p>Dr Nour Ardo</p>
-                                <p>Dr Yasmina Hobeika </p>
-                            </div>
-                        </div>
-                    </div>
+
+        {% else %}
+            <h3 style="width: 100%; color: rgba(221, 26, 26, 0.767); ">No Results Found</h3>
+        {% endif %}
+
+        <h3 style="width: 100%;">Top Specialties</h3>
+
+    <div class="specialties-container">
+        
+        <div class="flip-box">
+            <div class="flip-box-inner">
+                <div class="flip-box-front">
+                    <img src= "{% static 'doctor/Ophtalmology.PNG' %}" style="width: 300px; height: 300px;">
                 </div>
-                <div class="col">
-                    <div class="flip-box">
-                        <div class="flip-box-inner">
-                            <div class="flip-box-front">
-                                <img src= "{% static 'doctor/Radiology.PNG' %}" alt="Pediatricians" style="width: 300px; height: 300px;">
-                            </div>
-                            <div class="flip-box-back">
-                                <h2>Radiologists:</h2>
-                                <p>Dr Kevin Ziadeh</p>
-                                <p>Dr Hiba Houhou </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="flip-box">
-                        <div class="flip-box-inner">
-                            <div class="flip-box-front">
-                                <img src= "{% static 'doctor/Gyneco.PNG' %}" alt="Psychatrists" style="width: 300px; height: 300px;">
-                            </div>
-                            <div class="flip-box-back">
-                                <h2>Gynecologists:</h2>
-                                <p>Dr Yara Halawi</p>
-                            </div>
-                        </div>
-                    </div>
+                <div class="flip-box-back">
+                    <h2>Ophtam:</h2>
+                    <p>Dr Nour Ardo</p>
+                    <p>Dr Yasmina Hobeika</p>
                 </div>
             </div>
-        </center>
-        <center>
-            <div class="ro">
-                <div class="col">
-                    <div class="flip-box">
-                        <div class="flip-box-inner">
-                            <div class="flip-box-front">
-                                <img src= "{% static 'doctor/urology.PNG' %}" alt="Dermatologists" style="width: 300px; height: 300px;">
-                            </div>
-                            <div class="flip-box-back">
-                                <h2>Urologists:</h2>
-                                <p>Dr Nour Ardo</p>
-                                <p>Dr Yasmina Hobeika </p>
-                            </div>
-                        </div>
-                    </div>
+        </div>
+        
+        <div class="flip-box">
+            <div class="flip-box-inner">
+                <div class="flip-box-front">
+                    <img src= "{% static 'doctor/Radiology.PNG' %}" alt="Pediatricians" style="width: 300px; height: 300px;">
                 </div>
-                <div class="col">
-                    <div class="flip-box">
-                        <div class="flip-box-inner">
-                            <div class="flip-box-front">
-                                <img src= "{% static 'doctor/Cardiology.PNG' %}" alt="Neurologists" style="width: 300px; height: 300px;">
-                            </div>
-                            <div class="flip-box-back">
-                                <h2>Cardiologists:</h2>
-                                <p>Dr Kevin Ziadeh</p>
-                                <p>Dr Hiba Houhou </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="flip-box">
-                        <div class="flip-box-inner">
-                            <div class="flip-box-front">
-                                <img src= "{% static 'doctor/Neurology.PNG' %}" alt="Neurologists" style="width: 300px; height: 300px;">
-                            </div>
-                            <div class="flip-box-back">
-                                <h2>Neurologists:</h2>
-                                <p>Dr Yara Halawi</p>
-                            </div>
-                        </div>
-                    </div>
+                <div class="flip-box-back">
+                    <h2>Radiologists:</h2>
+                    <p>Dr Kevin Ziadeh</p>
+                    <p>Dr Hiba Houhou </p>
                 </div>
             </div>
-        </center>
+        </div>
+
+  
+        <div class="flip-box">
+            <div class="flip-box-inner">
+                <div class="flip-box-front">
+                    <img src= "{% static 'doctor/Gyneco.PNG' %}" alt="Psychatrists" style="width: 300px; height: 300px;">
+                </div>
+                <div class="flip-box-back">
+                    <h2>Gynecologists:</h2>
+                    <p>Dr Yara Halawi</p>
+                </div>
+            </div>
+        </div>
+ 
+    
+        <div class="flip-box">
+            <div class="flip-box-inner">
+                <div class="flip-box-front">
+                    <img src= "{% static 'doctor/urology.PNG' %}" alt="Dermatologists" style="width: 300px; height: 300px;">
+                </div>
+                <div class="flip-box-back">
+                    <h2>Urologists:</h2>
+                    <p>Dr Nour Ardo</p>
+                    <p>Dr Yasmina Hobeika </p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="flip-box">
+            <div class="flip-box-inner">
+                <div class="flip-box-front">
+                    <img src= "{% static 'doctor/Cardiology.PNG' %}" alt="Neurologists" style="width: 300px; height: 300px;">
+                </div>
+                <div class="flip-box-back">
+                    <h2>Cardiologists:</h2>
+                    <p>Dr Kevin Ziadeh</p>
+                    <p>Dr Hiba Houhou </p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="flip-box">
+            <div class="flip-box-inner">
+                <div class="flip-box-front">
+                    <img src= "{% static 'doctor/Neurology.PNG' %}" alt="Neurologists" style="width: 300px; height: 300px;">
+                </div>
+                <div class="flip-box-back">
+                    <h2>Neurologists:</h2>
+                    <p>Dr Yara Halawi</p>
+                </div>
+            </div>
+        </div>
+        
     </div>
 </div>
 
