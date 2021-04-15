@@ -20,7 +20,7 @@
         width: 100%;
         margin: 30px 0 10px 0;
         padding: 12px;
-        border-radius: 0;
+        border-radius: 30px;
         color: rgb(67, 136, 204);
         border-color: rgb(67, 136, 204);
     }
@@ -30,12 +30,11 @@
         border-color: rgb(67, 136, 204);
     }
 
-    /* .login-input{
-        padding: 14px;
-        height: auto;
-        border: 1px solid black;
-        border-radius: 0;
-    } */
+    .login-input{
+        padding: 25px 14px;
+        border-radius: 30px;
+        background-color: rgb(247, 247, 247);
+    }
 
     ul.errorlist{
         text-align: left;
@@ -58,6 +57,7 @@
     }
 
     .register-link{
+        margin-left: 5px;
         color: rgb(67, 136, 204);
     }
 </style>
@@ -76,18 +76,17 @@
         {% csrf_token %}
 
         <div class="row pt-3">
-            <input class="form-control form-control-lg" name="username" placeholder="Username">
+            <input class="form-control login-input" name="username" placeholder="Username">
         </div>
         <div class="row pt-3">
-            <input class="form-control form-control-lg" type="password" name="password" placeholder="Password">
+            <input class="form-control login-input" type="password" name="password" placeholder="Password">
         </div>
-        <br>
         <div class="row">
             <button class="btn btn-outline-primary login-btn" type="submit">Sign In</button>
         </div>
     </form>
     <div class="row text-center justify-content-center register-sentence">
-        Don't have an account? <a href="{% url "customer:signup" %}" class="register-link">  Register</a>
+        Don't have an account?<a href="{% url "customer:signup" %}" class="register-link">Register</a>
     </div>
 </div>
 
