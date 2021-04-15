@@ -2,6 +2,21 @@
 {% load static %}
 {% block styles %}
 <link rel="stylesheet" type="text/css" href="{% static 'doctor/search_doctors.css' %}">
+<style>
+.login-btn{
+    width: 100%;
+    margin: 30px 0 10px 0;
+    padding: 12px;
+    border-radius: 30px;
+    color: rgb(67, 136, 204) !important;
+    border-color: rgb(67, 136, 204) !important;
+}
+
+.login-btn:hover{
+    background-color: rgb(67, 136, 204) !important;
+    color: white !important;
+}
+</style>
 {% endblock %}
 {% block content %}
     <div class="center">
@@ -35,8 +50,8 @@
                             <span class="label">Specialty: </span> {{ d.specialty }} <br>
                             <span class="label">Phone number: </span>{{ d.phone_number }} <br>
                             <span class="label">Address: </span>{{ d.address }} <br>
-                            <a href="/appointment/{{ d.pk }}/day"><button class="btn btn-lg btn-outline-primary login-btn" type="submit">Book Now</button></a>
-                            <button class="btn btn-lg btn-outline-primary login-btn" type="submit">Chat</button>
+                            <a href="/appointment/{{ d.pk }}/day"><button class="btn btn-outline-primary login-btn" type="submit">Book Now</button></a>
+                            <!-- <button class="btn btn-lg btn-outline-primary login-btn" type="submit">Chat</button> -->
                         </p>
                     </div>
                 </div>
@@ -46,7 +61,7 @@
     </div>
 
         {% else %}
-            <h3 style="width: 100%; color: rgba(221, 26, 26, 0.767); ">No Results Found</h3>
+            <p style="width: 100%; color: gray; text-align: center;">No Results Found</p>
         {% endif %}
 
         <h3 style="width: 100%;">Top Specialties</h3>
