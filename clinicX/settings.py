@@ -32,6 +32,9 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'websockets',
+    'django_private_chat',
+    'chat',
     'customer.apps.CustomerConfig',
     'doctor.apps.DoctorConfig',
     'appointment.apps.AppointmentConfig',
@@ -126,3 +129,9 @@ STATIC_URL = '/static/'
 # MEDIA_URL = '/images/'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'static/')
+
+CHAT_WS_SERVER_HOST = 'localhost'
+CHAT_WS_SERVER_PORT = 5002
+CHAT_WS_SERVER_PROTOCOL = 'ws'
+
+os.environ["DJANGO_ALLOW_ASYNC_UNSAFE"] = "true"
