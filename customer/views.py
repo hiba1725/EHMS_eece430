@@ -146,7 +146,7 @@ def edit_account_info(request):
                                   {'user_form_error': user_form.errors,
                                    'patient_form_error': patient_form.errors,
                                    'other_errors': "Wrong password"})
-                return redirect('/customer/account')
+                return redirect('/customer/account/')
             else:
                 return render(request, 'customer/edit_account_info.html',
                               {'user_form_error': user_form.errors, 'patient_form_error': patient_form.errors})
