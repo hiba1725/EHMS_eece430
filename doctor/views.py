@@ -179,6 +179,8 @@ def edit_password(request):
     return redirect('/doctor/login/')
 
 def search_doctors(request):
+    queryset = Doctor.objects.none()
+    queryset = queryset.values_list()
     if (request.POST):
         val = request.POST.get("q")
         if val:
@@ -206,9 +208,6 @@ def search_doctors(request):
                     except Exception as e:
                         print(e)
                 queryset = doctors
-    else:
-        queryset = Doctor.objects.none()
-        queryset = queryset.values_list()
     return render(request, 'doctor/search_doctors.html', {'queryset':queryset})
 
     
