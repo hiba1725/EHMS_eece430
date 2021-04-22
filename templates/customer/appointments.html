@@ -68,6 +68,9 @@
                     <span>{{ appointment.date }} at {{ appointment.slot|add:8}}:00</span>
                     <br/>
                     <span style="color: gray;">Dr. {{ appointment.doctor.user.first_name }} {{ appointment.doctor.user.last_name }}</span>
+                    <a href="{% url 'dialogs_detail' appointment.doctor.user.username %}" style="float: right;" class="btn">
+                        Chat with Dr. {{ appointment.doctor.user.username }}
+                    </a>
                 </div>
                 {% endfor %}
             </div>
