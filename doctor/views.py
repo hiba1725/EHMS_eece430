@@ -43,7 +43,7 @@ def signup(request):
             return redirect('/')
         else:
             return render(request, 'doctor/signup.html',
-                          {'user_form_error': user_form.errors, 'patient_form_error': doctor_form.errors})
+                          {'user_form_error': user_form.errors, 'doctor_form': doctor_form.errors})
     else:
         return render(request, 'doctor/signup.html')
 
@@ -147,12 +147,12 @@ def edit_account_info(request):
                 else:
                     return render(request, 'doctor/edit_account_info.html',
                                   {'user_form_error': user_form.errors,
-                                   'patient_form_error': doctor_form.errors,
+                                   'doctor_form_error': doctor_form.errors,
                                    'other_errors': "Wrong password"})
                 return redirect('/doctor/account')
             else:
                 return render(request, 'doctor/edit_account_info.html',
-                              {'user_form_error': user_form.errors, 'patient_form_error': doctor_form.errors})
+                              {'user_form_error': user_form.errors, 'doctor_form_error': doctor_form.errors})
         return render(request, 'doctor/edit_account_info.html')
     return redirect('/doctor/login/')
 

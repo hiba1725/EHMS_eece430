@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'customer.apps.CustomerConfig',
     'doctor.apps.DoctorConfig',
     'appointment.apps.AppointmentConfig',
+    'manager.apps.ManagerConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

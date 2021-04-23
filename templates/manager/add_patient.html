@@ -1,0 +1,152 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block styles %}
+<style>
+.signup-main{
+    margin-top: 40px;
+    padding: 20px 80px;
+	background-color: white;
+    /* box-shadow: 0px 20px 40px 0px rgba(0, 0, 0, 0.55); */
+    border: 1pt solid rgb(236, 236, 236);
+}
+
+.signup-title{
+    margin: 30px;
+    color: rgb(67, 136, 204);
+}
+
+.signup-btn{
+    width: 100%;
+    margin: 30px 0 10px 0;
+    padding: 12px;
+    border-radius: 30px;
+    color: rgb(67, 136, 204) !important;
+    border-color: rgb(67, 136, 204) !important;
+}
+
+.signup-btn:hover{
+    background-color: rgb(67, 136, 204) !important;
+    color: white !important;
+}
+
+.signup-input{
+    padding: 25px 14px;
+    border-radius: 30px;
+    background-color: rgb(247, 247, 247);
+}
+
+ul.errorlist{
+    text-align: left;
+    list-style-type: none;
+    font-weight: bold;
+    text-transform: capitalize;
+    padding: 0;
+}
+
+ul>li>ul.errorlist{
+    text-align: left;
+    list-style-type: none;
+    font-weight: normal;
+    text-transform: capitalize;
+    padding-left: 20px;
+}
+
+.signup-gender{
+    font-size: 15px;
+    color: gray;
+    margin-left: 10px;
+}
+
+.signup-gender-val{
+    font-size: 15px;
+}
+
+</style>
+{% endblock %}
+{% block content %}
+
+{% include 'partials/_sidebar.html' %}
+
+<div class="col-sm-4 col-md-5 signup-main">
+    <div class="row text-center justify-content-center">
+        <h2 class="signup-title">Add Patient</h2>
+    </div>
+    <form class="form" action="" method="post">
+        {% csrf_token %}
+        <div class="form-row">
+            <div class="col-xs-6 col-md-6 pt-3">
+                <input class="form-control signup-input" name="first_name" placeholder="First Name">
+            </div>
+            <div class="col-xs-6 col-md-6 pt-3">
+                <input class="form-control signup-input" name="last_name" placeholder="Last Name">
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="col-xs-6 col-md-6 pt-1">
+                <input class="form-control signup-input" name="username" placeholder="Username">
+            </div>
+            <div class="col-xs-6 col-md-6 pt-1">
+                <input class="form-control signup-input" name="age" placeholder="Age">
+            </div>
+        </div>
+        <div class="form-row pt-1">
+            <div class="col-md">
+                <input class="form-control signup-input" name="email" placeholder="Email">
+            </div>
+        </div>
+        <div class="form-row pt-1">
+            <div class="col-md">
+                <input class="form-control signup-input" name="phone_number" placeholder="Phone Number">
+            </div>
+        </div>
+        <div class="form-row pt-1">
+            <div class="col-md">
+                <input class="form-control signup-input" name="address" placeholder="Address">
+            </div>
+        </div>
+        <div class="form-row pt-1">
+            <div class="col-md">
+                <input class="form-control signup-input" type="password" name="password" placeholder="Password">
+            </div>
+        </div>
+        <div class="form-row pt-1">
+            <div class="col-md">
+                <input class="form-control signup-input" type="password" name="passwordConfirm" placeholder="Confirm Password">
+            </div>
+        </div>
+        <div class="form-row pt-2">
+            <label for="gender" class="signup-gender">Gender:&nbsp; </label>
+            <label class="radio-inline signup-gender-val">
+                <input type="radio" name="gender" value="M" id="male" > Male&nbsp;
+            </label>
+            <label class="radio-inline signup-gender-val">
+                <input type="radio" name="gender" value="F" id="female"> Female&nbsp;
+            </label>
+            <label class="radio-inline signup-gender-val">
+                <input type="radio" name="gender" value="O" id="other"> Other&nbsp;
+            </label>
+        </div>
+        <button class="btn btn-outline-primary signup-btn" type="submit">Add Patient</button>
+    </form>
+</div>
+
+<div class="col-sm-4 col-md signup-error">
+
+    {% if user_form_error %}
+        <div class="alert alert-danger text-center">
+            {{ user_form_error }}
+        </div>
+    {% endif %}
+    {% if patient_form_error %}
+        <div class="alert alert-danger text-center">
+            {{ patient_form_error }}
+        </div>
+    {% endif %}
+    {% if other_errors %}
+        <div class="alert alert-danger text-center">
+            {{ other_errors }}
+        </div>
+    {% endif %}
+</div>
+
+{% endblock %}

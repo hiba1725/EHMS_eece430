@@ -9,6 +9,7 @@ urlpatterns = [
     path('customer/', include('customer.urls'), name='customer'),
     path('doctor/', include('doctor.urls'), name='doctor'),
     path('appointment/', include('appointment.urls'), name='appointment'),
+    path('manager', include('manager.urls'), name='manager'),
     url(r'^', include('django_private_chat.urls')),
     url(r'',include('chat.urls')),
     path('admin/', admin.site.urls),

@@ -1,55 +1,47 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block styles %}
-<link rel="stylesheet" type="text/css" href="{% static 'doctor/edit_account_info.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'customer/edit_account_info.css' %}">
 {% endblock %}
 {% block content %}
 
-<div class="col-sm-4 col-md"></div>
+    {% include 'partials/_sidebar.html' %}
 
 <div class="col-sm-4 col-md-5 edit-account-main">
     <div class="row text-center justify-content-center">
-        <h3 class="text-center edit-account-title"><strong>Edit Account Info</strong></h3>
+        <h3 class="text-center edit-account-title"><strong>Edit Patient Info</strong></h3>
     </div>
     <form class="form" action="" method="post">
         {% csrf_token %}
         <div class="form-row">
             <div class="col-md-6 pt-3">
-                <input class="form-control input-lg edit-account-input" name="first_name" placeholder="First Name" value="{{ user.first_name }}">
+                <input class="form-control input-lg edit-account-input" name="first_name" placeholder="First Name" value="{{ patient.user.first_name }}">
             </div>
             <div class="col-md-6 pt-3">
-                <input class="form-control input-lg edit-account-input" name="last_name" placeholder="Last Name" value="{{ user.last_name }}">
+                <input class="form-control input-lg edit-account-input" name="last_name" placeholder="Last Name" value="{{ patient.user.last_name }}">
             </div>
         </div>
         <div class="form-row">
             <div class="col-xs-6 col-md-6 pt-1">
-                <input class="form-control input-lg edit-account-input" name="username" placeholder="Username" value="{{ user.username }}">
+                <input class="form-control input-lg edit-account-input" name="username" placeholder="Username" value="{{ patient.user.username }}">
             </div>
             <div class="col-xs-6 col-md-6 pt-1">
-                <input class="form-control input-lg edit-account-input" name="age" placeholder="Age" value="{{ user.patient.age }}">
+                <input class="form-control input-lg edit-account-input" name="age" placeholder="Age" value="{{ patient.age }}">
             </div>
         </div>
         <div class="form-row pt-1">
             <div class="col-md">
-                <input class="form-control input-lg edit-account-input" name="email" placeholder="Email" value="{{ user.email }}">
+                <input class="form-control input-lg edit-account-input" name="email" placeholder="Email" value="{{ patient.user.email }}">
             </div>
         </div>
         <div class="form-row pt-1">
             <div class="col-md">
-                <input class="form-control input-lg edit-account-input" name="phone_number" placeholder="Phone Number" value="{{ user.patient.phone_number }}">
+                <input class="form-control input-lg edit-account-input" name="phone_number" placeholder="Phone Number" value="{{ patient.phone_number }}">
             </div>
         </div>
         <div class="form-row pt-1">
             <div class="col-md">
-                <input class="form-control input-lg edit-account-input" name="address" placeholder="Address" value="{{ user.patient.address }}">
-            </div>
-        </div>
-        <div class="form-row">
-            <div class="col-xs-6 col-md-6 pt-1">
-                <input class="form-control input-lg edit-account-input" name="specialty" placeholder="Specialty" value="{{ doctor.specialty }}">
-            </div>
-            <div class="col-xs-6 col-md-6 pt-1">
-                <input class="form-control input-lg edit-account-input" name="years_of_experience" placeholder="Years of Experience" value="{{ doctor.years_of_experience }}">
+                <input class="form-control input-lg edit-account-input" name="address" placeholder="Address" value="{{ patient.address }}">
             </div>
         </div>
         <div class="form-row pt-2">
@@ -82,9 +74,9 @@
             {{ user_form_error }}
         </div>
     {% endif %}
-    {% if doctor_form_error %}
+    {% if patient_form_error %}
         <div class="alert alert-danger text-center">
-            {{ doctor_form_error }}
+            {{ patient_form_error }}
         </div>
     {% endif %}
     {% if other_errors %}

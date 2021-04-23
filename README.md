@@ -2,7 +2,11 @@
 > Django based application for an E Healthcare Management System developped for university course.
 
 ## Overview
-E Healthcare Management System with login, signup and registration. This project allows the user to signup/login as a patient ro as a doctor, to register appointments online with a specific doctor, and have a online chat with them. There is also a manager application that is accessed url direct accessing `<mainurl.com>/manager/`. The  manager can add, delete and edit patients, doctors and appointments; as well as gets a monthly report.
+E Healthcare Management System with login, signup and registration. This project allows the user to signup/login as a 
+patient or as a doctor, to register appointments online with a specific doctor, and have a online chat with them. 
+<br/>
+There is also a manager application that is accessed url direct accessing `<mainurl.com>/manager/`. The  manager can 
+add, delete and edit patients, doctors and appointments; as well as gets a monthly report.
 
 ## Requirements
 To be able to run the Django server, you need to have the following tools on your machine
@@ -24,4 +28,5 @@ $ python manage.py makemigrations
 $ python manage.py migrate
 $ python manage.py runserver 0.0.0.0:8000
 ```
+You should create a manager using the admin portal once.
 To run the chat server, enter the command `python manage.py run_chat_server` from a seperate terminal after running `python manage.py runserver`
