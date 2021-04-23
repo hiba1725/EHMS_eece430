@@ -14,4 +14,5 @@ urlpatterns = [
     path('remove_card/', views.remove_card, name='remove_card'),
     path('edit_account_info/', views.edit_account_info, name='edit_account_info'),
     path('edit_password/', views.edit_password, name='edit_password'),
+    path('view_history/', views.view_history, name='view_history'),
 ]

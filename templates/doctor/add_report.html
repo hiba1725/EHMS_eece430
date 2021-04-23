@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+      <title>add reports</title>
+  </head>
+<body>
+    <h2>reports</h2>
+    <form class="form" action="" method="post">
+        {% csrf_token %}
+        <input type = "text" name="problem">
+        <input type = "text" name="analysis">
+        <input type = "text" name="medications">
+        <button type="submit" name="report">Submit</button>
+    </form>
+</body> 
+</html>

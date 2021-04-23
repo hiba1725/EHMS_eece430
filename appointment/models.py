@@ -16,3 +16,6 @@ class Appointment(models.Model):
     date = models.DateField()
     slot = models.IntegerField()
     done = models.BooleanField(default=False)
+    problem = models.CharField(max_length = 20000,default = 'none')
+    analysis = models.CharField(max_length = 20000,default = 'none')
+    medications = models.CharField(max_length = 20000,default = 'none')

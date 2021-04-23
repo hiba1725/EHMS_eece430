@@ -186,6 +186,10 @@
                                     <a href="{% url 'dialogs_detail' appointment.patient.user.username %}" style="float: right;" class="btn-outline-primary btn button">
                                         Chat with {{ appointment.patient.user.username }}
                                     </a>0</li>
+                                    <a href="{% url 'doctor:report' appointment.slot appointment.patient.user.pk %}" style="float: right;" class="btn-outline-primary btn button">
+                                        Add a report to {{ appointment.patient.user.username }}
+                                    </a>
+
                                 {% endif %}
                             {% endfor %}
                         </ul>

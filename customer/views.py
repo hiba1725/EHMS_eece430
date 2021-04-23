@@ -178,3 +178,18 @@ def edit_password(request):
 
         return render(request, 'customer/edit_password.html')
     return redirect('/customer/login')
+
+def view_history(request):
+    if request.user.is_authenticated and request.user.patient.role == "Patient":
+        query = Appointment.objects.filter(patient = request.user.pk).order_by('-date')
+        history = []
+        for q in query:
+            appts = {}
+            appts['name'] = q.doctor.user.username
+            appts['date'] = q.date
+            appts['problem'] = q.problem
+            appts['analysis'] = q.analysis
+            appts['medication'] = q.medications
+            history.append(appts)
+        return render(request, 'customer/history.html', {'history': history})
+    return redirect('/customer/login/')
