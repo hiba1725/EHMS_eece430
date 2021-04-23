@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+      <title>add reports</title>
+  </head>
+<body>
+    <form class="form" action="" method="post">
+        {% csrf_token %}
+        {% if history %}
+            <div class="patients">
+                <div class="row">
+                    {% for his in history %}
+                        <div class="col-md-3 d-flex justify-content-center col-md-offset-1">
+                        <div class="col-md-12 patient-info">
+                            <p>
+                                <span class="label">doctorName: </span> {{ his.name }} <br>
+                                <span class="label">Date: </span> {{ his.date }}<br>
+                                <span class="label">Problem: </span>{{ his.problem }} <br>
+                                <span class="label">Analysis: </span>{{ his.analysis }} <br>
+                                <span class="label">Medications: </span>{{ his.medication }} <br>
+                            </p>
+                        </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        {% endif %}
+    </form>
+</body> 
+</html>

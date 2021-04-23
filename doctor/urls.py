@@ -14,4 +14,6 @@ urlpatterns = [
     path('edit_password/', views.edit_password, name='edit_password'),
     path('search_doctors/', views.search_doctors, name="dsearch"),
     path('search_patient/', views.search_patient, name="search_patient"),
+    path('report/<int:slot>/<str:patient_pk>/', views.add_report, name="report"),
+    path('search_history/<str:patient_pk>', views.patient_history, name='search_history'),
 ]
