@@ -1,0 +1,63 @@
+{% block styles %}
+    <style>
+        .aside{
+            background-color: white;
+            margin: 20px;
+            padding: 0;
+        }
+
+        .sidenav-item{
+            text-align: center;
+            background-color: rgb(67, 136, 204);
+            padding: 15px;
+        }
+
+        .sidenav-item:hover{
+            background-color: rgb(87, 156, 234);
+            transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+            text-decoration: none;
+            color: white;
+        }
+
+        .sidenav-link{
+            color: white;
+            font-size: 16pt;
+        }
+
+        .sidenav-link:hover{
+            text-decoration: none;
+            color: white;
+        }
+
+    </style>
+{% endblock %}
+
+
+<aside class="col-12 col-sm-3 flex-shrink-1 aside">
+    <nav class="navbar navbar-expand-sm align-items-start flex-sm-column flex-row" style="padding: 0;">
+        <div class="collapse navbar-collapse sidebar" style="width: 100%">
+            <ul class="flex-column navbar-nav justify-content-center" style="width: 100%">
+                <a class="sidenav-link" href={% url 'manager:get_report' %}>
+                    <li class="sidenav-item">
+                        Reports
+                    </li>
+                </a>
+                <a class="sidenav-link" href={% url 'manager:doctors' %}>
+                    <li class="sidenav-item">
+                        Doctors
+                    </li>
+                </a>
+                <a class="sidenav-link" href={% url 'manager:patients' %}>
+                    <li class="sidenav-item">
+                        Patients
+                    </li>
+                </a>
+                <a class="sidenav-link" href={% url 'manager:appointments' %}>
+                    <li class="sidenav-item">
+                        Appointments
+                    </li>
+                </a>
+            </ul>
+        </div>
+    </nav>
+</aside>
