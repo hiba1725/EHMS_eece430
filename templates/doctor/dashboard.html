@@ -182,7 +182,10 @@
                                 {% if appointment.done %}
                                     <li class="list-group-item myactive"> {{ appointment.date }} with {{ appointment.patient.user.last_name }} {{ appointment.patient.user.first_name }} at {{ appointment.slot|add:8 }}:00 until {{ appointment.slot|add:9 }}:00</li>
                                 {% else %}
-                                    <li class="list-group-item"> {{ appointment.date }} with {{ appointment.patient.user.last_name }} {{ appointment.patient.user.first_name }} at {{ appointment.slot|add:8 }}:00 until {{ appointment.slot|add:9 }}:00</li>
+                                    <li class="list-group-item"> {{ appointment.date }} with {{ appointment.patient.user.last_name }} {{ appointment.patient.user.first_name }} at {{ appointment.slot|add:8 }}:00 until {{ appointment.slot|add:9 }}:0
+                                    <a href="{% url 'dialogs_detail' appointment.patient.user.username %}" style="float: right;" class="btn-outline-primary btn button">
+                                        Chat with {{ appointment.patient.user.username }}
+                                    </a>0</li>
                                 {% endif %}
                             {% endfor %}
                         </ul>
