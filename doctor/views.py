@@ -108,7 +108,10 @@ def dashboard(request):
         for app in appointments:
             iso = app.date.isocalendar()
             if app.date.year == today.year and iso[1] == week_number+(today.isocalendar()[2]//7): # if sunday, we want next week
-                week_appointment[iso[2]] = [app.slot, f"{app.patient.user.first_name} {app.patient.user.last_name}"]
+                if iso[2] not in week_appointment:
+                    week_appointment[iso[2]] = [[app.slot, f"{app.patient.user.first_name} {app.patient.user.last_name}"]]
+                else:
+                    week_appointment[iso[2]].append([app.slot, f"{app.patient.user.first_name} {app.patient.user.last_name}"])
             if app.done:
                 done_app += 1
             else:
