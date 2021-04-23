@@ -2,5 +2,5 @@ APSchedule
 datetime
 django
 django-private-chat
-django-apscheduler
+apscheduler
 websockets
