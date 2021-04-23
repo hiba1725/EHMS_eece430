@@ -23,7 +23,10 @@
             overflow: auto;
             height: 399px;
         }
-
+        #messages {
+            scrollbar-width: thin;   
+            scrollbar-color: rgb(135, 179, 222) lightgray;    
+        }
         #messages::-webkit-scrollbar {
             width: 12px;    
         }   
@@ -106,23 +109,23 @@
         }
 
         .msg-read {
-            background-color: rgb(70, 116, 234);
+            background-color: #5e87ed;
             border-radius: 12px 12px 3px 12px;
             margin: 5px;
             width: fit-content;
-            padding-left: 5px;
-            padding-right: 5px;
+            padding-left: 10px;
+            padding-right: 10px;
             float: right;
             clear: both;
         }
 
         .msg-unread {
-            background-color: rgb(70, 116, 234);
+            background-color: #5e87ed;
             border-radius: 12px 12px 3px 12px;
             margin: 5px;
             width: fit-content;
-            padding-left: 5px;
-            padding-right: 5px;
+            padding-left: 10px;
+            padding-right: 10px;
             float: right;
             clear: both;
         }
@@ -130,8 +133,8 @@
         .opponent {
             background-color: lightgray;
             width: fit-content;
-            padding-left: 5px;
-            padding-right: 5px;
+            padding-left: 10px;
+            padding-right: 10px;
             float: left;
             clear: both;
             border-radius: 12px 12px 12px 3px;
@@ -146,7 +149,7 @@
 {% block content %}
     <input id="owner_username" type="hidden" value="{{ request.user.username }}">
     <div class="container">
-        <div class="col-md-3">
+        <!--<div class="col-md-3">
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <h3 class="panel-title">{% trans "Chat list" %}</h3>
@@ -173,7 +176,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div>-->
         <div class="col-md-9">
             <div class="well well-lg">
                 <div class="row">
@@ -196,8 +199,11 @@
                                     <p class="{% if msg.sender == request.user %}pull-left{% else %}pull-right{% endif %}">
                                         <span class="username">{{ msg.sender.username }}</span>
                                         {{ msg.text }}
-                                        <span class="timestamp">&ndash; <span
-                                                data-livestamp="{{ msg.get_formatted_create_datetime }}">{{ msg.get_formatted_create_datetime }}</span></span>
+                                        <span class="timestamp">&ndash; 
+                                            <span data-livestamp="{{ msg.get_formatted_create_datetime }}">
+                                                {{ msg.get_formatted_create_datetime }}
+                                            </span>
+                                        </span>
                                     </p>
                                 </div>
                             {% endfor %}
@@ -294,8 +300,8 @@
             }
 
             function scrollToLastMessage() {
-                var $msgs = $('#messages');
-                $msgs.animate({"scrollTop": $msgs.prop('scrollHeight')})
+                var chat = document.getElementById('messages');
+                chat.scrollTop = chat.scrollHeight - chat.clientHeight;
             }
 
             function generateMessage(context) {
