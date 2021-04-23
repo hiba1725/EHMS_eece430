@@ -5,6 +5,7 @@ from django.shortcuts import get_object_or_404, render, redirect
 from django.urls import reverse, reverse_lazy
 from django.contrib.auth import authenticate, login, logout, password_validation
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
 
 from .models import Patient, CreditCard
 from .forms import PatientForm, UserForm, CardForm
@@ -193,3 +194,11 @@ def view_history(request):
             history.append(appts)
         return render(request, 'customer/history.html', {'history': history})
     return redirect('/customer/login/')
+
+
+def delete_patient(request):
+    if request.user.is_authenticated and request.user.patient.role == "Patient":
+        user = User.objects.filter(pk=request.user.pk)
+        user.delete()
+        return redirect('/')
+    return redirect('/')

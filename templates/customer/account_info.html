@@ -28,11 +28,11 @@
         margin-top: 0px;
     }
 
-    .btn {
+    .edit {
         color: rgb(67, 136, 204) !important;
         border-color: rgb(67, 136, 204) !important;
     }
-    .btn:hover{
+    .edit:hover{
         color: white !important;
         background-color: rgb(67, 136, 204) !important;
     }
@@ -63,8 +63,11 @@
                     <h2>Account Information</h2>
                 </div>
                 <div class="col">
-                    <a href = {% url 'customer:edit_account_info' %} class="button-link">
-                        <button class="btn btn-outline-primary">Edit account info</button>
+                    <a href = "{% url 'customer:edit_account_info' %}" class="button-link">
+                        <button class="btn btn-outline-primary edit">Edit account info</button>
+                    </a>
+                    <a href = {% url 'customer:delete_patient' %} class="button-link">
+                        <button class="btn btn-danger">Delete Account</button>
                     </a>
                 </div>    
             </div>

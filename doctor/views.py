@@ -139,8 +139,6 @@ def add_report(request, slot, patient_pk):
     return redirect('/doctor/login/')
 
 
-
-
 def edit_account_info(request):
     if request.user.is_authenticated and request.user.doctor.role == "Doctor":
         if request.POST:
@@ -269,3 +267,11 @@ def patient_history(request, patient_pk):
 
 def patient_profile(request):
     pass
+
+
+def delete_doctor(request):
+    if request.user.is_authenticated and request.user.doctor.role == "Doctor":
+        user = User.objects.filter(pk=request.user.pk)
+        user.delete()
+        return redirect('/')
+    return redirect('/')
