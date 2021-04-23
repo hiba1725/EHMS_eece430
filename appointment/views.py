@@ -18,7 +18,7 @@ def day_selector(request,doctor_pk):
         #     print(doc.pk, doc.user.first_name)
         doctor = Doctor.objects.get(pk=doctor_pk)
         return render(request,"appointment/day_selector.html",{"doctor":doctor,"error":""})
-    return redirect('/customer/login')
+    return redirect('/customer/login/')
 
 def slot_selector(request,doctor_pk):
     """
@@ -41,7 +41,7 @@ def slot_selector(request,doctor_pk):
             appts = Appointment.objects.filter(date=day,doctor_id=doctor)
             slots = functions.find_available_slots(appts)
             return render(request,"appointment/slot_selector.html",{"doctor":doctor,"available_slots":slots,"day":day})
-    return redirect('/customer/login')
+    return redirect('/customer/login/')
 
 def confirmation(request,doctor_pk,day):
     """
@@ -52,7 +52,7 @@ def confirmation(request,doctor_pk,day):
         slot = request.GET["select-slot"]
         doctor = Doctor.objects.get(pk=doctor_pk)
         return render(request,"appointment/confirmation.html",{"doctor":doctor,"slot":slot,"day":day})
-    return redirect('/customer/login')
+    return redirect('/customer/login/')
 
 def book(request,doctor_pk,day,slot):
     """
@@ -66,4 +66,4 @@ def book(request,doctor_pk,day,slot):
         appt = Appointment(doctor=doctor,patient=patient,date=day,slot=slot_encoded)
         appt.save()
         return render(request,"appointment/booked.html")
-    return redirect('/customer/login')
+    return redirect('/customer/login/')
