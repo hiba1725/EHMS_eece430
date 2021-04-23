@@ -1,0 +1,6 @@
+APSchedule
+datetime
+django
+django-private-chat
+django-apscheduler
+websockets
