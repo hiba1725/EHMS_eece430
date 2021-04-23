@@ -1,3 +1,0 @@
-django-private-chat
-websockets
-apscheduler

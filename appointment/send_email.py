@@ -1,5 +1,5 @@
 from .models import Appointment
-from datetime import datetime, timedelta
+from datetime import datetime
 from django.core.mail import BadHeaderError, send_mail
 from django.http import HttpResponse, HttpResponseRedirect
 from clinicX.settings import EMAIL_HOST
