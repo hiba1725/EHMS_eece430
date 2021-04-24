@@ -1,16 +1,32 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-      <title>add reports</title>
-  </head>
+{% extends 'base.html' %}
+{% load static %}
+{% block styles %}
+<link rel="stylesheet" type="text/css" href="{% static 'doctor/search_patient.css' %}">
+{% endblock %}
+{% block content %}
 <body>
-    <h2>reports</h2>
-    <form class="form" action="" method="post">
-        {% csrf_token %}
-        <input type = "text" name="problem">
-        <input type = "text" name="analysis">
-        <input type = "text" name="medications">
-        <button type="submit" name="report">Submit</button>
-    </form>
-</body> 
-</html>
+<div class="general w-100">
+    <div class="row w-10000">
+        <div class="center">
+                    <h1 class="title" style="text-align: center">Add Report</h1>
+            <h4 style="font-size: 10px"><br></h4>
+                    <form class ="d-flex justify-content-center h-100" action="" method="post" style=" width:100%; line-height: 20px;">
+                        {% csrf_token %}
+                        <div class="searchbar" style="height: 250px; margin: 5px">
+                            <textarea class="search_input" type="text" name="problem" placeholder="Problem" style="height:250px"></textarea>
+                        </div>
+                        <div class="searchbar" style="height: 250px; margin: 5px">
+                            <textarea class="search_input" type="text" name="analysis" placeholder="Analysis" style="height:250px"></textarea>
+                        </div>
+                        <div class="searchbar" style="height: 250px; margin: 5px">
+                            <textarea class="search_input" type="text" name="medications" placeholder="Medications" style="height:250px"></textarea>
+                        </div>
+                        <div class="row">
+                        <button class="search_icon" type="submit" name = "report"><i class="fa fa-plus" aria-hidden="true"></i></button>
+                        </div>
+                    </form>
+                </div>
+    </div>
+</div>
+</body>
+{% endblock %}
