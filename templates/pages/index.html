@@ -118,12 +118,12 @@
         </div>
     </div>
     <div style="margin-left: 80px;">
-        <h1>We care about you!</h1>
+        <h1><center></br>We care about you!</center></h1>
         {% if user.is_authenticated  %}
-            <p>Make an appointment or get an online consultation with our specialists.</p>
+            <p style="font-size:18px "><br/>Make an appointment or get an online consultation with our specialists</p>
             <a href = "/doctor/search_doctors/"><button class="button">Book An Appointment</button></a>
             <br><br>
-            <p>Check your medical history.</p>
+            <p style="font-size:18px">Check your medical history</p>
             <a href = "/customer/view_history/"><button class="button">View Medical History</button></a>
         {% else %}
             <a href = "/customer/signup/"><button class="button">Join Us Now!</button></a>
