@@ -81,7 +81,7 @@ def add_manager(request):
 				manager.role = "Manager"
 				manager.save()
 				login(request, user)
-				return redirect('/manager/get_reports')
+				return redirect('/manager/get_report')
 			else:
 				return render(request, 'manager/add_manager.html',
 							  {'user_form_error': user_form.errors})
@@ -113,7 +113,7 @@ def add_doctor(request):
 				doctor.user = user
 				doctor.role = "Doctor"
 				doctor.save()
-				return redirect('/manager/get_reports')
+				return redirect('/manager/get_report')
 			else:
 				return render(request, 'manager/add_doctor.html',
 							  {'user_form_error': user_form.errors, 'doctor_form': manager_form.errors})
@@ -146,7 +146,7 @@ def add_patient(request):
 				patient.user = user
 				patient.role = "Patient"
 				patient.save()
-				return redirect('/manager/get_reports')
+				return redirect('/manager/get_report')
 			else:
 				return render(request, 'manager/add_patient.html',
 							  {'user_form_error': user_form.errors, 'patient_form_error': patient_form.errors})
@@ -172,7 +172,7 @@ def edit_doctor(request, doctor_pk):
 					doctor = doctor_form.save(commit=False)
 					doctor.user = user
 					doctor.save()
-					return redirect('/manager/get_reports')
+					return redirect('/manager/get_report')
 				else:
 					return render(request, 'manager/edit_doctor.html',
 								{'user_form_error': user_form.errors,
@@ -204,7 +204,7 @@ def edit_patient(request, patient_pk):
 					patient = patient_form.save(commit=False)
 					patient.user = user
 					patient.save()
-					return redirect('/manager/get_reports')
+					return redirect('/manager/get_report')
 				else:
 					return render(request, 'manager/edit_patient.html',
 								{'user_form_error': user_form.errors,
@@ -221,7 +221,7 @@ def edit_patient(request, patient_pk):
 def delete_doctor(request, doctor_pk):
 	if request.user.is_authenticated and request.user.manager.role == "Manager":
 		doctor = Doctor.objects.filter(pk=doctor_pk)
-		doctor.delete()
+		doctor.user.delete()
 		return redirect('/manager/doctors')
 	return redirect('/')
 
@@ -229,7 +229,7 @@ def delete_doctor(request, doctor_pk):
 def delete_patient(request, patient_pk):
 	if request.user.is_authenticated and request.user.manager.role == "Manager":
 		patient = Patient.objects.filter(pk=patient_pk)
-		patient.delete()
+		patient.user.delete()
 		return redirect('/manager/patients')
 	return redirect('/')
 

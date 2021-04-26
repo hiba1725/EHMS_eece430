@@ -10,7 +10,7 @@
         <ul class="list-group text-center justify-content-center">
             {% for appointment in appointments %}
                 <li class="list-group-item">
-                    Doctor: {{ appointment.doctor.user.first_name }} {{ appointment.doctor.user.first_name }} | Patient: {{ appointment.patient.user.first_name }} {{ appointment.patient.user.first_name }}
+                    Doctor: {{ appointment.doctor.user.first_name }} {{ appointment.doctor.user.last_name }} | Patient: {{ appointment.patient.user.first_name }} {{ appointment.patient.user.last_name }}
                     <br>
                     Date: {{ appointment.date }}
                     <a href="{% url 'manager:delete_appointment' appointment_pk=appointment.pk %}" style="float: right;border-radius: 0" class="btn-outline-danger btn button">Remove appointment</a>
