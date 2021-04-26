@@ -22,6 +22,8 @@ def signup(request):
         user_form = UserForm(request.POST)
         doctor_form = DoctorForm(request.POST)
         if user_form.is_valid() and doctor_form.is_valid():
+            if request.POST["age"]<=request.POST["years_of_experience"]:
+                return render(request, 'doctor/signup.html', {'other_errors': ErrorDict({"Years of Experience": ErrorDict({'': "Years of experience cannot be equal or greater than age"})})})
             user = user_form.save(commit=False)
             password = request.POST["password"]
             try:
@@ -32,7 +34,7 @@ def signup(request):
                               {'user_form_error': ErrorDict(errAsDict)})
             passwordConfirm = request.POST["passwordConfirm"]
             if password != passwordConfirm:
-                return render(request, 'doctor/signup.html', {'password': ErrorDict({'': "Passwords do not match"})})
+                return render(request, 'doctor/signup.html', {'other_errors': ErrorDict({"Password": ErrorDict({'': "Passwords do not match"})})})
             user.set_password(password)
             user.save()
             doctor = doctor_form.save(commit=False)
@@ -43,7 +45,7 @@ def signup(request):
             return redirect('/')
         else:
             return render(request, 'doctor/signup.html',
-                          {'user_form_error': user_form.errors, 'doctor_form': doctor_form.errors})
+                          {'user_form_error': user_form.errors, 'doctor_form_error': doctor_form.errors})
     else:
         return render(request, 'doctor/signup.html')
 
