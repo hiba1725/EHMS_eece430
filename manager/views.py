@@ -5,6 +5,7 @@ from django.shortcuts import get_object_or_404, render, redirect
 from django.urls import reverse, reverse_lazy
 from django.contrib.auth import authenticate, login, logout, password_validation
 from django.contrib.auth.decorators import login_required
+from django.forms.models import model_to_dict
 
 from .forms import ManagerForm, UserForm
 from .models import Manager, Report
@@ -265,6 +266,9 @@ def get_report(request):
 def doctors(request):
 	if request.user.is_authenticated and request.user.manager.role == "Manager":
 		doctors = Doctor.objects.filter(role="Doctor").exclude(user__username="admin")
+		for doctor in doctors:
+			num_appointment = len(Appointment.objects.filter(doctor=doctor))
+			doctor.num_appointment = num_appointment
 		return render(request, 'manager/doctors.html', {'doctors': doctors})
 	return redirect('/')
 
@@ -272,6 +276,9 @@ def doctors(request):
 def patients(request):
 	if request.user.is_authenticated and request.user.manager.role == "Manager":
 		patients = Patient.objects.filter(role="Patient").exclude(user__username="admin")
+		for patient in patients:
+			num_appointment = len(Appointment.objects.filter(patient=patient))
+			patient.num_appointment = num_appointment
 		return render(request, 'manager/patients.html', {'patients': patients})
 	return redirect('/')
 

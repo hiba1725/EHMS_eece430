@@ -10,7 +10,7 @@
         <a href="{% url 'manager:add_patient' %}" style="float: right;" class="btn-outline-primary btn button"> Add patient</a>
         <ul class="list-group text-center justify-content-center">
             {% for patient in patients %}
-                <li class="list-group-item"> {{ patient.user.first_name }} {{ patient.user.last_name }} | {{ patient.user.email }} | {{ patient.age }}
+                <li class="list-group-item"> {{ patient.user.first_name }} {{ patient.user.last_name }} | {{ patient.user.email }} | {{ patient.age }} | {{ patient.num_appointment }}
                     <a href="{% url 'manager:delete_patient' patient_pk=patient.pk %}" style="float: right;border-radius: 0" class="btn-outline-danger btn button">Remove patient</a>
                     <a href="{% url 'manager:edit_patient' patient_pk=patient.pk%}" style="float: right; border-radius: 0" class="btn-outline-primary btn button"> Edit patient</a>
                 </li>
@@ -18,6 +18,7 @@
         </ul>
     {% else %}
         <h3>There are no patients to show</h3>
+        <a href="{% url 'manager:add_patient' %}" style="float: right;" class="btn-outline-primary btn button"> Add patient</a>
     {% endif %}
     </main>
 {% endblock %}
