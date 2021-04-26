@@ -58,6 +58,7 @@
         p {
             font-size:14px; 
             text-align: center;
+            color:rgb(73, 73, 73);
         }
 
         hr {
@@ -72,21 +73,19 @@
         .box {
             flex: auto;
             margin: 20px;
-            margin-top: 40px;
-            background-color: white;
-            /* box-shadow: 0 10px 30px 0 rgba(0,0,0,0.5); */
-            border: 1pt solid rgb(236, 236, 236);
-            padding: 60px;
+            /* margin-top: 40px; */
+            /* background-color: white; */
+            /* border-bottom: 1pt solid rgb(245, 245, 245); */
+            padding: 20px;
             text-align: center;
         }
 
         .main-box {
             flex: auto;
             margin: 20px;
-            margin-top: 40px;
+            /* margin-top: 40px; */
             background-color: white;
-            /* box-shadow: 0 10px 30px 0 rgba(0,0,0,0.5); */
-            border: 1pt solid rgb(236, 236, 236);
+            border-bottom: 1pt solid rgb(245, 245, 245);
             padding: 0 60px 0 60px;
             text-align: center;
             height: max-content;
@@ -107,6 +106,12 @@
         ul {
             list-style: none;
         }
+
+        .footer {
+            text-align: center;
+            margin: 10px;
+            color:rgb(73, 73, 73);
+        }
     </style>
 {% endblock %}
 {% block content %}
@@ -114,13 +119,14 @@
 <div class="main-box row-items">
     <div>
         <div class="image">
-            <img src="https://api.time.com/wp-content/uploads/2016/07/sb10063567v-001.jpg?w=800&quality=85" height='350px'>
+            <!-- <img src="https://api.time.com/wp-content/uploads/2016/07/sb10063567v-001.jpg?w=800&quality=85" height='350px'> -->
+            <img src="https://i.imgur.com/mMImMgp.png" height="400px">
         </div>
     </div>
-    <div style="margin-left: 80px;">
-        <h1><center></br>We care about you!</center></h1>
+    <div style="margin-left: 20px;">
+        <h1></br>We care about you!</h1>
+        <p style="font-size:12pt; text-align: left;">We make it easy to book appointments and get online consultations with our specialists</p>
         {% if user.is_authenticated  %}
-            <p style="font-size:18px "><br/>Make an appointment or get an online consultation with our specialists</p>
             <a href = "/doctor/search_doctors/"><button class="button">Book An Appointment</button></a>
             <br><br>
             <p style="font-size:18px">Check your medical history</p>
@@ -134,19 +140,18 @@
 <div class='container'>
     <div class="box">
         <h3>Browse or search for specialists</h3>
-        <p>Browse by speciality or search for a specialist by name</p>
+        <p style="font-size:12pt;">Browse by speciality or search for a specialist by name</p>
         <a href="/doctor/search_doctors/"><button class="button-1">Browse Hub</button></a>
     </div>
 </div>
-
-</div>
 <hr/>
+</div>
 <div class="container" id="about_block">
     <div class="row">
         <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-            <div class='box' style="height: 332px;">
+            <div class='box'>
                 <h3>Who are we?</h3>
-                <span>
+                <span style="color:rgb(73, 73, 73);">
                     We are a team of highly specialized doctors and nurses. 
                     We come from many different backgrounds and specialize in 
                     different fields and easy medicare.
@@ -156,7 +161,7 @@
         <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
             <div class="box" style="text-align: left;">
                 <h3>How does it work?</h3>
-                <ol>
+                <ol style="color:rgb(73, 73, 73);"> 
                     <li>Create an account </li>
                     <li>Select the doctor you want </li>
                     <li>Select a suitable time</li>
@@ -168,19 +173,18 @@
         </div>
     </div>
 </div>
-
 <hr/>
-
-<div class="row text-center justify-content-center" id="services_block">
+<br/>
+<div class="row text-center justify-content-center" id="services_block" >
     <h3>
-        <strong>Our Services</strong>
+        Our Services
     </h3>
 </div>
-<div class="container">
+<div class="container" style="color:rgb(73, 73, 73);">
     <div class="row">
         <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
             <div class='box'>
-                <h3>Specialists</h3>
+                <h5>Specialists</h5>
                 <ul>
                     <li>Stay linked to your patients</li>
                     <li>Have all the information in one place</li>
@@ -191,7 +195,7 @@
         </div>
         <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
             <div class="box">
-                <h3>Patients</h3>
+                <h5>Patients</h5>
                 <ul>
                     <li>Consult a doctor by dropping a text, call or video</li>
                     <li>Book an appointment quickly and securely </li>
@@ -201,6 +205,10 @@
             </div>
         </div>
     </div>
+</div>
+<hr/>
+<div class="footer">
+CLINIC X
 </div>
 </body>
 {% endblock %}
