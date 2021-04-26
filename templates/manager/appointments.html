@@ -1,24 +1,96 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block styles %}
+<style>
+    .left-bar {
+        border: 1pt solid rgb(236, 236, 236);
+        background-color: white;
+        padding: 30px;
+    }
+
+    .right-bar {
+        border: 1pt solid rgb(236, 236, 236);
+        background-color: white;
+        padding: 30px;
+    }
+
+    .active {
+        background-color: rgb(67, 136, 204) !important;
+        border-color: rgb(67, 136, 204) !important;
+    }
+    
+    .section-divider {
+        color: gray;
+    }
+
+    hr {
+        margin-top: 0px;
+    }
+
+    .edit {
+        color: rgb(67, 136, 204) !important;
+        border-color: rgb(67, 136, 204) !important;
+    }
+    .edit:hover{
+        color: white !important;
+        background-color: rgb(67, 136, 204) !important;
+    }
+
+    .btn {
+        color: rgb(67, 136, 204) !important;
+        border-color: rgb(67, 136, 204) !important;
+    }
+    .btn:hover{
+        color: white !important;
+        background-color: rgb(67, 136, 204) !important;
+    }
+</style>
 {% endblock %}
 {% block content %}
-    {% include 'partials/_sidebar.html' %}
-    <main class="col bg-faded py-3 justify-content-center">
-    {% if appointments %}
-        <h2>Appointments</h2>
-        <ul class="list-group text-center justify-content-center">
-            {% for appointment in appointments %}
-                <li class="list-group-item">
-                    Doctor: {{ appointment.doctor.user.first_name }} {{ appointment.doctor.user.last_name }} | Patient: {{ appointment.patient.user.first_name }} {{ appointment.patient.user.last_name }}
-                    <br>
-                    Date: {{ appointment.date }}
-                    <a href="{% url 'manager:delete_appointment' appointment_pk=appointment.pk %}" style="float: right;border-radius: 0" class="btn-outline-danger btn button">Remove appointment</a>
-                </li>
-            {% endfor %}
-        </ul>
-    {% else %}
-        <h3>There are no appointments to show</h3>
-    {% endif %}
-    </main>
+<div class="container-fluid" style="margin: 20px;">
+    <div class="row">
+        <div class="col-3 left-bar">
+            <h4>Welcome Manager {{user.username}}</h4>
+            <br/>
+            <ul class="list-group">
+                <a href = "/manager/get_report/" class="list-group-item list-group-item-action">
+                    Reports
+                </a>
+                <a href = "/manager/doctors/" class="list-group-item list-group-item-action">
+                    Doctors
+                </a>
+                <a href = "/manager/patients/" class="list-group-item list-group-item-action">
+                    Patients
+                </a>
+                <a href = "/manager/appointments/" class="list-group-item list-group-item-action active">
+                    Appointments
+                </a>
+            </ul>
+        </div>
+        <div class="col right-bar" style="margin-left: 20px;">
+            <h2>Appointments</h2>
+            <main class="col bg-faded py-3 justify-content-center">
+                {% if appointments %}
+                    <ul class="list-group text-center justify-content-center">
+                        {% for appointment in appointments %}
+                            <li class="list-group-item">
+                                Doctor: {{ appointment.doctor.user.first_name }} {{ appointment.doctor.user.last_name }} 
+                                <br/>
+                                Patient: {{ appointment.patient.user.first_name }} {{ appointment.patient.user.last_name }}
+                                <br/>
+                                Date: {{ appointment.date }}
+                                <br/>
+                                <a href="{% url 'manager:delete_appointment' appointment_pk=appointment.pk %}" class="btn-outline-danger btn button">Remove appointment</a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                {% else %}
+                <span style="color: rgb(194, 194, 194);">Nothing to show here</span>
+                {% endif %}
+                </main>
+        </div>
+    </div>
+
+</div>
+
 {% endblock %}

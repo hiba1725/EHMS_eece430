@@ -1,24 +1,103 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block styles %}
+<style>
+    .left-bar {
+        border: 1pt solid rgb(236, 236, 236);
+        background-color: white;
+        padding: 30px;
+    }
+
+    .right-bar {
+        border: 1pt solid rgb(236, 236, 236);
+        background-color: white;
+        padding: 30px;
+    }
+
+    .active {
+        background-color: rgb(67, 136, 204) !important;
+        border-color: rgb(67, 136, 204) !important;
+    }
+    
+    .section-divider {
+        color: gray;
+    }
+
+    hr {
+        margin-top: 0px;
+    }
+
+    .edit {
+        color: rgb(67, 136, 204) !important;
+        border-color: rgb(67, 136, 204) !important;
+    }
+    .edit:hover{
+        color: white !important;
+        background-color: rgb(67, 136, 204) !important;
+    }
+
+    .btn {
+        color: rgb(67, 136, 204) !important;
+        border-color: rgb(67, 136, 204) !important;
+    }
+    .btn:hover{
+        color: white !important;
+        background-color: rgb(67, 136, 204) !important;
+    }
+</style>
 {% endblock %}
 {% block content %}
-    {% include 'partials/_sidebar.html' %}
-    <main class="col bg-faded py-3 justify-content-center">
-    {% if doctors %}
-        <h2>Doctors</h2>
-        <a href="{% url 'manager:add_doctor' %}" style="float: right;" class="btn-outline-primary btn button"> Add doctor</a>
-        <ul class="list-group text-center justify-content-center">
-            {% for doctor in doctors %}
-                <li class="list-group-item"> {{ doctor.user.first_name }} {{ doctor.user.last_name }} | {{ doctor.user.email }} | {{ doctor.age }} {{ doctor.specialty }} | {{ doctor.num_appointment }}
-                    <a href="{% url 'manager:delete_doctor' doctor_pk=doctor.pk %}" style="float: right;border-radius: 0" class="btn-outline-danger btn button">Remove doctor</a>
-                    <a href="{% url 'manager:edit_doctor' doctor_pk=doctor.pk%}" style="float: right; border-radius: 0" class="btn-outline-primary btn button"> Edit doctor</a>
-                </li>
-            {% endfor %}
-        </ul>
-    {% else %}
-        <h3>There are no Doctors to show</h3>
-        <a href="{% url 'manager:add_doctor' %}" style="float: right;" class="btn-outline-primary btn button"> Add doctor</a>
-    {% endif %}
-    </main>
+<div class="container-fluid" style="margin: 20px;">
+    <div class="row">
+        <div class="col-3 left-bar">
+            <h4>Welcome Manager {{user.username}}</h4>
+            <br/>
+            <ul class="list-group">
+                <a href = "/manager/get_report/" class="list-group-item list-group-item-action">
+                    Reports
+                </a>
+                <a href = "/manager/doctors/" class="list-group-item list-group-item-action active">
+                    Doctors
+                </a>
+                <a href = "/manager/patients/" class="list-group-item list-group-item-action">
+                    Patients
+                </a>
+                <a href = "/manager/appointments/" class="list-group-item list-group-item-action">
+                    Appointments
+                </a>
+            </ul>
+        </div>
+        <div class="col right-bar" style="margin-left: 20px;">
+            <div class="row">
+                <div class="col">
+                    <h2>Doctors</h2>
+                </div>
+                <div class="col">
+                    <a href="{% url 'manager:add_doctor' %}" class="btn-outline-primary btn button"> Add doctor</a>
+                </div>
+            </div>
+            <main class="col bg-faded py-3 justify-content-center">
+                {% if doctors %}
+                <ul class="list-group text-center justify-content-center">
+                    {% for doctor in doctors %}
+                        <li class="list-group-item">                                 
+                            {{ doctor.user.first_name }} {{ doctor.user.last_name }} - {{doctor.user.specialty}
+                            <br/> {{ doctor.user.email }} 
+                            <br/> {{ patient.num_appointment }} appointment(s)
+                            <br/>
+                            <br/>
+                            <a href="{% url 'manager:delete_doctor' doctor_pk=doctor.pk %}" class="btn-outline-danger btn button">Remove doctor</a>
+                            <a href="{% url 'manager:edit_doctor' doctor_pk=doctor.pk%}" class="btn-outline-primary btn button"> Edit doctor</a>>
+                        </li>
+
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <span style="color: rgb(194, 194, 194);">Nothing to show here</span>
+            {% endif %}
+            </main>
+        </div>
+    </div>
+
+</div>
 {% endblock %}

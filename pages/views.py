@@ -7,8 +7,6 @@ def index(request):
 		try:
 			if request.user.doctor.role == "Doctor":
 				return redirect('/doctor/search_patient/')
-			if request.user.manager.role == "Manager":
-				return redirect('/manager/')
 		except Exception as e:
 			print(e)
 	return render(request, 'pages/index.html')

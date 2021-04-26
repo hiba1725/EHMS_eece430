@@ -45,16 +45,16 @@
             <h4>Welcome Manager {{user.username}}</h4>
             <br/>
             <ul class="list-group">
-                <a href = "/get_report/" class="list-group-item list-group-item-action active">
+                <a href = "/manager/get_report/" class="list-group-item list-group-item-action active">
                     Reports
                 </a>
-                <a href = "/doctors/" class="list-group-item list-group-item-action">
+                <a href = "/manager/doctors/" class="list-group-item list-group-item-action">
                     Doctors
                 </a>
-                <a href = "/patients/" class="list-group-item list-group-item-action">
+                <a href = "/manager/patients/" class="list-group-item list-group-item-action">
                     Patients
                 </a>
-                <a href = "/appointments/" class="list-group-item list-group-item-action">
+                <a href = "/manager/appointments/" class="list-group-item list-group-item-action">
                     Appointments
                 </a>
             </ul>
@@ -63,34 +63,37 @@
             <div class="row">
                 <div class="col">
                     <h2>Reports</h2>
+                    <br/>
+                    <div class="row">
+                        <div class="col">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5 class="card-title">Number of Doctors</h5>
+                                    <p class="card-text">{{num_doctors}}</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5 class="card-title">Number of Patients</h5>
+                                    <p class="card-text">{{num_patients}}</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5 class="card-title">Appointments This Month</h5>
+                                    <p class="card-text">{{ num_appointments_month}}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            </div>
-            <div class="row">
-
             </div>
         </div>
     </div>
 
 </div>
-    <!-- {% include 'partials/_sidebar.html' %}
-    <div class="card-deck" style="margin: 20px">
-        <div class="card bg-primary" style="border: none">
-            <div class="card-body text-center" style="background-color: rgb(67, 136, 204); color: white; border: none">
-                <h4 class="card-title">Total Number of Patients</h4>
-                <p class="card-text">{{ num_patients}}</p>
-            </div>
-        </div>
-        <div class="card bg-primary" style="border: none">
-            <div class="card-body text-center" style="background-color: rgb(67, 136, 204); color: white; border: none">
-                <h4 class="card-title">Total Number of Doctors</h4>
-                <p class="card-text">{{ num_doctors }}</p>
-            </div>
-        </div>
-        <div class="card bg-primary" style="border: none">
-            <div class="card-body text-center" style="background-color: rgb(67, 136, 204); color: white; border: none">
-                <h4 class="card-title">Number of Appointments this month</h4>
-                <p class="card-text">{{ num_appointments_month}}</p>
-            </div>
-        </div>
-    </div> -->
 {% endblock %}

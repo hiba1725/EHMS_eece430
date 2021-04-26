@@ -65,11 +65,11 @@ ul>li>ul.errorlist{
 {% endblock %}
 {% block content %}
 
-{% include 'partials/_sidebar.html' %}
+<div class="col-sm-4 col-md"></div>
 
 <div class="col-sm-4 col-md-5 signup-main">
     <div class="row text-center justify-content-center">
-        <h2 class="signup-title">Add Patient</h2>
+        <h2 class="signup-title">Add a patient</h2>
     </div>
     <form class="form" action="" method="post">
         {% csrf_token %}
@@ -126,7 +126,7 @@ ul>li>ul.errorlist{
                 <input type="radio" name="gender" value="O" id="other"> Other&nbsp;
             </label>
         </div>
-        <button class="btn btn-outline-primary signup-btn" type="submit">Add Patient</button>
+        <button class="btn btn-outline-primary signup-btn" type="submit">Add patient</button>
     </form>
 </div>
 

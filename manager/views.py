@@ -224,7 +224,7 @@ def edit_patient(request, patient_pk):
 
 def delete_doctor(request, doctor_pk):
 	if request.user.is_authenticated and request.user.manager.role == "Manager":
-		doctor = Doctor.objects.filter(pk=doctor_pk)
+		doctor = Doctor.objects.get(pk=doctor_pk)
 		doctor.user.delete()
 		return redirect('/manager/doctors')
 	return redirect('/')
@@ -232,7 +232,7 @@ def delete_doctor(request, doctor_pk):
 
 def delete_patient(request, patient_pk):
 	if request.user.is_authenticated and request.user.manager.role == "Manager":
-		patient = Patient.objects.filter(pk=patient_pk)
+		patient = Patient.objects.get(pk=patient_pk)
 		patient.user.delete()
 		return redirect('/manager/patients')
 	return redirect('/')
@@ -240,7 +240,7 @@ def delete_patient(request, patient_pk):
 
 def delete_appointment(request, appointment_pk):
 	if request.user.is_authenticated and request.user.manager.role == "Manager":
-		appointment = Appointment.objects.filter(pk=appointment_pk)
+		appointment = Appointment.objects.get(pk=appointment_pk)
 		appointment.delete()
 		return redirect('/manager/appointments')
 	return redirect('/')
