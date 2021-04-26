@@ -12,6 +12,9 @@ class PatientForm(ModelForm):
 
 class UserForm(forms.ModelForm):
     password = forms.CharField(widget=forms.PasswordInput())
+    email = forms.CharField(max_length=150, required=True)
+    first_name = forms.CharField(max_length=150, required=True)
+    last_name = forms.CharField(max_length=150, required=True)
 
     class Meta:
         model = User
