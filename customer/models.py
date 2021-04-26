@@ -7,7 +7,7 @@ from django.dispatch import receiver
 
 class Patient(models.Model):
 	user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='patient', primary_key=True)
-	age = models.IntegerField(default=0, validators=[MinValueValidator(0), MaxValueValidator(150)])
+	age = models.IntegerField(default=0, validators=[MinValueValidator(9), MaxValueValidator(150)])
 	phone_number = models.CharField(max_length=15, default='01111111')
 	address = models.CharField(max_length=100, null=True, blank=True)
 	role = models.CharField(max_length=10, default='none')

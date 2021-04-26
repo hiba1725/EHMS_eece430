@@ -26,7 +26,7 @@
                 <input class="form-control input-lg edit-account-input" name="username" placeholder="Username" value="{{ user.username }}">
             </div>
             <div class="col-xs-6 col-md-6 pt-1">
-                <input class="form-control input-lg edit-account-input" name="age" placeholder="Age" value="{{ user.patient.age }}">
+                <input class="form-control input-lg edit-account-input" name="age" placeholder="Age" value="{{ user.doctor.age }}">
             </div>
         </div>
         <div class="form-row pt-1">
@@ -36,20 +36,20 @@
         </div>
         <div class="form-row pt-1">
             <div class="col-md">
-                <input class="form-control input-lg edit-account-input" name="phone_number" placeholder="Phone Number" value="{{ user.patient.phone_number }}">
+                <input class="form-control input-lg edit-account-input" name="phone_number" placeholder="Phone Number" value="{{ user.doctor.phone_number }}">
             </div>
         </div>
         <div class="form-row pt-1">
             <div class="col-md">
-                <input class="form-control input-lg edit-account-input" name="address" placeholder="Address" value="{{ user.patient.address }}">
+                <input class="form-control input-lg edit-account-input" name="address" placeholder="Address" value="{{ user.doctor.address }}">
             </div>
         </div>
         <div class="form-row">
             <div class="col-xs-6 col-md-6 pt-1">
-                <input class="form-control input-lg edit-account-input" name="specialty" placeholder="Specialty" value="{{ doctor.specialty }}">
+                <input class="form-control input-lg edit-account-input" name="specialty" placeholder="Specialty" value="{{ user.doctor.specialty }}">
             </div>
             <div class="col-xs-6 col-md-6 pt-1">
-                <input class="form-control input-lg edit-account-input" name="years_of_experience" placeholder="Years of Experience" value="{{ doctor.years_of_experience }}">
+                <input class="form-control input-lg edit-account-input" name="years_of_experience" placeholder="Years of Experience" value="{{ user.doctor.years_of_experience }}">
             </div>
         </div>
         <div class="form-row pt-2">
@@ -73,7 +73,9 @@
         <br/>
         <button class="btn btn-lg btn-primary edit-account-btn"  style="" type="submit">Submit Changes</button>
     </form>
-</div>
+    <div class="row text-center justify-content-center">
+        <a href="{% url 'doctor:edit_password' %}" class="edit-password-link">Change password</a>
+    </div></div>
 
 
 <div class="col-sm-4 col-md edit-account-error">

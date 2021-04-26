@@ -29,7 +29,7 @@ def signup(request):
                               {'user_form_error': ErrorDict(errAsDict)})
             passwordConfirm = request.POST["passwordConfirm"]
             if password != passwordConfirm:
-                return render(request, 'customer/signup.html', {'password': ErrorDict({'': "Passwords do not match"})})
+                return render(request, 'customer/signup.html', {'other_errors': ErrorDict({"Password": ErrorDict({'': "Passwords do not match"})})})
             user.set_password(password)
             user.save()
             patient = patient_form.save(commit=False)
@@ -85,17 +85,20 @@ def account_info(request):
             return render(request, 'customer/account_info.html')
     return redirect('/customer/login')
 
+
 def appointments(request):
     if request.user.is_authenticated and request.user.patient.role == "Patient":
             appointments = Appointment.objects.filter(patient=request.user.patient)
             return render(request, 'customer/appointments.html', {'appointments':appointments})
     return redirect('/customer/login')
 
+
 def payments(request):
     if request.user.is_authenticated and request.user.patient.role == "Patient":
             appointments = Appointment.objects.filter(patient=request.user.patient)
             return render(request, 'customer/payment_methods.html')
     return redirect('/customer/login')
+
 
 def add_card(request):
     if request.user.is_authenticated and request.user.patient.role == "Patient":
@@ -146,7 +149,7 @@ def edit_account_info(request):
                     return render(request, 'customer/edit_account_info.html',
                                   {'user_form_error': user_form.errors,
                                    'patient_form_error': patient_form.errors,
-                                   'other_errors': "Wrong password"})
+                                   'other_errors': ErrorDict({"Password": ErrorDict({'': "Wrong Password"})})})
                 return redirect('/customer/account/')
             else:
                 return render(request, 'customer/edit_account_info.html',
@@ -166,19 +169,20 @@ def edit_password(request):
                     passwordnew1 = request.POST["passwordnew1"]
                     password_validation.validate_password(passwordnew1)
                 except Exception as e:
-                    return render(request, 'customer/edit_password.html', {'errors': e.messages})
+                    errAsDict = {'password': ErrorDict({'': '\n'.join(e.messages)})}
+                    return render(request, 'customer/edit_password.html', {'errors': ErrorDict(errAsDict)})
                 passwordnew2 = request.POST["passwordnew2"]
                 if passwordnew1 != passwordnew2:
-                    return render(request, 'customer/edit_password.html', {'errors': 'Passwords do not match'})
+                    return render(request, 'customer/edit_password.html', {'errors': ErrorDict({"Password": ErrorDict({'': "Passwords do not match"})})})
                 user.set_password(passwordnew1)
                 user.save()
                 login(request, user)
                 return redirect('/customer/account')
             else:
-                return render(request, 'customer/edit_password.html', {'errors': 'Old password is not correct'})
-
+                return render(request, 'customer/edit_password.html', {'errors': ErrorDict({"Password": ErrorDict({'': "Old password is incorrect"})})})
         return render(request, 'customer/edit_password.html')
     return redirect('/customer/login')
+
 
 def view_history(request):
     if request.user.is_authenticated and request.user.patient.role == "Patient":
