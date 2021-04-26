@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block styles %}
+{% endblock %}
+{% block content %}
+    {% include 'partials/_sidebar.html' %}
+    <main class="col bg-faded py-3 justify-content-center">
+    {% if doctors %}
+        <h2>Doctors</h2>
+        <a href="{% url 'manager:add_doctor' %}" style="float: right;" class="btn-outline-primary btn button"> Add doctor</a>
+        <ul class="list-group text-center justify-content-center">
+            {% for doctor in doctors %}
+                <li class="list-group-item"> {{ doctor.user.first_name }} {{ doctor.user.first_name }} | {{ doctor.user.email }} | {{ doctor.age }} {{ doctor.specialty }}
+                    <a href="{% url 'manager:delete_doctor' doctor_pk=doctor.pk %}" style="float: right;border-radius: 0" class="btn-outline-danger btn button">Remove doctor</a>
+                    <a href="{% url 'manager:edit_doctor' doctor_pk=doctor.pk%}" style="float: right; border-radius: 0" class="btn-outline-primary btn button"> Edit doctor</a>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <h3>There are no Doctors to show</h3>
+    {% endif %}
+    </main>
+{% endblock %}

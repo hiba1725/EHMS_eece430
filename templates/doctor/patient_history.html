@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block styles %}
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+<link rel="stylesheet" type="text/css" href="{% static 'doctor/search_doctors.css' %}">
+{% endblock %}
+{% block content %}
+<div style="padding: 2px; text-align: center; color: rgb(67, 136, 204);">
+    <p></br></p>
+    <h1><strong>Patient Medical Records: <br></strong></h1>
+    <p></br></p>
+</div>
+{% csrf_token %}
+{% if history %}
+<div class="doctors">
+    <div class="row">
+        {% for his in history %}
+        <div class="col-md-12 d-flex justify-content-center col-md-offset-1">
+            <div class="col-md-12 doctor-info">
+                <p>
+                    <span class="label">doctorName: </span> {{ his.name }} <br>
+                    <span class="label">Date: </span> {{ his.date }}<br>
+                    <span class="label">Problem: </span>{{ his.problem }} <br>
+                    <span class="label">Analysis: </span>{{ his.analysis }} <br>
+                    <span class="label">Medications: </span>{{ his.medication }} <br>
+                    <!-- <button class="btn btn-lg btn-outline-primary login-btn" type="submit">Chat</button> -->
+                </p>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endif %}
+{% endblock %}

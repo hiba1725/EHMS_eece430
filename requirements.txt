@@ -1,2 +1,6 @@
+datetime
+django
 django-private-chat
+apscheduler
 websockets
+Pillow

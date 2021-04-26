@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block styles %}
+<link rel="stylesheet" type="text/css" href="{% static 'doctor/signup.css' %}">
+{% endblock %}
+{% block content %}
+
+{% include 'partials/_sidebar.html' %}
+
+<div class="col-sm-4 col-md-5 signup-main">
+    <div class="row text-center justify-content-center">
+        <h3 class="text-center signup-title"><strong>Add another Manager</strong></h3>
+    </div>
+    <form class="form" action="" method="post">
+        {% csrf_token %}
+        <div class="form-row">
+            <div class="col-xs-6 col-md-6 pt-3">
+                <input class="form-control input-lg signup-input" name="first_name" placeholder="First Name">
+            </div>
+            <div class="col-xs-6 col-md-6 pt-3">
+                <input class="form-control input-lg signup-input" name="last_name" placeholder="Last Name">
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="col-xs-6 col-md-6 pt-1">
+                <input class="form-control input-lg signup-input" name="username" placeholder="Username">
+            </div>
+            <div class="col-xs-6 col-md-6 pt-1">
+                <input class="form-control input-lg signup-input" name="email" placeholder="Email">
+            </div>
+        </div>
+        <div class="form-row pt-1">
+            <div class="col-md">
+                <input class="form-control input-lg signup-input" type="password" name="password" placeholder="Password">
+            </div>
+        </div>
+        <div class="form-row pt-1">
+            <div class="col-md">
+                <input class="form-control input-lg signup-input" type="password" name="passwordConfirm" placeholder="Confirm Password">
+            </div>
+        </div>
+        <br/>
+        <button class="btn btn-lg btn-primary signup-btn"  style="" type="submit">Add Manager</button>
+    </form>
+</div>
+
+<div class="col-sm-4 col-md signup-error">
+
+    {% if user_form_error %}
+        <div class="alert alert-danger text-center">
+            {{ user_form_error }}
+        </div>
+    {% endif %}
+    {% if other_errors %}
+        <div class="alert alert-danger text-center">
+            {{ other_errors }}
+        </div>
+    {% endif %}
+</div>
+
+{% endblock %}

@@ -5,11 +5,11 @@
 {% endblock %}
 {% block content %}
 
-<div class="col-sm-4 col-md"></div>
+{% include 'partials/_sidebar.html' %}
 
 <div class="col-sm-4 col-md-5 signup-main">
     <div class="row text-center justify-content-center">
-        <h3 class="text-center signup-title"><strong>Sign Up as A Doctor</strong></h3>
+        <h3 class="text-center signup-title"><strong>Add Doctor</strong></h3>
     </div>
     <form class="form" action="" method="post">
         {% csrf_token %}
@@ -75,7 +75,7 @@
             </label>
         </div>
         <br/>
-        <button class="btn btn-lg btn-primary signup-btn"  style="" type="submit">Sign Up</button>
+        <button class="btn btn-lg btn-primary signup-btn"  style="" type="submit">Add Doctor</button>
     </form>
 </div>
 

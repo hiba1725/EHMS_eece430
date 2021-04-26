@@ -3,40 +3,40 @@
 {% load i18n %}
 {% block styles %}
     {{ block.super }}
-    <link href="{% static 'css/django_private_chat.css' %}" rel="stylesheet" type="text/css" media="all">
     <style>
-        .container {
-            max-width: 800px;
+        #container {
+            width: auto;
+            margin: 0 auto;
+            display: flex;
+        }
+        @media (max-width: 600px) {
+            #container {
+                display: flex;
+                flex-direction: column;
+            }
         }
 
-        .messages-container {
-            height: 400px;
-            position: relative;
-            width: 100%;
-            border: 1px solid rgb(135, 179, 222);
-            border-radius: 6px;
+        .box {
+            flex: auto;
+            margin: 20px;
+            margin-top: 40px;
+            background-color: white;
+            border: 1pt solid rgb(236, 236, 236);
+            padding: 60px;
+            text-align: center;
+            height: max-content;
+        }.box2 {
+            flex: auto;
+            margin: 20px;
+            margin-top: 40px;
+            background-color: white;
+            border: 1pt solid rgb(236, 236, 236);
+            padding-left: 60px;
+            padding-right: 60px;
+            padding-top: 20px;
+            height: max-content;
         }
-
-        .messages {
-            box-sizing: border-box;
-            padding: 20px;
-            overflow: auto;
-            height: 399px;
-        }
-
-        #messages::-webkit-scrollbar {
-            width: 12px;    
-        }   
-        #messages::-webkit-scrollbar-track {
-            background: lightgray;
-            border-radius: 12px;
-        }
-        #messages::-webkit-scrollbar-thumb {
-            background-color: rgb(135, 179, 222);
-            border-radius: 20px;
-        }
-
-        .user-list {
+        /*.user-list {
             position: absolute;
             top: 0;
             right: 0;
@@ -53,22 +53,69 @@
             display: block;
             color: orange;
             font-weight: bold;
+        }*/
+
+        :root {
+            --body-bg: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            --msger-bg: #fff;
+            --left-msg-bg: #ececec;
+            --right-msg-bg: #579ffb;
+        }
+        .container {
+            max-width: 800px;
+        }
+
+        .messages-container {
+            height: 400px;
+            position: relative;
+            width: 100%;
+        }
+
+        .messages {
+            background: var(--msger-bg);
+            /*background-image: url('https://i.redd.it/qwd83nc4xxf41.jpg');*/
+            border: 1px solid rgb(135, 179, 222);
+            border-radius: 6px;
+            box-sizing: border-box;
+            padding: 20px;
+            overflow: auto;
+            height: 399px;
+        }
+        #messages {
+            scrollbar-width: thin;   
+            scrollbar-color: rgb(135, 179, 222) lightgray;    
+        }
+        #messages::-webkit-scrollbar {
+            width: 6px;    
+        }   
+        #messages::-webkit-scrollbar-track {
+            background: lightgray;
+            border-radius: 12px;
+        }
+        #messages::-webkit-scrollbar-thumb {
+            background-color: rgb(135, 179, 222);
+            border-radius: 20px;
         }
 
         .username {
             font-weight: bold;
-            color: darkblue;
+            color: white;
+            display: block;
+            padding-left:2px;
+            padding-top: 2px;
+        }.opponent .username {
+            font-weight: bold;
+            color: black;
             display: block;
             padding-left:2px;
             padding-top: 2px;
         }
 
         .timestamp {
-            font-size: 12px;
-            color: lightgray;
-        }
-        .opponent .timestamp {
-            font-size: 12px;
+            font-size: 10px;
+            color: white;
+        }.opponent .timestamp {
+            font-size: 10px;
             color: #666666;
         }
 
@@ -106,35 +153,41 @@
         }
 
         .msg-read {
-            background-color: rgb(70, 116, 234);
-            border-radius: 12px 12px 3px 12px;
+            background: var(--right-msg-bg);
+            color: #fff;
+            border-radius: 12px 12px 0px 12px;
             margin: 5px;
             width: fit-content;
-            padding-left: 5px;
-            padding-right: 5px;
+            max-width: 300px;
+            padding-left: 10px;
+            padding-right: 10px;
             float: right;
             clear: both;
         }
 
         .msg-unread {
-            background-color: rgb(70, 116, 234);
-            border-radius: 12px 12px 3px 12px;
+            background: var(--right-msg-bg);
+            color: #fff;
+            border-radius: 12px 12px 0px 12px;
             margin: 5px;
             width: fit-content;
-            padding-left: 5px;
-            padding-right: 5px;
+            max-width: 300px;
+            padding-left: 10px;
+            padding-right: 10px;
             float: right;
             clear: both;
         }
 
         .opponent {
-            background-color: lightgray;
+            background: var(--left-msg-bg);
+            border-radius: 12px 12px 12px 3px;
+            color: black;
             width: fit-content;
-            padding-left: 5px;
-            padding-right: 5px;
+            max-width: 300px;
+            padding-left: 10px;
+            padding-right: 10px;
             float: left;
             clear: both;
-            border-radius: 12px 12px 12px 3px;
         }
 
         .timestamp {
@@ -145,81 +198,62 @@
 
 {% block content %}
     <input id="owner_username" type="hidden" value="{{ request.user.username }}">
-    <div class="container">
-        <div class="col-md-3">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h3 class="panel-title">{% trans "Chat list" %}</h3>
-                </div>
-                <div class="panel-body">
-                    <div class="user-list-div">
-                        <ul style="list-style-type: none;">
-                            {% for dialog in object_list %}
-                                <li>
-                                    {% if dialog.owner == request.user %}
-                                        {% with dialog.opponent.username as username %}
-                                            <a href="{% url 'dialogs_detail' username %}" id="user-{{ username }}"
-                                               class="btn btn-danger">{% trans "Chat with" %} {{ username }}</a>
-                                        {% endwith %}
-                                    {% else %}
-                                        {% with dialog.owner.username as username %}
-                                            <a href="{% url 'dialogs_detail' username %}" id="user-{{ username }}"
-                                               class="btn btn-danger">{% trans "Chat with" %} {{ username }}</a>
-                                        {% endwith %}
-                                    {% endif %}
-                                </li>
-                            {% endfor %}
-                        </ul>
+    <div id="container">
+        <!-- <div class="box">
+            <h6>Chatting with</h6>
+            <br/>
+            <div id="dr-pic">
+                <img src="https://st2.depositphotos.com/3889193/7657/i/950/depositphotos_76570869-stock-photo-confident-female-doctor-posing-in.jpg" alt="Doctor's Picture" width = "200" height = "200" style="object-fit: cover; border-radius: 50%;">
+            </div>
+            <h4>Dr. {{doctor.user.first_name}} {{doctor.user.last_name}}</h4>
+            <h5>{{ doctor.specialty }}</h5>
+        </div>  -->    
+        <div class="box2"><div class="row">
+            <!-- <div class="col-md-3 col-md-offset-9">
+                <span class="pull-right" hidden id="typing-text">
+                    <strong>{{ opponent_username }} {% trans "is typing..." %}</strong>
+                </span>
+            </div> -->
+            <p style="font-size: 15pt"> 
+                {{ opponent_username }} &nbsp;
+                <span class="text-success" id="online-status" style="display: none; font-size: smaller;">({% trans "Online" %})</span>
+                <span class="text-danger" id="offline-status" style="display: none; font-size: smaller;">({% trans "Offline" %})</span>
+            </p>
+
+            <div class="messages-container">
+                <div id="messages" class="messages">
+                    {% for msg in active_dialog.messages.all %}
+                        <div class="row  {% if msg.read %}msg-read{% else %}msg-unread{% endif %} {% if msg.sender != request.user %}opponent{% endif %}"
+                             data-id="{{ msg.id }}">
+                            <p class="{% if msg.sender == request.user %}pull-left{% else %}pull-right{% endif %}">
+                                <span class="username">{{ msg.sender.username }}</span>
+                                {{ msg.text }}
+                                <span class="timestamp">&ndash; 
+                                    <span data-livestamp="{{ msg.get_formatted_create_datetime }}">
+                                        {{ msg.get_formatted_create_datetime }}
+                                    </span>
+                                </span>
+                            </p>
+                        </div>
+                    {% endfor %}
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="col-md-9">
-            <div class="well well-lg">
-                <div class="row">
-                    <div class="col-md-3 col-md-offset-9">
-                    <span class="pull-right" hidden id="typing-text">
-                        <strong>{{ opponent_username }} {% trans "is typing..." %}</strong>
-                    </span>
+
+            <div class="row">
+                <div class="add-message">
+                    <div class="form-group">
+                    <textarea id="chat-message" class="form-control message"
+                              placeholder="{% trans 'Write a message' %}"></textarea>
                     </div>
-                    <p style="font-size: 15pt">
-                        {{ opponent_username }} &nbsp; &nbsp;
-                    </p>
-                    <p class="text-success" id="online-status" style="display: none">({% trans "Online" %})</p>
-                    <p class="text-danger" id="offline-status" style="display: none">({% trans "Offline" %})</p>
 
-                    <div class="messages-container">
-                        <div id="messages" class="messages">
-                            {% for msg in active_dialog.messages.all %}
-                                <div class="row  {% if msg.read %}msg-read{% else %}msg-unread{% endif %} {% if msg.sender != request.user %}opponent{% endif %}"
-                                     data-id="{{ msg.id }}">
-                                    <p class="{% if msg.sender == request.user %}pull-left{% else %}pull-right{% endif %}">
-                                        <span class="username">{{ msg.sender.username }}</span>
-                                        {{ msg.text }}
-                                        <span class="timestamp">&ndash; <span
-                                                data-livestamp="{{ msg.get_formatted_create_datetime }}">{{ msg.get_formatted_create_datetime }}</span></span>
-                                    </p>
-                                </div>
-                            {% endfor %}
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="add-message">
-                        <div class="form-group">
-                        <textarea id="chat-message" class="form-control message"
-                                  placeholder="{% trans 'Write a message' %}"></textarea>
-                        </div>
-
-                        <div class="form-group clearfix">
-                            <input id="btn-send-message" type="submit" class="btn btn-primary pull-right send-message"
-                                   style="margin-left: 10px;" value="{% trans 'Send' %}"/>
-                        </div>
+                    <div class="form-group clearfix">
+                        <input id="btn-send-message" type="submit" class="btn btn-primary pull-right send-message"
+                               style="margin-left: 10px;" value="{% trans 'Send' %}"/>
                     </div>
                 </div>
             </div>
-        </div>
+        </div>    
     </div>
 {% endblock %}
 
@@ -278,13 +312,15 @@
                 var msg_class = "";
                 if (packet['sender_name'] == $("#owner_username").val()) {
                     msg_class = "pull-left";
+                    opp_send = ""
                 } else {
                     msg_class = "pull-right";
+                    opp_send = "opponent"
                 }
                 var msgElem =
-                    $('<div class="row msg-unread" data-id="' + packet.message_id + '">' +
+                    $('<div class="row msg-unread '+opp_send+'" data-id="' + packet.message_id + '">' +
                         '<p class="' + msg_class + '">' +
-                        '<span class="username">' + packet['sender_name'] + ': </span>' +
+                        '<span class="username">' + packet['sender_name'] + '</span>' +
                         packet['message'] +
                         ' <span class="timestamp">&ndash; <span data-livestamp="' + packet['created'] + '"> ' + packet['created'] + '</span></span> ' +
                         '</p> ' +
@@ -294,8 +330,8 @@
             }
 
             function scrollToLastMessage() {
-                var $msgs = $('#messages');
-                $msgs.animate({"scrollTop": $msgs.prop('scrollHeight')})
+                var chat = document.getElementById('messages');
+                chat.scrollTop = chat.scrollHeight - chat.clientHeight;
             }
 
             function generateMessage(context) {
@@ -422,7 +458,7 @@
                             }
                             break;
                         case "opponent-typing":
-                            var typing_elem = $('#typing-text');
+                            var typing_elem = document.getElementByID('typing-text');
                             if (!typing_elem.is(":visible")) {
                                 typing_elem.fadeIn(500);
                             } else {

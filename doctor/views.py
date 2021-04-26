@@ -43,7 +43,7 @@ def signup(request):
             return redirect('/')
         else:
             return render(request, 'doctor/signup.html',
-                          {'user_form_error': user_form.errors, 'patient_form_error': doctor_form.errors})
+                          {'user_form_error': user_form.errors, 'doctor_form': doctor_form.errors})
     else:
         return render(request, 'doctor/signup.html')
 
@@ -108,7 +108,10 @@ def dashboard(request):
         for app in appointments:
             iso = app.date.isocalendar()
             if app.date.year == today.year and iso[1] == week_number+(today.isocalendar()[2]//7): # if sunday, we want next week
-                week_appointment[iso[2]] = [app.slot, f"{app.patient.user.first_name} {app.patient.user.last_name}"]
+                if iso[2] not in week_appointment:
+                    week_appointment[iso[2]] = [[app.slot, f"{app.patient.user.first_name} {app.patient.user.last_name}"]]
+                else:
+                    week_appointment[iso[2]].append([app.slot, f"{app.patient.user.first_name} {app.patient.user.last_name}"])
             if app.done:
                 done_app += 1
             else:
@@ -121,6 +124,18 @@ def dashboard(request):
                        'total_app': len(appointments),
                        'form_hidden': form_hidden
                        })
+    return redirect('/doctor/login/')
+
+def add_report(request, slot, patient_pk):
+    if request.user.is_authenticated and request.user.doctor.role =="Doctor":
+        appt = Appointment.objects.filter(doctor = request.user.pk, patient = patient_pk, slot = slot)
+        if request.POST:
+            for i in appt:
+                i.problem = request.POST.get('problem')
+                i.analysis = request.POST.get('analysis')
+                i.medications = request.POST.get('medications')
+                i.save()
+        return render(request, 'doctor/add_report.html')
     return redirect('/doctor/login/')
 
 
@@ -144,12 +159,12 @@ def edit_account_info(request):
                 else:
                     return render(request, 'doctor/edit_account_info.html',
                                   {'user_form_error': user_form.errors,
-                                   'patient_form_error': doctor_form.errors,
+                                   'doctor_form_error': doctor_form.errors,
                                    'other_errors': "Wrong password"})
                 return redirect('/doctor/account')
             else:
                 return render(request, 'doctor/edit_account_info.html',
-                              {'user_form_error': user_form.errors, 'patient_form_error': doctor_form.errors})
+                              {'user_form_error': user_form.errors, 'doctor_form_error': doctor_form.errors})
         return render(request, 'doctor/edit_account_info.html')
     return redirect('/doctor/login/')
 
@@ -179,6 +194,8 @@ def edit_password(request):
     return redirect('/doctor/login/')
 
 def search_doctors(request):
+    queryset = Doctor.objects.none()
+    queryset = queryset.values_list()
     if (request.POST):
         val = request.POST.get("q")
         if val:
@@ -206,11 +223,7 @@ def search_doctors(request):
                     except Exception as e:
                         print(e)
                 queryset = doctors
-    else:
-        queryset = Doctor.objects.none()
-        queryset = queryset.values_list()
     return render(request, 'doctor/search_doctors.html', {'queryset':queryset})
-
     
 
 def search_patient(request):
@@ -237,6 +250,28 @@ def search_patient(request):
         return render(request, 'doctor/search_patient.html', {'users':patients})
     return redirect('/doctor/login/')
 
+def patient_history(request, patient_pk):
+    if request.user.is_authenticated and request.user.doctor.role == "Doctor":
+        query = Appointment.objects.filter(patient = patient_pk).order_by('-date')
+        history = []
+        for q in query:
+            appts = {}
+            appts['name'] = q.doctor.user.username
+            appts['date'] = q.date
+            appts['problem'] = q.problem
+            appts['analysis'] = q.analysis
+            appts['medication'] = q.medications
+            history.append(appts)
+        return render(request, 'doctor/patient_history.html', {'history': history})
+    return redirect('/doctor/login/')
 
 def patient_profile(request):
     pass
+
+
+def delete_doctor(request):
+    if request.user.is_authenticated and request.user.doctor.role == "Doctor":
+        user = User.objects.filter(pk=request.user.pk)
+        user.delete()
+        return redirect('/')
+    return redirect('/')

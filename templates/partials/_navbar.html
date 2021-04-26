@@ -64,14 +64,25 @@
                             <a class="nav-link" href="{%  url 'customer:logout' %}"><strong>Logout</strong></a>
                         </li>
                     </ul>
-                {% endif %}
-                {% if user.doctor.role == 'Doctor' %}
+                {% elif user.doctor.role == 'Doctor' %}
                     <ul class="navbar-nav">
                         <li class ="nav-item">
                             <a class="nav-link" href="{%  url 'doctor:dashboard' %}">Dashboard</a>
                         </li>
                         <li class ="nav-item">
                             <a class="nav-link" href="{%  url 'doctor:logout' %}"><strong>Logout</strong></a>
+                        </li>
+                    </ul>
+                {% elif user.manager.role == 'Manager' %}
+                    <ul class="navbar-nav">
+                        <li class ="nav-item">
+                            <a class="nav-link" href="{%  url 'manager:get_report' %}">Dashboard</a>
+                        </li>
+                        <li class ="nav-item">
+                            <a class="nav-link" href="{%  url 'manager:add_manager' %}">Add Manager</a>
+                        </li>
+                        <li class ="nav-item">
+                            <a class="nav-link" href="{%  url 'manager:logout_manager' %}"><strong>Logout</strong></a>
                         </li>
                     </ul>
                 {% endif %}

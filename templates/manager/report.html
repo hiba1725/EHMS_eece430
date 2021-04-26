@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block styles %}
+{% endblock %}
+{% block content %}
+    {% include 'partials/_sidebar.html' %}
+    <div class="card-deck" style="margin: 20px">
+        <div class="card bg-primary" style="border: none">
+            <div class="card-body text-center" style="background-color: rgb(67, 136, 204); color: white; border: none">
+                <h4 class="card-title">Total Number of Patients</h4>
+                <p class="card-text">{{ num_patients}}</p>
+            </div>
+        </div>
+        <div class="card bg-primary" style="border: none">
+            <div class="card-body text-center" style="background-color: rgb(67, 136, 204); color: white; border: none">
+                <h4 class="card-title">Total Number of Doctors</h4>
+                <p class="card-text">{{ num_doctors }}</p>
+            </div>
+        </div>
+        <div class="card bg-primary" style="border: none">
+            <div class="card-body text-center" style="background-color: rgb(67, 136, 204); color: white; border: none">
+                <h4 class="card-title">Number of Appointments this month</h4>
+                <p class="card-text">{{ num_appointments_month}}</p>
+            </div>
+        </div>
+    </div>
+{% endblock %}

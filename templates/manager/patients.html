@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block styles %}
+{% endblock %}
+{% block content %}
+    {% include 'partials/_sidebar.html' %}
+    <main class="col bg-faded py-3 justify-content-center">
+    {% if patients %}
+        <h2>Patients</h2>
+        <a href="{% url 'manager:add_patient' %}" style="float: right;" class="btn-outline-primary btn button"> Add patient</a>
+        <ul class="list-group text-center justify-content-center">
+            {% for patient in patients %}
+                <li class="list-group-item"> {{ patient.user.first_name }} {{ patient.user.first_name }} | {{ patient.user.email }} | {{ patient.age }}
+                    <a href="{% url 'manager:delete_patient' patient_pk=patient.pk %}" style="float: right;border-radius: 0" class="btn-outline-danger btn button">Remove patient</a>
+                    <a href="{% url 'manager:edit_patient' patient_pk=patient.pk%}" style="float: right; border-radius: 0" class="btn-outline-primary btn button"> Edit patient</a>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <h3>There are no patients to show</h3>
+    {% endif %}
+    </main>
+{% endblock %}

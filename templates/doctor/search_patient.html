@@ -25,7 +25,6 @@
             </div>
         </div>
     </div>
-
     <div class="row w-100">
         {% if users %}
             <div class="patients">
@@ -40,6 +39,9 @@
                                 <span class="label">Phone number: </span>{{ user.patient.phone_number }} <br>
                                 <span class="label">Address: </span>{{ user.patient.address }} <br>
                             </p>
+                            <a href="{% url 'doctor:search_history' user.pk %}" style="float: right;" class="btn-outline-primary btn button">
+                                Check Medical History
+                            </a>
                         </div>
                         </div>
                     {% endfor %}
@@ -47,5 +49,6 @@
             </div>
         {% endif %}
     </div>
+
 </div>
 {% endblock %}
