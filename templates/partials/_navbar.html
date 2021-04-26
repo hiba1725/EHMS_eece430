@@ -35,6 +35,7 @@
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".collapsibleNavbar">
             <span class="navbar-toggler-icon"></span>
         </button>
+        {%if user.manager.role != "Manager"%}
         <div class="collapse navbar-collapse collapsibleNavbar">
             <ul class="navbar-nav">
                 <li class="nav-item">
@@ -51,8 +52,9 @@
                 </li>
             </ul>
         </div>
+        {%endif%}
         <div class="justify-content-center"> 
-            <a class="navbar-brand" href="/">Clinic X</a>
+            <a class="navbar-brand" href="#">Clinic X</a>
         </div>
         <div class="collapse navbar-collapse collapsibleNavbar justify-content-end">
             {% if user.is_authenticated  %}

@@ -1,9 +1,78 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block styles %}
+<style>
+    .left-bar {
+        border: 1pt solid rgb(236, 236, 236);
+        background-color: white;
+        padding: 30px;
+    }
+
+    .right-bar {
+        border: 1pt solid rgb(236, 236, 236);
+        background-color: white;
+        padding: 30px;
+    }
+
+    .active {
+        background-color: rgb(67, 136, 204) !important;
+        border-color: rgb(67, 136, 204) !important;
+    }
+    
+    .section-divider {
+        color: gray;
+    }
+
+    hr {
+        margin-top: 0px;
+    }
+
+    .edit {
+        color: rgb(67, 136, 204) !important;
+        border-color: rgb(67, 136, 204) !important;
+    }
+    .edit:hover{
+        color: white !important;
+        background-color: rgb(67, 136, 204) !important;
+    }
+
+</style>
 {% endblock %}
 {% block content %}
-    {% include 'partials/_sidebar.html' %}
+<div class="container-fluid" style="margin: 20px;">
+    <div class="row">
+        <div class="col-3 left-bar">
+            <h4>Welcome Manager {{user.username}}</h4>
+            <br/>
+            <ul class="list-group">
+                <a href = "/get_report/" class="list-group-item list-group-item-action active">
+                    Reports
+                </a>
+                <a href = "/doctors/" class="list-group-item list-group-item-action">
+                    Doctors
+                </a>
+                <a href = "/patients/" class="list-group-item list-group-item-action">
+                    Patients
+                </a>
+                <a href = "/appointments/" class="list-group-item list-group-item-action">
+                    Appointments
+                </a>
+            </ul>
+        </div>
+        <div class="col right-bar" style="margin-left: 20px;">
+            <div class="row">
+                <div class="col">
+                    <h2>Reports</h2>
+                </div>
+            </div>
+            <div class="row">
+
+            </div>
+        </div>
+    </div>
+
+</div>
+    <!-- {% include 'partials/_sidebar.html' %}
     <div class="card-deck" style="margin: 20px">
         <div class="card bg-primary" style="border: none">
             <div class="card-body text-center" style="background-color: rgb(67, 136, 204); color: white; border: none">
@@ -23,5 +92,5 @@
                 <p class="card-text">{{ num_appointments_month}}</p>
             </div>
         </div>
-    </div>
+    </div> -->
 {% endblock %}
