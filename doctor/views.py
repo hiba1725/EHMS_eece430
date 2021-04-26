@@ -22,7 +22,7 @@ def signup(request):
         user_form = UserForm(request.POST)
         doctor_form = DoctorForm(request.POST)
         if user_form.is_valid() and doctor_form.is_valid():
-            if request.POST["age"]<=request.POST["years_of_experience"]:
+            if int(request.POST["age"]) <= int(request.POST["years_of_experience"]):
                 return render(request, 'doctor/signup.html', {'other_errors': ErrorDict({"Years of Experience": ErrorDict({'': "Years of experience cannot be equal or greater than age"})})})
             user = user_form.save(commit=False)
             password = request.POST["password"]
@@ -128,6 +128,7 @@ def dashboard(request):
                        })
     return redirect('/doctor/login/')
 
+
 def add_report(request, slot, patient_pk):
     if request.user.is_authenticated and request.user.doctor.role =="Doctor":
         appt = Appointment.objects.filter(doctor = request.user.pk, patient = patient_pk, slot = slot)
@@ -151,6 +152,8 @@ def edit_account_info(request):
                 password = request.POST['password']
                 user = authenticate(username=username, password=password)
                 if user is not None:
+                    if int(request.POST["age"]) <= int(request.POST["years_of_experience"]):
+                        return render(request, 'doctor/edit_account_info.html', {'other_errors': ErrorDict({"Years of Experience": ErrorDict({'': "Years of experience cannot be equal or greater than age"})})})
                     user = user_form.save(commit=False)
                     user.set_password(request.POST["password"])
                     user.save()
@@ -162,8 +165,8 @@ def edit_account_info(request):
                     return render(request, 'doctor/edit_account_info.html',
                                   {'user_form_error': user_form.errors,
                                    'doctor_form_error': doctor_form.errors,
-                                   'other_errors': "Wrong password"})
-                return redirect('/doctor/account')
+                                   'other_errors': ErrorDict({"Password": ErrorDict({'': "Wrong Password"})})})
+                return redirect('/doctor/dashboard/')
             else:
                 return render(request, 'doctor/edit_account_info.html',
                               {'user_form_error': user_form.errors, 'doctor_form_error': doctor_form.errors})
@@ -185,15 +188,16 @@ def edit_password(request):
                     return render(request, 'doctor/edit_password.html', {'errors': e.messages})
                 passwordnew2 = request.POST["passwordnew2"]
                 if passwordnew1 != passwordnew2:
-                    return render(request, 'doctor/edit_password.html', {'errors': 'Passwords do not match'})
+                    return render(request, 'doctor/edit_password.html', {'errors': ErrorDict({"Password": ErrorDict({'': "Passwords do not match"})})})
                 user.set_password(passwordnew1)
                 user.save()
                 login(request, user)
-                return redirect('/doctor/account')
+                return redirect('/doctor/dashboard/')
             else:
-                return render(request, 'doctor/edit_password.html', {'errors': 'Old password is not correct'})
+                return render(request, 'doctor/edit_password.html', {'errors': ErrorDict({"Password": ErrorDict({'': "Old password is incorrect"})})})
         return render(request, 'doctor/edit_password.html')
     return redirect('/doctor/login/')
+
 
 def search_doctors(request):
     queryset = Doctor.objects.none()
@@ -252,6 +256,7 @@ def search_patient(request):
         return render(request, 'doctor/search_patient.html', {'users':patients})
     return redirect('/doctor/login/')
 
+
 def patient_history(request, patient_pk):
     if request.user.is_authenticated and request.user.doctor.role == "Doctor":
         query = Appointment.objects.filter(patient = patient_pk).order_by('-date')
@@ -266,6 +271,7 @@ def patient_history(request, patient_pk):
             history.append(appts)
         return render(request, 'doctor/patient_history.html', {'history': history})
     return redirect('/doctor/login/')
+
 
 def patient_profile(request):
     pass
