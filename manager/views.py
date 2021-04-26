@@ -5,6 +5,7 @@ from django.shortcuts import get_object_or_404, render, redirect
 from django.urls import reverse, reverse_lazy
 from django.contrib.auth import authenticate, login, logout, password_validation
 from django.contrib.auth.decorators import login_required
+from django.forms.models import model_to_dict
 
 from .forms import ManagerForm, UserForm
 from .models import Manager, Report
@@ -81,7 +82,7 @@ def add_manager(request):
 				manager.role = "Manager"
 				manager.save()
 				login(request, user)
-				return redirect('/manager/get_reports')
+				return redirect('/manager/get_report')
 			else:
 				return render(request, 'manager/add_manager.html',
 							  {'user_form_error': user_form.errors})
@@ -113,7 +114,7 @@ def add_doctor(request):
 				doctor.user = user
 				doctor.role = "Doctor"
 				doctor.save()
-				return redirect('/manager/get_reports')
+				return redirect('/manager/get_report')
 			else:
 				return render(request, 'manager/add_doctor.html',
 							  {'user_form_error': user_form.errors, 'doctor_form': manager_form.errors})
@@ -146,7 +147,7 @@ def add_patient(request):
 				patient.user = user
 				patient.role = "Patient"
 				patient.save()
-				return redirect('/manager/get_reports')
+				return redirect('/manager/get_report')
 			else:
 				return render(request, 'manager/add_patient.html',
 							  {'user_form_error': user_form.errors, 'patient_form_error': patient_form.errors})
@@ -172,7 +173,7 @@ def edit_doctor(request, doctor_pk):
 					doctor = doctor_form.save(commit=False)
 					doctor.user = user
 					doctor.save()
-					return redirect('/manager/get_reports')
+					return redirect('/manager/get_report')
 				else:
 					return render(request, 'manager/edit_doctor.html',
 								{'user_form_error': user_form.errors,
@@ -204,7 +205,7 @@ def edit_patient(request, patient_pk):
 					patient = patient_form.save(commit=False)
 					patient.user = user
 					patient.save()
-					return redirect('/manager/get_reports')
+					return redirect('/manager/get_report')
 				else:
 					return render(request, 'manager/edit_patient.html',
 								{'user_form_error': user_form.errors,
@@ -221,7 +222,7 @@ def edit_patient(request, patient_pk):
 def delete_doctor(request, doctor_pk):
 	if request.user.is_authenticated and request.user.manager.role == "Manager":
 		doctor = Doctor.objects.filter(pk=doctor_pk)
-		doctor.delete()
+		doctor.user.delete()
 		return redirect('/manager/doctors')
 	return redirect('/')
 
@@ -229,7 +230,7 @@ def delete_doctor(request, doctor_pk):
 def delete_patient(request, patient_pk):
 	if request.user.is_authenticated and request.user.manager.role == "Manager":
 		patient = Patient.objects.filter(pk=patient_pk)
-		patient.delete()
+		patient.user.delete()
 		return redirect('/manager/patients')
 	return redirect('/')
 
@@ -265,6 +266,9 @@ def get_report(request):
 def doctors(request):
 	if request.user.is_authenticated and request.user.manager.role == "Manager":
 		doctors = Doctor.objects.filter(role="Doctor").exclude(user__username="admin")
+		for doctor in doctors:
+			num_appointment = len(Appointment.objects.filter(doctor=doctor))
+			doctor.num_appointment = num_appointment
 		return render(request, 'manager/doctors.html', {'doctors': doctors})
 	return redirect('/')
 
@@ -272,6 +276,9 @@ def doctors(request):
 def patients(request):
 	if request.user.is_authenticated and request.user.manager.role == "Manager":
 		patients = Patient.objects.filter(role="Patient").exclude(user__username="admin")
+		for patient in patients:
+			num_appointment = len(Appointment.objects.filter(patient=patient))
+			patient.num_appointment = num_appointment
 		return render(request, 'manager/patients.html', {'patients': patients})
 	return redirect('/')
 
