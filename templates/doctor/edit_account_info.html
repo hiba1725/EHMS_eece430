@@ -73,8 +73,9 @@
         <br/>
         <button class="btn btn-lg btn-primary edit-account-btn"  style="" type="submit">Submit Changes</button>
     </form>
-    <h4> To edit your password, click <a href="{% url "doctor:edit_password" %}"> here </a></h4>
-</div>
+    <div class="row text-center justify-content-center">
+        <a href="{% url 'doctor:edit_password' %}" class="edit-password-link">Change password</a>
+    </div></div>
 
 
 <div class="col-sm-4 col-md edit-account-error">

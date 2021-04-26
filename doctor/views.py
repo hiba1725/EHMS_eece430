@@ -185,7 +185,8 @@ def edit_password(request):
                     passwordnew1 = request.POST["passwordnew1"]
                     password_validation.validate_password(passwordnew1)
                 except Exception as e:
-                    return render(request, 'doctor/edit_password.html', {'errors': e.messages})
+                    errAsDict = {'password': ErrorDict({'': '\n'.join(e.messages)})}
+                    return render(request, 'doctor/edit_password.html', {'errors': ErrorDict(errAsDict)})
                 passwordnew2 = request.POST["passwordnew2"]
                 if passwordnew1 != passwordnew2:
                     return render(request, 'doctor/edit_password.html', {'errors': ErrorDict({"Password": ErrorDict({'': "Passwords do not match"})})})
