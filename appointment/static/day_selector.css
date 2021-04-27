@@ -43,7 +43,7 @@ a {
 	margin-bottom: 20px;
 	align-items: center;
 }#dr-pic img{
-	border: 2px solid rgb(67, 136, 204);
+	border: 1px solid rgb(145, 145, 145);
 	height: 200px;
 	width: 200px;
 	margin: 0 auto;
@@ -71,7 +71,7 @@ input[type="date"] {
 
 .btn:hover {
 	background-color: rgb(67, 136, 204);
-	border-color: rgb(67, 136, 204);
+	border-color: rgb(46, 46, 46);
 	color: white;
 }
 

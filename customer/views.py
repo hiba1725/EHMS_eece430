@@ -108,7 +108,7 @@ def add_card(request):
                 card = card_form.save(commit=False)
                 card.patient = request.user.patient
                 card.save()
-                return redirect('/customer/account')
+                return redirect('/customer/account/')
             else:
                 return render(request, 'customer/add_card.html', {'card_form_error': card_form.errors})
         return render(request, 'customer/add_card.html')

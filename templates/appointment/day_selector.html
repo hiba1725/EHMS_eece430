@@ -11,7 +11,11 @@
             <h6>Booking an appointment with</h6>
             <br/>
             <div id="dr-pic">
-                <img src="{{doctor.profile_pic.url}}"" alt="Doctor's Picture" width = "200" height = "200" style="object-fit: cover; border-radius: 50%;">
+                {% if doctor.profile_pic %}
+                <img src="{{doctor.profile_pic.url}}" alt="Doctor's Picture" width = "200" height = "200" style="object-fit: cover; border-radius: 50%;">
+                {% else %}
+                <img src="https://i.imgur.com/VvLqO4z.png" alt="Doctor's Picture" width = "200" height = "200" style="object-fit: cover; border-radius: 50%;">
+                {% endif %}
             </div>
             <h4>Dr. {{doctor.user.first_name}} {{doctor.user.last_name}}</h4>
             <h5>{{ doctor.specialty }}</h5>
