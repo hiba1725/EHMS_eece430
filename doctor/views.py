@@ -145,19 +145,23 @@ def add_report(request, slot, patient_pk):
 def edit_account_info(request):
     if request.user.is_authenticated and request.user.doctor.role == "Doctor":
         if request.POST:
-            user_form = UserForm(request.POST, instance=request.user, )
-            doctor_form = DoctorForm(request.POST, instance=request.user.patient)
+            user_form = UserForm(request.POST, instance=request.user)
+            doctor_form = DoctorForm(request.POST, instance=request.user.doctor)
             if user_form.is_valid() and doctor_form.is_valid():
                 username = request.POST['username']
                 password = request.POST['password']
                 user = authenticate(username=username, password=password)
                 if user is not None:
+                    print('test')
                     if int(request.POST["age"]) <= int(request.POST["years_of_experience"]):
                         return render(request, 'doctor/edit_account_info.html', {'other_errors': ErrorDict({"Years of Experience": ErrorDict({'': "Years of experience cannot be equal or greater than age"})})})
                     user = user_form.save(commit=False)
                     user.set_password(request.POST["password"])
                     user.save()
                     doctor = doctor_form.save(commit=False)
+                    print(doctor.age)
+                    print(doctor.user)
+                    print(doctor.age)
                     doctor.user = user
                     doctor.save()
                     login(request, user)
