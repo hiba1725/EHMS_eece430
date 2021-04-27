@@ -152,16 +152,12 @@ def edit_account_info(request):
                 password = request.POST['password']
                 user = authenticate(username=username, password=password)
                 if user is not None:
-                    print('test')
                     if int(request.POST["age"]) <= int(request.POST["years_of_experience"]):
                         return render(request, 'doctor/edit_account_info.html', {'other_errors': ErrorDict({"Years of Experience": ErrorDict({'': "Years of experience cannot be equal or greater than age"})})})
                     user = user_form.save(commit=False)
                     user.set_password(request.POST["password"])
                     user.save()
                     doctor = doctor_form.save(commit=False)
-                    print(doctor.age)
-                    print(doctor.user)
-                    print(doctor.age)
                     doctor.user = user
                     doctor.save()
                     login(request, user)
