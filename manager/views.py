@@ -163,25 +163,12 @@ def edit_doctor(request, doctor_pk):
 			user_form = UserForm(request.POST, instance=doctor_info.user)
 			doctor_form = DoctorForm(request.POST, instance=doctor_info)
 			if user_form.is_valid() and doctor_form.is_valid():
-				username = request.POST['username']
-				password = request.POST['password']
-				user = authenticate(username=username, password=password)
-				if user is not None:
-					if int(request.POST["age"]) <= int(request.POST["years_of_experience"]):
-						return render(request, 'manager/edit_doctor.html', {'other_errors': ErrorDict({"Years of Experience": ErrorDict({'': "Years of experience cannot be equal or greater than age"})})})
-					user = user_form.save(commit=False)
-					user.set_password(request.POST["password"])
-					user.save()
-					doctor = doctor_form.save(commit=False)
-					doctor.user = user
-					doctor.save()
-					return redirect('/manager/get_report')
-				else:
-					return render(request, 'manager/edit_doctor.html',
-								{'user_form_error': user_form.errors,
-								'doctor_form_error': doctor_form.errors,
-								'other_errors': ErrorDict({"Password": ErrorDict({'': "Wrong Password"})}),
-								'doctor': doctor_info})
+				if int(request.POST["age"]) <= int(request.POST["years_of_experience"]):
+					return render(request, 'manager/edit_doctor.html', {'other_errors': ErrorDict({"Years of Experience": ErrorDict({'': "Years of experience cannot be equal or greater than age"})})})
+				user = user_form.save(commit=False)
+				user.save(update_fields=['username', 'first_name', 'last_name', 'email'])
+				doctor_form.save()
+				return redirect('/manager/get_report')
 			else:
 				return render(request, 'manager/edit_doctor.html',
 								{'user_form_error': user_form.errors,
@@ -198,23 +185,11 @@ def edit_patient(request, patient_pk):
 			user_form = UserForm(request.POST, instance=patient_info.user)
 			patient_form = PatientForm(request.POST, instance=patient_info)
 			if user_form.is_valid() and patient_form.is_valid():
-				username = request.POST['username']
-				password = request.POST['password']
-				user = authenticate(username=username, password=password)
-				if user is not None:
-					user = user_form.save(commit=False)
-					user.set_password(request.POST["password"])
-					user.save()
-					patient = patient_form.save(commit=False)
-					patient.user = user
-					patient.save()
-					return redirect('/manager/get_report')
-				else:
-					return render(request, 'manager/edit_patient.html',
-								{'user_form_error': user_form.errors,
-								'patient_form_error': patient_form.errors,
-								'other_errors': ErrorDict({"Password": ErrorDict({'': "Wrong Password"})}),
-								'patient': patient_info})
+				user = user_form.save(commit=False)
+				user.save(update_fields=['username', 'first_name', 'last_name', 'email'])
+				patient = patient_form.save(commit=False)
+				patient.save()
+				return redirect('/manager/get_report')
 			else:
 				return render(request, 'manager/edit_patient.html',
 								{'user_form_error': user_form.errors, 'patient_form_error': patient_form.errors, 'patient': patient_info})
