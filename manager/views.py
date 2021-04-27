@@ -118,7 +118,7 @@ def add_doctor(request):
 				return redirect('/manager/get_report')
 			else:
 				return render(request, 'manager/add_doctor.html',
-							  {'user_form_error': user_form.errors, 'doctor_form': manager_form.errors})
+							  {'user_form_error': user_form.errors, 'doctor_form_error': doctor_form.errors})
 		else:
 			return render(request, 'manager/add_doctor.html')
 	return redirect('/')

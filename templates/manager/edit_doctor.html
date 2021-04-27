@@ -2,7 +2,7 @@
 {% load static %}
 {% block styles %}
 <style>
-    .signup-main{
+    .edit-account-main{
         margin-top: 40px;
         padding: 20px 80px;
         background-color: white;
@@ -10,12 +10,12 @@
         border: 1pt solid rgb(236, 236, 236);
     }
     
-    .signup-title{
+    .edit-account-title{
         margin: 30px;
         color: rgb(67, 136, 204);
     }
     
-    .signup-btn{
+    .edit-account-btn{
         width: 100%;
         margin: 30px 0 10px 0;
         padding: 12px;
@@ -24,12 +24,12 @@
         border-color: rgb(67, 136, 204) !important;
     }
     
-    .signup-btn:hover{
+    .edit-account-btn:hover{
         background-color: rgb(67, 136, 204) !important;
         color: white !important;
     }
     
-    .signup-input{
+    .edit-account-input{
         padding: 25px 14px;
         border-radius: 30px;
         background-color: rgb(247, 247, 247);
@@ -60,7 +60,7 @@
 
 <div class="col-sm-4 col-md-5 edit-account-main">
     <div class="row text-center justify-content-center">
-        <h2 class="login-title">Edit doctor info</h2>
+        <h2 class="edit-account-title">Edit doctor info</h2>
     </div>
     <form class="form" action="" method="post">
         {% csrf_token %}
@@ -122,7 +122,7 @@
             </div>
         </div>
         <br/>
-        <button class="btn btn-outline-primary signup-btn" type="submit">Submit Changes</button>
+        <button class="btn btn-outline-primary edit-account-btn" type="submit">Submit Changes</button>
     </form>
 </div>
 
