@@ -81,9 +81,9 @@
                 <ul class="list-group text-center justify-content-center">
                     {% for doctor in doctors %}
                         <li class="list-group-item">                                 
-                            {{ doctor.user.first_name }} {{ doctor.user.last_name }} - {{doctor.user.specialty}
+                            {{ doctor.user.first_name }} {{ doctor.user.last_name }} - {{doctor.specialty }}
                             <br/> {{ doctor.user.email }} 
-                            <br/> {{ patient.num_appointment }} appointment(s)
+                            <br/> {{ doctor.num_appointment }} appointment(s)
                             <br/>
                             <br/>
                             <a href="{% url 'manager:delete_doctor' doctor_pk=doctor.pk %}" class="btn-outline-danger btn button">Remove doctor</a>
