@@ -44,12 +44,21 @@
                 <div class="col-md-3 d-flex justify-content-center col-md-offset-1">
                     <div class="col-md-12 doctor-info">
                         <p>
-                            <span class="label">Username: </span> {{ d.user.username }} <br>
-                            <span class="label">Name: </span> {{ d.user.first_name }} {{ d.user.last_name }} <br>
-                            <span class="label">Age: </span>{{ d.age }} <br>
-                            <span class="label">Specialty: </span> {{ d.specialty }} <br>
-                            <span class="label">Phone number: </span>{{ d.phone_number }} <br>
-                            <span class="label">Address: </span>{{ d.address }} <br>
+                            {% if doctor.profile_pic %}
+                            <img src="{{doctor.profile_pic.url}}" alt="Doctor's Picture" width = "200" height = "200" style="object-fit: cover; border-radius: 50%;">
+                            {% else %}
+                            <img src="https://i.imgur.com/VvLqO4z.png" alt="Doctor's Picture" width = "200" height = "200" style="object-fit: cover; border-radius: 50%;">
+                            {% endif %}
+                            <br/>
+                            <br/>
+                            <!-- <span class="label">Username: </span> {{ d.user.username }} <br> -->
+                            <!-- <span class="label">Name: </span>  -->
+                            <span>{{ d.user.first_name }} {{ d.user.last_name }} </span><br>
+                            <!-- <span class="label">Age: </span>{{ d.age }} <br> -->
+                            <!-- <span class="label">Specialty: </span>  -->
+                            <span style="color: gray; font-size: 12tp;">{{ d.specialty }}</span> <br>
+                            <!-- <span class="label">Phone number: </span>{{ d.phone_number }} <br>
+                            <span class="label">Address: </span>{{ d.address }} <br> -->
                             <a href="/appointment/{{ d.pk }}/day"><button class="btn btn-outline-primary login-btn" type="submit">Book Now</button></a>
                             <!-- <button class="btn btn-lg btn-outline-primary login-btn" type="submit">Chat</button> -->
                         </p>
@@ -61,10 +70,10 @@
     </div>
 
         {% else %}
-            <p style="width: 100%; color: gray; text-align: center; font-size: 33px; margin-bottom:50px">No Results Found</p>
+            <p style="width: 100%; color:rgb(194, 194, 194); text-align: center;  margin-bottom:50px">No results found</p>
         {% endif %}
 
-        <h3 style="width: 100%;">Top Specialties</h3>
+        <!-- <h3 style="width: 100%;">Top Specialties</h3>
 
     <div class="specialties-container">
         
@@ -94,7 +103,7 @@
                 </div>
               
         
-    </div>
+    </div> -->
 </div>
 
 {% endblock %}
