@@ -35,6 +35,8 @@ def signup(request):
             passwordConfirm = request.POST["passwordConfirm"]
             if password != passwordConfirm:
                 return render(request, 'doctor/signup.html', {'other_errors': ErrorDict({"Password": ErrorDict({'': "Passwords do not match"})})})
+            if not all(x.isdigit() for x in request.POST["phone_number"]):
+                return render(request, 'doctor/signup.html', {'other_errors': ErrorDict({"Phone Number": ErrorDict({'': "Phone number should be made of digits only"})})})
             user.set_password(password)
             user.save()
             doctor = doctor_form.save(commit=False)
@@ -154,6 +156,8 @@ def edit_account_info(request):
                 if user is not None:
                     if int(request.POST["age"]) <= int(request.POST["years_of_experience"]):
                         return render(request, 'doctor/edit_account_info.html', {'other_errors': ErrorDict({"Years of Experience": ErrorDict({'': "Years of experience cannot be equal or greater than age"})})})
+                    if not all(x.isdigit() for x in request.POST["phone_number"]):
+                        return render(request, 'doctor/edit_account_info.html', {'other_errors': ErrorDict({"Phone Number": ErrorDict({'': "Phone number should be made of digits only"})})})
                     user = user_form.save(commit=False)
                     user.set_password(request.POST["password"])
                     user.save()

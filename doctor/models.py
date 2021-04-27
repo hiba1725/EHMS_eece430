@@ -4,14 +4,14 @@ from django.contrib.auth.models import AbstractUser, User
 # Create your models here.
 from django.db.models.signals import post_save
 from django.dispatch import receiver
-from django.core.validators import MinValueValidator, MaxValueValidator
+from django.core.validators import MinValueValidator, MaxValueValidator, MinLengthValidator
 
 
 class Doctor(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='doctor', primary_key=True)
     years_of_experience = models.IntegerField(default=0)
     age = models.IntegerField(default=0, validators=[MinValueValidator(19), MaxValueValidator(150)])
-    phone_number = models.CharField(max_length=15, default='01111111')
+    phone_number = models.CharField(max_length=8, validators=[MinLengthValidator(8)], default='01111111')
     specialty = models.CharField(max_length=15, default='General')
     address = models.CharField(max_length=100, null=True, blank=True)
     role = models.CharField(max_length=10, default='none')

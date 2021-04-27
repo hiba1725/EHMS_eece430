@@ -164,7 +164,9 @@ def edit_doctor(request, doctor_pk):
 			doctor_form = DoctorForm(request.POST, instance=doctor_info)
 			if user_form.is_valid() and doctor_form.is_valid():
 				if int(request.POST["age"]) <= int(request.POST["years_of_experience"]):
-					return render(request, 'manager/edit_doctor.html', {'other_errors': ErrorDict({"Years of Experience": ErrorDict({'': "Years of experience cannot be equal or greater than age"})})})
+					return render(request, 'manager/edit_doctor.html', {'doctor': doctor_info, 'other_errors': ErrorDict({"Years of Experience": ErrorDict({'': "Years of experience cannot be equal or greater than age"})})})
+				if not all(x.isdigit() for x in request.POST["phone_number"]):
+					return render(request, 'manager/edit_doctor.html', {'doctor': doctor_info, 'other_errors': ErrorDict({"Phone Number": ErrorDict({'': "Phone number should be made of digits only"})})})
 				user = user_form.save(commit=False)
 				user.save(update_fields=['username', 'first_name', 'last_name', 'email'])
 				doctor_form.save()
@@ -185,6 +187,8 @@ def edit_patient(request, patient_pk):
 			user_form = UserForm(request.POST, instance=patient_info.user)
 			patient_form = PatientForm(request.POST, instance=patient_info)
 			if user_form.is_valid() and patient_form.is_valid():
+				if not all(x.isdigit() for x in request.POST["phone_number"]):
+					return render(request, 'manager/edit_patient.html', {'patient': patient_info,'other_errors': ErrorDict({"Phone Number": ErrorDict({'': "Phone number should be made of digits only"})})})
 				user = user_form.save(commit=False)
 				user.save(update_fields=['username', 'first_name', 'last_name', 'email'])
 				patient = patient_form.save(commit=False)
