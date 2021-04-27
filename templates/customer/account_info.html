@@ -60,14 +60,14 @@
         <div class="col right-bar" style="margin-left: 20px;">
             <div class="row">
                 <div class="col">
-                    <h2>Account Information</h2>
+                    <h2>Account Information</h2> 
                 </div>
                 <div class="col">
                     <a href = "{% url 'customer:edit_account_info' %}" class="button-link">
                         <button class="btn btn-outline-primary edit">Edit account info</button>
                     </a>
                     <a href = {% url 'customer:delete_patient' %} class="button-link">
-                        <button class="btn btn-danger">Delete Account</button>
+                        <button class="btn btn-danger" onclick="return confirm('Are you sure you want to delete your account?');">Delete Account</button>
                     </a>
                 </div>    
             </div>
@@ -109,6 +109,13 @@
                     <h5><b>Gender</b></h5>
                     <input class="form-control" type="text" placeholder="{{user.patient.gender}}" disabled>
                 </div>
+            </div>
+            <br/>
+            <div class="row">
+                
+                <a href = "{% url 'customer:view_history' %}" class="button-link">
+                    <button class="btn btn-outline-primary edit">View medical history</button>
+                </a>
             </div>
 
         </div>
