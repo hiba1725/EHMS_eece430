@@ -181,7 +181,7 @@ def edit_password(request):
                 user.set_password(passwordnew1)
                 user.save()
                 login(request, user)
-                return redirect('/customer/account')
+                return redirect('/customer/account/')
             else:
                 return render(request, 'customer/edit_password.html', {'errors': ErrorDict({"Password": ErrorDict({'': "Old password is incorrect"})})})
         return render(request, 'customer/edit_password.html')
