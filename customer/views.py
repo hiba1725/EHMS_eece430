@@ -30,6 +30,8 @@ def signup(request):
             passwordConfirm = request.POST["passwordConfirm"]
             if password != passwordConfirm:
                 return render(request, 'customer/signup.html', {'other_errors': ErrorDict({"Password": ErrorDict({'': "Passwords do not match"})})})
+            if not all(x.isdigit() for x in request.POST["phone_number"]):
+                return render(request, 'customer/signup.html', {'other_errors': ErrorDict({"Phone Number": ErrorDict({'': "Phone number should be made of digits only"})})})
             user.set_password(password)
             user.save()
             patient = patient_form.save(commit=False)
@@ -138,6 +140,8 @@ def edit_account_info(request):
                 password = request.POST['password']
                 user = authenticate(username=username, password=password)
                 if user is not None:
+                    if not all(x.isdigit() for x in request.POST["phone_number"]):
+                        return render(request, 'customer/edit_account_info.html', {'other_errors': ErrorDict({"Phone Number": ErrorDict({'': "Phone number should be made of digits only"})})})
                     user = user_form.save(commit=False)
                     user.set_password(request.POST["password"])
                     user.save()
