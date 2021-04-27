@@ -187,7 +187,7 @@
                                 {% else %}
                                     <li class="list-group-item"> {{ appointment.date }} with {{ appointment.patient.user.last_name }} {{ appointment.patient.user.first_name }} at {{ appointment.slot|add:8 }}:00 until {{ appointment.slot|add:9 }}:0
                                     <a href="{% url 'dialogs_detail' appointment.patient.user.username %}" style="float: right;" class="btn-outline-primary btn button">
-                                        Chat with {{ appointment.patient.user.username }}
+                                        Chat with {{ appointment.patient.user.first_name }} {{ appointment.patient.user.last_name }}
                                     </a>0</li>
                                     <a href="{% url 'doctor:report' appointment.slot appointment.patient.user.pk %}" style="float: right;" class="btn-outline-primary btn button">
                                         Add a report to {{ appointment.patient.user.username }}
